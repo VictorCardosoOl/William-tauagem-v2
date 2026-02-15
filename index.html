@@ -8,7 +8,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&amp;family=Inter:wght@300;400;500;600&amp;family=Cinzel+Decorative:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&amp;family=Inter:wght@200;300;400;500&amp;display=swap" rel="stylesheet"/>
 
     <!-- GSAP for Advanced Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -23,7 +23,7 @@
                     colors: {
                         primary: "#1a1a1a",
                         "background-light": "#E8E6E1", // Stone/Beige
-                        "background-dark": "#0f0f0f",
+                        "background-dark": "#0A0A0A", // Darker black for better contrast
                         "background-rose": "#DFC6C6", // Dusty Rose
                         "skin-light": "#fdf2f2",
                         "skin-medium": "#ebd5d5",
@@ -32,7 +32,15 @@
                     fontFamily: {
                         serif: ["'Cormorant Garamond'", "serif"],
                         sans: ["'Inter'", "sans-serif"],
-                        display: ["'Cinzel Decorative'", "serif"],
+                    },
+                    letterSpacing: {
+                        tighter: '-0.05em',
+                        tight: '-0.025em',
+                        normal: '0em',
+                        wide: '0.025em',
+                        wider: '0.05em',
+                        widest: '0.1em',
+                        'ultra': '0.25em', // New spacing for micro-labels
                     },
                     borderRadius: {
                         'arch': '20rem 20rem 0 0',
@@ -57,7 +65,7 @@
         }
         /* Custom scrollbar for webkit */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px; /* Thinner scrollbar */
         }
         ::-webkit-scrollbar-track {
             background: #E8E6E1;
@@ -86,7 +94,7 @@
 }
 </script>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-primary dark:text-gray-100 transition-colors duration-300 antialiased selection:bg-accent-pink selection:text-white overflow-x-hidden">
+<body class="bg-background-light dark:bg-background-dark text-primary dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-primary selection:text-white dark:selection:bg-white dark:selection:text-primary overflow-x-hidden">
     <div id="root"></div>
 </body>
 </html>

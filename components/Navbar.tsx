@@ -202,7 +202,7 @@ const Navbar: React.FC = () => {
         }}
         onClick={handleLogoClick}
       >
-        <span className="font-serif text-2xl tracking-widest uppercase select-none">
+        <span className="font-serif text-2xl tracking-widest uppercase select-none font-medium">
           {TEXTOS_GERAIS.marca.split(' ')[0]}.S
         </span>
       </div>
@@ -232,8 +232,8 @@ const Navbar: React.FC = () => {
           aria-label="Open Menu"
         >
           <div className="flex flex-col gap-1.5 items-center justify-center transition-transform duration-300 group-hover:scale-110">
-            <div className="w-6 h-0.5 bg-primary dark:bg-white/90"></div>
-            <div className="w-6 h-0.5 bg-primary dark:bg-white/90"></div>
+            <div className="w-6 h-px bg-primary dark:bg-white/90"></div>
+            <div className="w-6 h-px bg-primary dark:bg-white/90"></div>
           </div>
         </button>
 
@@ -242,7 +242,7 @@ const Navbar: React.FC = () => {
           onClick={() => setIsExpanded(false)}
           className={`absolute top-6 right-8 md:top-1/2 md:-translate-y-1/2 md:right-8 z-20 transition-opacity duration-300 ${isExpanded ? 'opacity-100 delay-300' : 'opacity-0 pointer-events-none'}`}
         >
-          <X className="w-6 h-6 text-white/70 hover:text-white transition-colors" />
+          <X className="w-6 h-6 text-white/70 hover:text-white transition-colors" strokeWidth={1} />
         </button>
 
 
@@ -256,7 +256,7 @@ const Navbar: React.FC = () => {
                key={link.name}
                href={link.href}
                onClick={(e) => handleNavClick(e, link.href)}
-               className="nav-link-item opacity-0 translate-y-4 font-sans text-xl md:text-sm tracking-[0.2em] font-medium text-white hover:text-accent-pink transition-colors uppercase relative group"
+               className="nav-link-item opacity-0 translate-y-4 font-sans text-xl md:text-xs tracking-ultra font-medium text-white hover:text-accent-pink transition-colors uppercase relative group"
              >
                 {link.name}
                 <span className="absolute -bottom-2 left-0 w-0 h-px bg-accent-pink transition-all duration-300 group-hover:w-full"></span>
