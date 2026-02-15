@@ -1,84 +1,147 @@
 import React from 'react';
-import { TEXTOS_GERAIS, ITENS_FLASH } from '../data';
+import { Zap, Crown, CheckCircle2, Calendar, ArrowRight } from 'lucide-react';
 
 const FlashSection: React.FC = () => {
+  const flashFeatures = [
+    "Desenhos exclusivos do dia",
+    "Valores promocionais",
+    "Ordem de chegada"
+  ];
+
+  const fullDayFeatures = [
+    "Diária fechada (6h - 8h)",
+    "Projetos autorais extensos",
+    "Privacidade total"
+  ];
+
   return (
-    <section id="flash" className="bg-primary text-background-light dark:bg-black dark:text-gray-200 py-32 px-6 border-y border-white/10">
+    <section id="flash" className="bg-background-light dark:bg-black py-32 px-6 border-y border-white/10 transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-white/10 pb-8">
-          <h2 className="font-serif text-6xl md:text-8xl uppercase tracking-tighter whitespace-pre-line leading-[0.9] font-light">
-            {TEXTOS_GERAIS.tituloFlash}
-          </h2>
-          <div className="mt-8 md:mt-0 text-right">
-            <p className="font-sans text-xs uppercase tracking-ultra mb-2 text-white/50">Próximo Evento</p>
-            <p className="font-serif italic text-2xl md:text-3xl text-white/90">{TEXTOS_GERAIS.dataProximoEvento}</p>
-          </div>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10">
-          {ITENS_FLASH.map((item) => {
-            const isSold = item.status === 'VENDIDO';
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 shadow-2xl">
+          
+          {/* CARD 1: FLASH DAY (Light) */}
+          <div className="bg-[#FAFAFA] text-primary p-12 md:p-16 flex flex-col justify-between min-h-[600px] relative overflow-hidden">
             
-            return (
-              <div 
-                key={item.id} 
-                className="bg-primary dark:bg-black p-12 hover:bg-white/5 transition-colors relative group h-[450px] flex flex-col justify-between"
-              >
-                {/* Top Row: Badge & Number */}
-                <div className="flex justify-between items-start">
-                  <span 
-                    className={`font-sans text-[10px] tracking-widest border border-white/20 px-3 py-1 rounded-full uppercase ${
-                      isSold ? 'bg-white text-black font-bold' : 'text-white/70'
-                    }`}
-                  >
-                    {item.status === 'VENDIDO' ? 'VENDIDO' : 'DISP'}
-                  </span>
-                  <span 
-                    className={`font-serif text-3xl transition-colors font-light ${
-                      isSold ? 'line-through opacity-30' : 'group-hover:text-accent-pink opacity-50'
-                    }`}
-                  >
-                    {item.numero}
-                  </span>
-                </div>
+            {/* Background Texture Hint */}
+            <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                <Zap size={200} strokeWidth={0.5} />
+            </div>
 
-                {/* Center SVG Graphic (Revealed on Hover) */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <svg className="w-40 h-40 drop-shadow-2xl" viewBox="0 0 100 100">
-                    {item.svgPath}
-                  </svg>
-                </div>
+            <div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 text-[10px] tracking-widest uppercase font-bold mb-12">
+                <Zap size={12} fill="currentColor" />
+                Flash Day
+              </div>
 
-                {/* Bottom Row: Title & Details */}
-                <div className="z-10">
-                  <h4 
-                    className={`font-serif text-3xl tracking-tight mb-3 font-light ${
-                      isSold ? 'line-through opacity-40' : ''
-                    }`}
-                  >
-                    {item.titulo}
-                  </h4>
-                  <p className="text-xs text-white/50 font-sans tracking-widest uppercase">
-                    {item.detalhes}
-                  </p>
+              {/* Title */}
+              <h2 className="font-serif text-5xl md:text-6xl leading-[0.9] text-primary mb-6">
+                Sessões Rápidas <br />
+                <span className="italic text-gray-400 font-light">& Catálogo Pronto</span>
+              </h2>
+
+              {/* Description */}
+              <p className="font-sans text-sm text-gray-600 leading-relaxed max-w-sm mb-10">
+                O estúdio abre as portas para o público. Desenhos autorais pré-definidos, 
+                valores especiais e atendimento por ordem de chegada.
+              </p>
+
+              {/* List */}
+              <ul className="space-y-4 mb-12">
+                {flashFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-3 font-sans text-xs font-bold uppercase tracking-wider text-gray-500">
+                    <CheckCircle2 size={16} className="text-[#d48d92]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Footer Area */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-gray-200 pt-8">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                  <Calendar size={14} />
+                  Próxima Data:
+                </div>
+                <div className="font-serif text-3xl text-primary">
+                  15 . OUT
                 </div>
               </div>
-            );
-          })}
+
+              <button className="bg-primary text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors flex items-center gap-3 group">
+                Ver Designs Disponíveis
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+
+          {/* CARD 2: FULL DAY (Dark/Image) */}
+          <div className="relative bg-[#0f0f0f] text-white p-12 md:p-16 flex flex-col justify-between min-h-[600px] overflow-hidden group">
+            
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+               <div className="absolute inset-0 bg-black/60 z-10"></div>
+               <img 
+                 src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Abstract Texture" 
+                 className="w-full h-full object-cover grayscale opacity-60 group-hover:scale-105 transition-transform duration-[2s]"
+               />
+            </div>
+
+            <div className="relative z-20">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-[#782838] text-white px-4 py-2 text-[10px] tracking-widest uppercase font-bold mb-12 shadow-lg">
+                <Crown size={12} fill="currentColor" />
+                Experiência VIP
+              </div>
+
+              {/* Title */}
+              <h2 className="font-serif text-5xl md:text-6xl leading-[0.9] text-white mb-6">
+                Full Day <br />
+                <span className="italic text-[#d48d92] opacity-80 font-light">& Imersão Total</span>
+              </h2>
+
+              {/* Description */}
+              <p className="font-sans text-sm text-gray-300 leading-relaxed max-w-sm mb-10">
+                "Aluga" o artista por um dia inteiro. Foco absoluto no seu projeto, sem pressa. 
+                Ideal para fechamentos de braço/costas.
+              </p>
+
+              {/* List */}
+              <ul className="space-y-4 mb-12">
+                {fullDayFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-3 font-sans text-xs font-bold uppercase tracking-wider text-gray-300">
+                    <CheckCircle2 size={16} className="text-[#d48d92]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Footer Area */}
+            <div className="relative z-20 flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-white/10 pt-8">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                  <Calendar size={14} />
+                  Disponibilidade:
+                </div>
+                <div className="font-serif text-3xl text-white">
+                  Sob Consulta
+                </div>
+              </div>
+
+              <button className="bg-white text-primary px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors flex items-center gap-3 group">
+                Solicitar Orçamento Full Day
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <a
-            href="#"
-            className="inline-block px-12 py-4 border border-white/20 hover:bg-white hover:text-black hover:border-white transition-all duration-500 font-sans text-xs tracking-ultra uppercase font-medium"
-          >
-            Ver Todos os Flashes
-          </a>
-        </div>
       </div>
     </section>
   );

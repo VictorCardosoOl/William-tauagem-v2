@@ -12,12 +12,6 @@ const Preparation: React.FC = () => {
                 <span className="w-12 h-px bg-[#d48d92]"></span>
                 O Preparo
             </h3>
-            {/* Curved line decoration similar to image */}
-            <div className="mt-4 hidden md:block">
-                 <svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 25 C 20 25, 40 5, 100 5" stroke="#d48d92" strokeWidth="1" strokeOpacity="0.5" fill="none" />
-                 </svg>
-            </div>
         </div>
 
         {/* Content Grid */}
@@ -41,11 +35,6 @@ const Preparation: React.FC = () => {
               <p className="font-sans text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400">
                 {item.descricao}
               </p>
-              
-              {/* Optional: Tiny dot decoration */}
-              {item.id === 2 && (
-                 <div className="absolute top-8 right-8 w-2 h-2 bg-black dark:bg-white rounded-full hidden lg:block"></div>
-              )}
 
             </div>
           ))}
