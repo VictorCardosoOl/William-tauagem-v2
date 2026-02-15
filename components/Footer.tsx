@@ -63,9 +63,9 @@ const Footer: React.FC = () => {
 
         {/* Big Typography & Copyright Row */}
         <div className="relative overflow-hidden">
-            {/* Big Text */}
+            {/* Big Text with Gradient (Dark Top -> Light Bottom) */}
             <div className="flex justify-center mb-8">
-                <h1 className="font-serif text-[16vw] md:text-[19vw] leading-[0.7] text-center tracking-tighter select-none bg-gradient-to-b from-gray-400 to-gray-100 dark:from-white/20 dark:to-transparent bg-clip-text text-transparent opacity-50 mix-blend-overlay">
+                <h1 className="font-serif text-[16vw] md:text-[19vw] leading-[0.7] text-center tracking-tighter select-none bg-gradient-to-b from-gray-900 to-transparent dark:from-white dark:to-transparent bg-clip-text text-transparent opacity-80 mix-blend-overlay">
                     SIQUEIRA
                 </h1>
             </div>

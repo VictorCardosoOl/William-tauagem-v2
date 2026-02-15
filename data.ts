@@ -10,7 +10,7 @@ export const TEXTOS_GERAIS = {
   slogan: "A PELE FALA. EU ESCUTO.", 
   heroTituloPrincipal: "WILLIAM",
   heroTituloSecundario: "Etching Silence",
-  heroTextoDescritivo: "A WILLIAM SIQUEIRA é um estúdio de arte na pele que elabora experiências únicas e perenes. Conectamos sua história à sua anatomia, transformando valores e memórias em narrativas visuais neotradicionais. Nossa missão é criar uma conexão emocional profunda através da tinta.",
+  heroTextoDescritivo: "Especialista em tatuagens neotradicionais e blackwork em São Paulo. Projetos exclusivos desenhados para sua anatomia com máxima biossegurança. Agende sua consultoria e transforme sua ideia em arte.",
   anoEstabelecimento: "EST. 2018",
   tituloMetodologia: {
     linha1: "INTENSIDADE",

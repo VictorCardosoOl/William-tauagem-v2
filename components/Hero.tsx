@@ -33,10 +33,7 @@ const Hero: React.FC = () => {
       {/* RIGHT SIDE: Narrative Text (Positioned absolutely for editorial layout) */}
       <div className="absolute top-[20%] right-[5%] md:top-[28%] md:right-[8%] z-10 w-full max-w-sm md:max-w-md text-right px-6 md:px-0">
          <p className="font-sans text-sm md:text-base leading-relaxed text-gray-800 dark:text-gray-300">
-           <strong className="block text-primary dark:text-white mb-2 font-bold tracking-wide">
-             A {TEXTOS_GERAIS.heroTituloPrincipal} SIQUEIRA
-           </strong>
-           {TEXTOS_GERAIS.heroTextoDescritivo.replace('A WILLIAM SIQUEIRA ', '')}
+           {TEXTOS_GERAIS.heroTextoDescritivo}
          </p>
       </div>
 
@@ -48,34 +45,6 @@ const Hero: React.FC = () => {
         >
           {TEXTOS_GERAIS.heroTituloPrincipal}
         </h1>
-      </div>
-
-      {/* BOTTOM LEFT: Metadata */}
-      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 z-20">
-        <div className="flex flex-col gap-1">
-          <p className="font-sans text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary dark:text-white">
-            Estúdio Privado
-          </p>
-          <p className="font-sans text-[10px] md:text-xs font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400">
-            São Paulo, Brasil
-          </p>
-        </div>
-      </div>
-
-      {/* BOTTOM RIGHT: Circular CTA (Overlapping the text) */}
-      <div className="absolute bottom-16 right-6 md:bottom-24 md:right-24 z-20">
-        <a 
-          href="#contact"
-          className="group relative flex items-center justify-center w-28 h-28 md:w-40 md:h-40 rounded-full bg-transparent border border-primary dark:border-white overflow-hidden transition-all duration-300 hover:scale-105"
-        >
-          {/* Hover Fill Effect */}
-          <div className="absolute inset-0 bg-primary dark:bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
-          
-          <div className="relative z-10 flex flex-col items-center text-primary dark:text-white group-hover:text-white dark:group-hover:text-primary transition-colors duration-300">
-            <span className="font-serif italic text-lg md:text-2xl leading-none">Orçar</span>
-            <span className="font-serif italic text-lg md:text-2xl leading-none">Projeto</span>
-          </div>
-        </a>
       </div>
 
     </header>
