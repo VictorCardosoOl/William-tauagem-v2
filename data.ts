@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem } from './types';
+import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -194,6 +194,32 @@ export const PROCESSO_CRIATIVO: ProcessoCriativoItem[] = [
     titulo: "A Sessão",
     subtitulo: "Execução técnica.",
     descricao: "O ritual final. Com precisão cirúrgica e materiais de alta qualidade, a arte é eternizada na pele em um ambiente seguro, estéril e acolhedor."
+  }
+];
+
+// ==========================================
+// PREPARO (NOVO)
+// ==========================================
+export const ITENS_PREPARO: PreparoItem[] = [
+  {
+    id: 1,
+    titulo: "Hidratação",
+    descricao: "Comece a hidratar a região da tatuagem 7 dias antes. Uma pele hidratada recebe melhor a tinta, reduz o trauma da agulha e facilita drasticamente a cicatrização posterior."
+  },
+  {
+    id: 2,
+    titulo: "Descanso",
+    descricao: "Durma bem na noite anterior (8h+). O corpo precisa de energia para lidar com a sessão. Faça uma refeição reforçada antes de vir ao estúdio para evitar quedas de pressão."
+  },
+  {
+    id: 3,
+    titulo: "Zero Álcool",
+    descricao: "Não consuma bebidas alcoólicas 24h antes. O álcool afina o sangue, aumentando o sangramento durante o processo, o que expulsa o pigmento e dificulta o trabalho."
+  },
+  {
+    id: 4,
+    titulo: "Vestimenta",
+    descricao: "Venha com roupas confortáveis, pretas ou escuras (tinta pode respingar). Garanta fácil acesso à área a ser tatuada sem comprimir o local e permitindo a circulação."
   }
 ];
 

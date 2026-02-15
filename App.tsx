@@ -6,6 +6,7 @@ import Manifesto from './components/Manifesto';
 import About from './components/About';
 import Concept from './components/Concept';
 import CreativeProcess from './components/CreativeProcess';
+import Preparation from './components/Preparation';
 import FlashSection from './components/FlashSection';
 import Aftercare from './components/Aftercare';
 import Footer from './components/Footer';
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <About />
         <Concept />
         <CreativeProcess />
+        <Preparation />
         <FlashSection />
         <Aftercare />
       </main>

@@ -34,3 +34,9 @@ export interface ProcessoCriativoItem {
   subtitulo: string;
   descricao: string;
 }
+
+export interface PreparoItem {
+  id: number;
+  titulo: string;
+  descricao: string;
+}
