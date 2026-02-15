@@ -1,8 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PROCESSO_CRIATIVO } from '../data';
+
+// Declare GSAP global for TypeScript
+declare global {
+  interface Window {
+    gsap: any;
+  }
+}
 
 const CreativeProcess: React.FC = () => {
   const [activeProcess, setActiveProcess] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // GSAP Animation when activeProcess changes
+  useEffect(() => {
+    if (!window.gsap || !contentRef.current) return;
+
+    const ctx = window.gsap.context(() => {
+      // Animate text elements entering
+      window.gsap.fromTo(
+        '.anim-text',
+        { y: 20, opacity: 0, filter: 'blur(5px)' },
+        { 
+          y: 0, 
+          opacity: 1, 
+          filter: 'blur(0px)',
+          duration: 0.6, 
+          stagger: 0.1, 
+          ease: 'power3.out' 
+        }
+      );
+    }, contentRef);
+
+    return () => ctx.revert();
+  }, [activeProcess]);
 
   return (
     <section className="bg-[#f2eaea] dark:bg-[#1f1f1f] py-32 px-6 md:px-12 transition-colors duration-500">
@@ -65,7 +96,7 @@ const CreativeProcess: React.FC = () => {
 
                 {/* RIGHT: Content Display */}
                 <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[400px] flex items-center justify-center lg:justify-start lg:pl-12">
-                    <div className="relative w-full max-w-lg">
+                    <div className="relative w-full max-w-lg" ref={contentRef}>
                         
                         {/* Giant Background Number */}
                         <div className="absolute -top-32 -left-12 text-[15rem] md:text-[20rem] leading-none font-serif text-[#5a4242] opacity-[0.03] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700">
@@ -73,11 +104,11 @@ const CreativeProcess: React.FC = () => {
                         </div>
 
                         {/* Details Content */}
-                        <div className="relative z-10 animate-fade-in-up" key={activeProcess}>
-                            <h3 className="font-serif text-3xl mb-8 text-[#5a4242] dark:text-white">
+                        <div className="relative z-10" key={activeProcess}>
+                            <h3 className="anim-text font-serif text-3xl mb-8 text-[#5a4242] dark:text-white border-b border-[#5a4242]/20 dark:border-white/20 pb-4 inline-block">
                                 Detalhes da Etapa
                             </h3>
-                            <p className="font-serif text-xl md:text-2xl leading-relaxed text-gray-700 dark:text-gray-300">
+                            <p className="anim-text font-sans text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 font-light">
                                 {PROCESSO_CRIATIVO[activeProcess].descricao}
                             </p>
                         </div>

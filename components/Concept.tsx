@@ -16,7 +16,7 @@ const Concept: React.FC = () => {
               {concept.titulo}
             </h2>
             <div className="h-px w-24 bg-accent-pink mb-6"></div>
-            <p className="font-sans text-xs tracking-[0.2em] uppercase opacity-60">
+            <p className="font-sans text-xs tracking-[0.2em] uppercase opacity-60 font-bold">
               {concept.subtitulo}
             </p>
           </div>
@@ -34,14 +34,24 @@ const Concept: React.FC = () => {
 
           {/* Asymmetric Image Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-center">
+             
              {/* Image 1 - Offset Up */}
              <div className="relative md:-mt-12 group">
-                <div className="overflow-hidden aspect-[4/5] shadow-xl">
+                <div className="overflow-hidden aspect-[4/5] shadow-xl relative">
+                  {/* Grayscale Base */}
                   <img 
                     src={concept.imagens[0].url} 
                     alt={concept.imagens[0].alt} 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
+                    className="absolute inset-0 w-full h-full object-cover grayscale opacity-90" 
                   />
+                  {/* Color Reveal */}
+                  <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
+                     <img 
+                      src={concept.imagens[0].url} 
+                      alt=""
+                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
+                    />
+                  </div>
                 </div>
                 <span className="absolute -bottom-6 -left-4 font-mono text-xs text-primary/50 dark:text-white/50 rotate-90 origin-left">
                   FIG. 01 — STUDY
@@ -50,15 +60,24 @@ const Concept: React.FC = () => {
 
              {/* Text Block + Image 2 */}
              <div className="flex flex-col gap-12">
-                <p className="font-sans text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                <p className="font-sans text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400 font-light">
                   {concept.textoSecundario}
                 </p>
-                <div className="overflow-hidden aspect-square shadow-xl w-3/4 self-end group">
+                <div className="overflow-hidden aspect-square shadow-xl w-3/4 self-end group relative">
+                   {/* Grayscale Base */}
                    <img 
                     src={concept.imagens[1].url} 
                     alt={concept.imagens[1].alt} 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
+                    className="absolute inset-0 w-full h-full object-cover grayscale opacity-90" 
                   />
+                  {/* Color Reveal */}
+                  <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
+                     <img 
+                      src={concept.imagens[1].url} 
+                      alt=""
+                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
+                    />
+                  </div>
                 </div>
              </div>
           </div>
