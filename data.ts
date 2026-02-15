@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial } from './types';
+import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -164,6 +164,36 @@ export const ITENS_FLASH: FlashItem[] = [
     titulo: 'Fases da Lua',
     detalhes: '10cm x 3cm • Coluna',
     svgPath: React.createElement('path', { d: "M50 10 Q90 50 50 90 Q10 50 50 10", className: "stroke-white fill-none stroke-1" })
+  }
+];
+
+// ==========================================
+// PROCESSO CRIATIVO
+// ==========================================
+export const PROCESSO_CRIATIVO: ProcessoCriativoItem[] = [
+  {
+    id: 1,
+    titulo: "Briefing & Conexão",
+    subtitulo: "Entendemos sua história.",
+    descricao: "Uma conversa profunda para captar a essência do que você deseja expressar. Analisamos referências, memórias e significados para construir uma base sólida para a arte."
+  },
+  {
+    id: 2,
+    titulo: "Estudo Anatômico",
+    subtitulo: "Projeção digital no corpo.",
+    descricao: "Utilizamos fotografia e edição digital (Photoshop) para projetar o desenho diretamente sobre a foto do seu corpo. Isso garante que a arte respeite sua musculatura, curvaturas e fluxo natural, criando uma peça orgânica e fluida."
+  },
+  {
+    id: 3,
+    titulo: "Sketching",
+    subtitulo: "O desenho ganha vida.",
+    descricao: "O momento onde a ideia toma forma. Traços iniciais, definição de fluxos, luz e sombra são refinados para criar uma composição visual única antes de passar para a pele."
+  },
+  {
+    id: 4,
+    titulo: "A Sessão",
+    subtitulo: "Execução técnica.",
+    descricao: "O ritual final. Com precisão cirúrgica e materiais de alta qualidade, a arte é eternizada na pele em um ambiente seguro, estéril e acolhedor."
   }
 ];
 

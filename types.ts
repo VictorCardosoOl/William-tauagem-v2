@@ -27,3 +27,10 @@ export interface LinkSocial {
   nome: string;
   url: string;
 }
+
+export interface ProcessoCriativoItem {
+  id: number;
+  titulo: string;
+  subtitulo: string;
+  descricao: string;
+}
