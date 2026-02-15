@@ -17,17 +17,25 @@ const CreativeProcess: React.FC = () => {
     if (!window.gsap || !contentRef.current) return;
 
     const ctx = window.gsap.context(() => {
-      // Animate text elements entering
+      // Kill previous animations to prevent overlap
+      window.gsap.killTweensOf('.anim-text');
+
+      // Animate text elements entering (Slide Up + Fade In)
       window.gsap.fromTo(
         '.anim-text',
-        { y: 20, opacity: 0, filter: 'blur(5px)' },
+        { 
+          y: 20, 
+          opacity: 0, 
+          filter: 'blur(4px)' 
+        },
         { 
           y: 0, 
           opacity: 1, 
           filter: 'blur(0px)',
           duration: 0.6, 
           stagger: 0.1, 
-          ease: 'power3.out' 
+          ease: 'power3.out',
+          overwrite: 'auto'
         }
       );
     }, contentRef);
@@ -36,12 +44,12 @@ const CreativeProcess: React.FC = () => {
   }, [activeProcess]);
 
   return (
-    <section className="bg-[#f2eaea] dark:bg-[#1f1f1f] py-32 px-6 md:px-12 transition-colors duration-500">
+    <section className="bg-background-rose dark:bg-[#1f1f1f] py-32 px-6 md:px-12 transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
             {/* Section Header */}
             <div className="flex items-center gap-4 mb-20">
-                <div className="w-2.5 h-2.5 border border-[#5a4242] dark:border-white/60 rounded-full"></div> 
-                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-[#5a4242] dark:text-white/80">
+                <div className="w-2.5 h-2.5 border border-accent-sepia dark:border-white/60 rounded-full"></div> 
+                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-accent-sepia dark:text-white/80">
                     O Processo Criativo
                 </h3>
             </div>
@@ -57,10 +65,10 @@ const CreativeProcess: React.FC = () => {
                             <div 
                                 key={item.id}
                                 onMouseEnter={() => setActiveProcess(index)}
-                                className={`relative cursor-pointer py-10 border-b border-[#5a4242]/10 dark:border-white/10 transition-all duration-300 group`}
+                                className={`relative cursor-pointer py-10 border-b border-primary/10 dark:border-white/10 transition-all duration-300 group`}
                             >
                                 {/* Active Left Bar Indicator */}
-                                <div className={`absolute left-[-2rem] top-10 bottom-10 w-1 bg-[#5a4242] dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
+                                <div className={`absolute left-[-2rem] top-10 bottom-10 w-1 bg-accent-pink dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
 
                                 <div className="flex justify-between items-baseline">
                                     
@@ -68,13 +76,13 @@ const CreativeProcess: React.FC = () => {
                                     <div className="pr-8">
                                         <h4 className={`text-4xl md:text-5xl transition-all duration-300 ${
                                             isActive 
-                                            ? 'font-serif italic text-[#5a4242] dark:text-white translate-x-2' 
-                                            : 'font-serif text-primary dark:text-gray-500 group-hover:text-primary/70'
+                                            ? 'font-serif italic text-primary dark:text-white translate-x-2' 
+                                            : 'font-serif text-primary/60 dark:text-gray-500 group-hover:text-primary'
                                         }`}>
                                             {item.titulo}
                                         </h4>
                                         <p className={`font-sans text-sm mt-3 transition-all duration-300 ${
-                                            isActive ? 'opacity-100 text-gray-600 dark:text-gray-300 translate-x-2' : 'opacity-40 text-gray-500'
+                                            isActive ? 'opacity-100 text-accent-sepia dark:text-gray-300 translate-x-2' : 'opacity-40 text-gray-500'
                                         }`}>
                                             {item.subtitulo}
                                         </p>
@@ -82,8 +90,8 @@ const CreativeProcess: React.FC = () => {
 
                                     {/* Right Side: Dot + Number */}
                                     <div className="flex items-center gap-4 shrink-0">
-                                        <div className={`w-1.5 h-1.5 rounded-full bg-[#5a4242] dark:bg-white transition-all duration-300 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}></div>
-                                        <span className={`font-sans text-xs font-bold transition-colors duration-300 ${isActive ? 'text-[#5a4242] dark:text-white opacity-100' : 'text-gray-400 opacity-30'}`}>
+                                        <div className={`w-1.5 h-1.5 rounded-full bg-accent-pink dark:bg-white transition-all duration-300 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}></div>
+                                        <span className={`font-sans text-xs font-bold transition-colors duration-300 ${isActive ? 'text-accent-pink dark:text-white opacity-100' : 'text-gray-400 opacity-30'}`}>
                                             0{item.id}
                                         </span>
                                     </div>
@@ -99,13 +107,13 @@ const CreativeProcess: React.FC = () => {
                     <div className="relative w-full max-w-lg" ref={contentRef}>
                         
                         {/* Giant Background Number */}
-                        <div className="absolute -top-32 -left-12 text-[15rem] md:text-[20rem] leading-none font-serif text-[#5a4242] opacity-[0.03] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700">
+                        <div className="absolute -top-32 -left-12 text-[15rem] md:text-[20rem] leading-none font-serif text-primary opacity-[0.02] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700">
                             0{activeProcess + 1}
                         </div>
 
                         {/* Details Content */}
                         <div className="relative z-10" key={activeProcess}>
-                            <h3 className="anim-text font-serif text-3xl mb-8 text-[#5a4242] dark:text-white border-b border-[#5a4242]/20 dark:border-white/20 pb-4 inline-block">
+                            <h3 className="anim-text font-serif text-3xl mb-8 text-primary dark:text-white border-b border-accent-pink/30 dark:border-white/20 pb-4 inline-block">
                                 Detalhes da Etapa
                             </h3>
                             <p className="anim-text font-sans text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 font-light">

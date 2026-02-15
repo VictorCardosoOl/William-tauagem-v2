@@ -40,13 +40,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#1a1a1a",
-                        "background-light": "#E8E6E1", // Stone/Beige
-                        "background-dark": "#0A0A0A", // Darker black for better contrast
-                        "background-rose": "#DFC6C6", // Dusty Rose
+                        primary: "#111111", // Ink (Soft Black)
+                        "background-light": "#F4F4F0", // Bone / Off-white texturizado
+                        "background-dark": "#0A0A0A", // Deep Black
+                        "background-rose": "#E5E0DC", // Muted Bone for sections (Substituindo o Rosa antigo)
                         "skin-light": "#fdf2f2",
                         "skin-medium": "#ebd5d5",
-                        "accent-pink": "#d48d92",
+                        "accent-pink": "#8A2525", // REBRAND: Dried Blood Red (Mantendo o nome da variavel para compatibilidade)
+                        "accent-sepia": "#685A4F", // Sepia Grey
                     },
                     fontFamily: {
                         serif: ["'Cormorant Garamond'", "serif"],
@@ -66,8 +67,8 @@
                     },
                     keyframes: {
                         breathe: {
-                            '0%, 100%': { backgroundColor: '#E8E6E1' },
-                            '50%': { backgroundColor: '#ebd5d5' },
+                            '0%, 100%': { backgroundColor: '#F4F4F0' },
+                            '50%': { backgroundColor: '#E5E0DC' },
                         }
                     },
                     animation: {
@@ -87,10 +88,10 @@
             width: 6px; /* Thinner scrollbar */
         }
         ::-webkit-scrollbar-track {
-            background: #E8E6E1;
+            background: #F4F4F0;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d48d92;
+            background: #8A2525;
             border-radius: 4px;
         }
         .dark ::-webkit-scrollbar-track {
