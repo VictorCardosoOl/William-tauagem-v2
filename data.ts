@@ -7,7 +7,7 @@ import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial } from './types';
 
 export const TEXTOS_GERAIS = {
   marca: "W. Siqueira",
-  slogan: "FINE LINE & CONTEMPORARY TATTOO",
+  slogan: "A PELE FALA. EU ESCUTO.", // Updated per "Linguagem Textual Sugerida"
   heroTituloPrincipal: "WILLIAM",
   heroTituloSecundario: "Etching Silence",
   anoEstabelecimento: "EST. 2018",
@@ -19,7 +19,7 @@ export const TEXTOS_GERAIS = {
   tituloFlash: "Flash\nDay",
   dataProximoEvento: "14 de Outubro, 2023",
   tituloPosCuidado: "A longevidade da sua arte depende da sua dedicação.",
-  rodapeChamada: "Dúvidas sobre o processo?",
+  rodapeChamada: "Vamos conversar sobre a próxima marca que você quer carregar para sempre.", // Updated
   rodapeTexto: "O suporte pós-tatuagem é vitalício. Se notar qualquer anormalidade, entre em contato imediatamente.",
   rodapeBotao: "Falar com o Especialista",
   endereco: [
@@ -41,11 +41,21 @@ export const TEXTOS_GERAIS = {
     tituloParte1: "EU SOU WILLIAM SIQUEIRA, E EU",
     tituloDestaque: "MATERIALIZO",
     tituloParte2: "HISTÓRIAS.",
-    descricao: "Especialista em Neotradicional. Transformo narrativas pessoais em anatomia e arte perene.",
+    descricao: "Sua pele, minha tela. Efêmero na superfície, eterno na essência. Transformo narrativas pessoais em anatomia e arte perene.",
     imagens: [
-      "https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop", // Industrial/Silo vibe
-      "https://images.unsplash.com/photo-1572978398450-4886e0624d55?q=80&w=800&auto=format&fit=crop", // Corner building vibe
-      "https://images.unsplash.com/photo-1440635592348-167b1b30296f?q=80&w=800&auto=format&fit=crop"  // Misty forest vibe
+      "https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop", 
+      "https://images.unsplash.com/photo-1572978398450-4886e0624d55?q=80&w=800&auto=format&fit=crop", 
+      "https://images.unsplash.com/photo-1440635592348-167b1b30296f?q=80&w=800&auto=format&fit=crop"
+    ]
+  },
+  concept: {
+    titulo: "CONCEPT",
+    subtitulo: "O Manifesto do Processo",
+    textoPrincipal: "Não imponho formas. Descubro formas. Cada corpo tem sua geografia — curvas, texturas, cicatrizes, histórias. Minha tatuagem é um mapa que respeita o território.",
+    textoSecundario: "A pele me conta uma história. Eu apenas a traduzo em linhas. Escuto o silêncio entre as palavras do cliente para encontrar a imagem que já existe, latente, esperando para emergir.",
+    imagens: [
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop", // Sketch/Art vibe
+      "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?q=80&w=800&auto=format&fit=crop"  // Detail/Texture vibe
     ]
   }
 };
