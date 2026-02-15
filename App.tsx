@@ -13,6 +13,14 @@ import Aftercare from './components/Aftercare';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 
+// Define GSAP globals
+declare global {
+  interface Window {
+    gsap: any;
+    Flip: any;
+  }
+}
+
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,14 +29,16 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    // Register GSAP Flip if available
+    if (window.gsap && window.Flip) {
+      window.gsap.registerPlugin(window.Flip);
+    }
+
     // Lock scroll while loading
     if (isLoading) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      
-      // Optional: Trigger Hero entrance animation here if needed via Custom Event or Context
-      // For now, Hero component handles its own entrance once visible
     }
   }, [isLoading]);
 

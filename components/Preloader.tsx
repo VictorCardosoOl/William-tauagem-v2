@@ -19,18 +19,70 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
+    // Failsafe: Ensure app loads even if GSAP crashes or animation hangs
+    const failsafe = setTimeout(() => {
+        onComplete();
+    }, 4000);
+
     if (!window.gsap) {
       onComplete();
-      return;
+      return () => clearTimeout(failsafe);
     }
 
-    const tl = window.gsap.timeline({
-      onComplete: () => {
-        onComplete();
-      }
-    });
+    const ctx = window.gsap.context(() => {
+        const tl = window.gsap.timeline({
+            onComplete: () => {
+                clearTimeout(failsafe);
+                onComplete();
+            }
+        });
 
-    // 1. Counter Animation (Sync roughly with 2s duration)
+        // 1. Counter Animation Logic (Visual only)
+        // We use setInterval here but it's fine since component unmounts
+        // However, better to rely on state update for render
+        // Logic handled in outside effect for state? No, we can do it here.
+
+        // 2. Signature Animation (Stroke Draw)
+        if (svgPathRef.current) {
+            const length = svgPathRef.current.getTotalLength();
+            window.gsap.set(svgPathRef.current, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
+            
+            tl.to(svgPathRef.current, {
+                strokeDashoffset: 0,
+                duration: 1.8,
+                ease: "power2.inOut"
+            }, 0);
+        }
+
+        // 3. Progress Bar Animation
+        if (barRef.current) {
+             tl.to(barRef.current, {
+                width: '100%',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+
+        // 4. Elements Fade Out
+        tl.to('.preloader-element', {
+            opacity: 0,
+            y: -20,
+            duration: 0.5,
+            ease: 'power2.in'
+        }, "-=0.3");
+
+        // 5. Curtain Reveal (Slide Up)
+        if (containerRef.current) {
+             tl.to(containerRef.current, {
+                yPercent: -100,
+                duration: 1.2,
+                ease: 'expo.inOut',
+                delay: 0.1
+            });
+        }
+    }, containerRef);
+
+    // Counter Interval
     const interval = setInterval(() => {
         setCounter(prev => {
             if (prev < 100) return prev + 1;
@@ -39,43 +91,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         });
     }, 20);
 
-    // 2. Signature Animation (Stroke Draw)
-    // Assuming length is approx 1000 for dasharray
-    if (svgPathRef.current) {
-        const length = svgPathRef.current.getTotalLength();
-        window.gsap.set(svgPathRef.current, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
-        
-        tl.to(svgPathRef.current, {
-            strokeDashoffset: 0,
-            duration: 1.8,
-            ease: "power2.inOut"
-        }, 0);
-    }
-
-    // 3. Progress Bar Animation
-    tl.to(barRef.current, {
-        width: '100%',
-        duration: 2,
-        ease: 'power2.inOut'
-    }, 0);
-
-    // 4. Elements Fade Out
-    tl.to('.preloader-element', {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        ease: 'power2.in'
-    }, "-=0.3");
-
-    // 5. Curtain Reveal (Slide Up)
-    tl.to(containerRef.current, {
-        yPercent: -100,
-        duration: 1.2,
-        ease: 'expo.inOut',
-        delay: 0.1
-    });
-
-    return () => clearInterval(interval);
+    return () => {
+        clearInterval(interval);
+        clearTimeout(failsafe);
+        ctx.revert();
+    };
   }, [onComplete]);
 
   return (
