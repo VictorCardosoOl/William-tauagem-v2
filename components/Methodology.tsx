@@ -3,15 +3,15 @@ import { TEXTOS_GERAIS, ITENS_METODOLOGIA, IMAGENS } from '../data';
 
 const Methodology: React.FC = () => {
   return (
-    <section id="methodology" className="relative py-24 md:py-40 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section id="methodology" className="relative py-24 md:py-40 3xl:py-64 px-6 md:px-12 max-w-screen-3xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 3xl:gap-24 items-center">
         
-        <div className="lg:col-span-5 space-y-20">
+        <div className="lg:col-span-5 space-y-20 3xl:space-y-32">
           <div className="space-y-6">
             <p className="text-ink-black font-sans text-[10px] tracking-[0.3em] uppercase font-bold">
               Metodologia
             </p>
-            <h2 className="font-serif font-light text-6xl md:text-8xl leading-[0.85] text-ink-black dark:text-gray-100">
+            <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl leading-[0.85] text-ink-black dark:text-gray-100">
               <span className="block">{TEXTOS_GERAIS.tituloMetodologia.linha1}</span>
               <span className="italic font-thin ml-8 md:ml-16 text-ink-medium dark:text-gray-500">
                 {TEXTOS_GERAIS.tituloMetodologia.linha2}
@@ -23,14 +23,15 @@ const Methodology: React.FC = () => {
             {ITENS_METODOLOGIA.map((item) => (
               <div key={item.id} className="group cursor-pointer">
                 <div className="flex items-baseline gap-6 mb-4">
-                  <span className="text-ink-medium font-serif italic text-xl">
+                  <span className="text-ink-medium font-serif italic text-xl 3xl:text-2xl">
                     {item.numero}
                   </span>
-                  <h3 className="font-serif font-light text-4xl text-ink-black dark:text-white group-hover:italic transition-all duration-300">
+                  <h3 className="font-serif font-light text-4xl 3xl:text-5xl text-ink-black dark:text-white group-hover:italic transition-all duration-300">
                     {item.titulo}
                   </h3>
                 </div>
-                <p className="font-sans text-xs tracking-wide leading-loose text-ink-dark dark:text-gray-400 pl-12 max-w-sm font-light">
+                {/* Constrained Text */}
+                <p className="font-sans text-xs 3xl:text-sm tracking-wide leading-loose text-ink-dark dark:text-gray-400 pl-12 max-w-sm font-light">
                   {item.descricao}
                 </p>
                 <div className="h-px w-full bg-ink-light dark:bg-gray-800 mt-8 group-hover:bg-ink-black transition-colors duration-500 origin-left scale-x-50 group-hover:scale-x-100 ease-out"></div>
@@ -40,7 +41,7 @@ const Methodology: React.FC = () => {
         </div>
 
         <div className="lg:col-span-7 relative flex justify-center lg:justify-end mt-12 lg:mt-0">
-          <div className="relative w-full max-w-md aspect-[3/4] rounded-t-[1000px] overflow-hidden shadow-none group">
+          <div className="relative w-full max-w-md 3xl:max-w-2xl aspect-[3/4] rounded-t-[1000px] overflow-hidden shadow-none group">
             <img
               src={IMAGENS.metodologiaDestaque}
               alt="Textura de pele em close"

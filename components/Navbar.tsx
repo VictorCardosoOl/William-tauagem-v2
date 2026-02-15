@@ -28,10 +28,17 @@ const Navbar: React.FC = () => {
       if (isExpanded) {
         // OPEN STATE
         document.body.style.overflow = 'hidden';
-        const isMobile = window.innerWidth < 768;
+        const width = window.innerWidth;
+        const isMobile = width < 768;
+        const isUltraWide = width > 1920;
         
+        // Dynamic width calculation based on screen size
+        let targetWidth = '940px';
+        if (isMobile) targetWidth = '95vw';
+        else if (isUltraWide) targetWidth = '1400px'; // Wider menu for 4K screens
+
         window.gsap.to(navContainerRef.current, {
-          width: isMobile ? '95vw' : '940px',
+          width: targetWidth,
           height: isMobile ? '85vh' : '80px',
           borderRadius: '2px', // Sharper corners for editorial feel
           duration: 0.6,
@@ -92,10 +99,10 @@ const Navbar: React.FC = () => {
       {/* LOGO */}
       <div 
         ref={logoRef}
-        className={`fixed top-8 left-6 md:left-12 z-50 transition-transform duration-500 ease-in-out cursor-pointer text-ink-black dark:text-paper-light mix-blend-difference`}
+        className={`fixed top-8 left-6 md:left-12 3xl:left-24 z-50 transition-transform duration-500 ease-in-out cursor-pointer text-ink-black dark:text-paper-light mix-blend-difference`}
         style={{ transform: isVisible ? 'translateY(0)' : 'translateY(-150%)' }}
       >
-        <span className="font-serif text-2xl tracking-widest uppercase select-none font-bold">
+        <span className="font-serif text-2xl 3xl:text-3xl tracking-widest uppercase select-none font-bold">
           {TEXTOS_GERAIS.marca.split(' ')[0]}.S
         </span>
       </div>
@@ -103,7 +110,7 @@ const Navbar: React.FC = () => {
       {/* MENU CONTAINER */}
       <div 
         ref={navContainerRef}
-        className={`fixed top-8 right-6 md:right-12 z-50 flex items-center justify-center overflow-hidden shadow-none transition-transform duration-500 ease-in-out border border-ink-black/10 dark:border-white/10`}
+        className={`fixed top-8 right-6 md:right-12 3xl:right-24 z-50 flex items-center justify-center overflow-hidden shadow-none transition-transform duration-500 ease-in-out border border-ink-black/10 dark:border-white/10`}
         style={{ 
            transform: isVisible || isExpanded ? 'translateY(0)' : 'translateY(-150%)',
            width: '64px',

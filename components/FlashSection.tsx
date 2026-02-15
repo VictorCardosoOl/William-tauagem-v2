@@ -16,15 +16,15 @@ const FlashSection: React.FC = () => {
   ];
 
   return (
-    <section id="flash" className="bg-paper-light dark:bg-black py-32 px-6 border-y border-ink-light dark:border-white/10 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto">
+    <section id="flash" className="bg-paper-light dark:bg-black py-32 3xl:py-48 px-6 border-y border-ink-light dark:border-white/10 transition-colors duration-500">
+      <div className="max-w-screen-3xl mx-auto">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-ink-light dark:border-white/10 pb-8">
             <div>
               <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-ink-medium font-bold mb-6">
                 Eventos & Agenda
               </p>
-              <h2 className="font-serif font-light text-6xl md:text-8xl text-ink-black dark:text-white uppercase leading-[0.8]">
+              <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-white uppercase leading-[0.8]">
                 {TEXTOS_GERAIS.tituloFlash}
               </h2>
             </div>
@@ -39,7 +39,7 @@ const FlashSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-ink-light dark:bg-white/10 border border-ink-light dark:border-white/10">
           
           {/* CARD 1: FLASH DAY */}
-          <div className="bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-12 md:p-20 flex flex-col justify-between min-h-[700px] relative overflow-hidden">
+          <div className="bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] relative overflow-hidden">
             
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
                 <Zap size={300} strokeWidth={0.2} />
@@ -51,12 +51,12 @@ const FlashSection: React.FC = () => {
                 Flash Day
               </div>
 
-              <h2 className="font-serif font-light text-6xl md:text-7xl leading-[0.9] text-ink-black dark:text-white mb-8">
+              <h2 className="font-serif font-light text-6xl md:text-7xl 3xl:text-8xl leading-[0.9] text-ink-black dark:text-white mb-8">
                 Sessões Rápidas <br />
                 <span className="italic font-thin text-ink-medium">Catálogo Pronto</span>
               </h2>
 
-              <p className="font-sans text-xs text-ink-dark dark:text-gray-400 leading-loose tracking-wide max-w-sm mb-12 font-light">
+              <p className="font-sans text-xs 3xl:text-sm text-ink-dark dark:text-gray-400 leading-loose tracking-wide max-w-sm mb-12 font-light">
                 O estúdio abre as portas para o público. Desenhos autorais pré-definidos, 
                 valores especiais e atendimento por ordem de chegada.
               </p>
@@ -91,7 +91,7 @@ const FlashSection: React.FC = () => {
 
 
           {/* CARD 2: FULL DAY */}
-          <div className="relative bg-[#1A1A1A] text-white p-12 md:p-20 flex flex-col justify-between min-h-[700px] overflow-hidden group">
+          <div className="relative bg-[#1A1A1A] text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] overflow-hidden group">
             
             <div className="absolute inset-0 z-0">
                <div className="absolute inset-0 bg-black/70 z-10"></div>
@@ -108,12 +108,12 @@ const FlashSection: React.FC = () => {
                 Experiência VIP
               </div>
 
-              <h2 className="font-serif font-light text-6xl md:text-7xl leading-[0.9] text-white mb-8">
+              <h2 className="font-serif font-light text-6xl md:text-7xl 3xl:text-8xl leading-[0.9] text-white mb-8">
                 Full Day <br />
                 <span className="italic font-thin text-gray-400">& Imersão Total</span>
               </h2>
 
-              <p className="font-sans text-xs text-gray-300 leading-loose tracking-wide max-w-sm mb-12 font-light">
+              <p className="font-sans text-xs 3xl:text-sm text-gray-300 leading-loose tracking-wide max-w-sm mb-12 font-light">
                 "Aluga" o artista por um dia inteiro. Foco absoluto no seu projeto, sem pressa. 
                 Ideal para fechamentos de braço/costas.
               </p>

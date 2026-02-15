@@ -7,24 +7,24 @@ const Footer: React.FC = () => {
 
   return (
     <footer id="contact" className="bg-paper-light dark:bg-paper-dark pt-40 pb-12 px-6 md:px-12 border-t border-ink-light dark:border-white/5">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-screen-3xl mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-start mb-40">
           
-          <div className="max-w-xl">
-            <h2 className="font-serif italic font-thin text-5xl md:text-7xl text-ink-black dark:text-gray-100 mb-10 leading-[1.1]">
+          <div className="max-w-xl 3xl:max-w-2xl">
+            <h2 className="font-serif italic font-thin text-5xl md:text-7xl 3xl:text-8xl text-ink-black dark:text-gray-100 mb-10 leading-[1.1]">
               {TEXTOS_GERAIS.rodapeChamada}
             </h2>
-            <p className="font-sans text-ink-medium dark:text-gray-400 mb-16 max-w-sm leading-loose text-xs tracking-wide font-light">
+            <p className="font-sans text-ink-medium dark:text-gray-400 mb-16 max-w-sm leading-loose text-xs 3xl:text-sm tracking-wide font-light">
               {TEXTOS_GERAIS.rodapeTexto}
             </p>
             <a 
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-8 text-2xl md:text-3xl font-serif italic font-light border-b border-ink-black/30 dark:border-white/30 pb-4 hover:border-ink-black dark:hover:border-white hover:opacity-70 transition-all duration-500 text-ink-black dark:text-white"
+              className="group inline-flex items-center gap-8 text-2xl md:text-3xl 3xl:text-4xl font-serif italic font-light border-b border-ink-black/30 dark:border-white/30 pb-4 hover:border-ink-black dark:hover:border-white hover:opacity-70 transition-all duration-500 text-ink-black dark:text-white"
             >
               <span>{TEXTOS_GERAIS.rodapeBotao}</span>
-              <ArrowRight className="h-6 w-6 group-hover:translate-x-6 transition-transform duration-500 font-light" strokeWidth={1} />
+              <ArrowRight className="h-6 w-6 3xl:h-8 3xl:w-8 group-hover:translate-x-6 transition-transform duration-500 font-light" strokeWidth={1} />
             </a>
           </div>
 
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
               <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-10">
                 Contato
               </h4>
-              <ul className="space-y-6 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-gray-300">
+              <ul className="space-y-6 text-[10px] 3xl:text-xs font-bold uppercase tracking-[0.2em] text-ink-black dark:text-gray-300">
                 {REDES_SOCIAIS.map((social) => (
                   <li key={social.nome}>
                     <a 
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-10">
                 Local
               </h4>
-              <address className="not-italic space-y-4 text-[10px] font-medium tracking-wide text-ink-black dark:text-gray-300 leading-relaxed opacity-80">
+              <address className="not-italic space-y-4 text-[10px] 3xl:text-xs font-medium tracking-wide text-ink-black dark:text-gray-300 leading-relaxed opacity-80">
                 {TEXTOS_GERAIS.endereco.map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}

@@ -48,7 +48,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
                 onClick(item, e.currentTarget as HTMLElement);
             }
         }}
-        className="group relative cursor-pointer mb-24 w-full block focus:outline-none focus:ring-1 focus:ring-ink-black"
+        className="group relative cursor-pointer mb-24 3xl:mb-32 w-full block focus:outline-none focus:ring-1 focus:ring-ink-black"
         onClick={(e) => onClick(item, e.currentTarget as HTMLElement)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -77,7 +77,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
             <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink-medium font-bold">
                 {item.placement}
             </span>
-            <h3 className="font-serif font-light italic text-4xl md:text-5xl text-ink-black dark:text-paper-light">
+            <h3 className="font-serif font-light italic text-4xl md:text-5xl 3xl:text-6xl text-ink-black dark:text-paper-light">
                 {item.title}
             </h3>
         </div>
@@ -134,11 +134,12 @@ const Portfolio: React.FC = () => {
   const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-24 md:py-32 px-6 relative" ref={containerRef}>
+    <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-24 md:py-32 3xl:py-48 px-6 relative" ref={containerRef}>
       
       {/* HEADER - Editorial Lines */}
-      <div className="max-w-[1400px] mx-auto mb-32 border-b border-ink-light dark:border-white/10 pb-8 flex flex-col md:flex-row justify-between items-end">
-          <h2 className="font-serif font-light text-6xl md:text-8xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
+      {/* Expanded Max-Width */}
+      <div className="max-w-screen-3xl mx-auto mb-32 border-b border-ink-light dark:border-white/10 pb-8 flex flex-col md:flex-row justify-between items-end">
+          <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 
             <span className="italic font-extralight text-ink-medium">Works</span>
           </h2>
@@ -147,7 +148,8 @@ const Portfolio: React.FC = () => {
           </p>
       </div>
 
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24">
+      {/* GRID CONTAINER - Wide Immersive Layout */}
+      <div className="max-w-screen-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 3xl:gap-32">
           <div className="flex flex-col gap-16 md:gap-32">
             {col1.map((item) => (
               <PortfolioItem key={item.id} item={item} onClick={handleItemClick} />
@@ -176,7 +178,7 @@ const Portfolio: React.FC = () => {
                     <X size={24} />
                 </button>
             </div>
-            <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-24 relative">
+            <div className="w-full md:w-1/2 h-[50vh] md:h-full flex flex-col justify-center px-8 md:px-24 3xl:px-40 relative">
                 <button 
                     onClick={handleClose}
                     className="absolute top-12 right-12 hidden md:block text-ink-black dark:text-paper-light hover:rotate-90 transition-transform duration-300"
@@ -188,7 +190,7 @@ const Portfolio: React.FC = () => {
                     <span className="font-sans text-[10px] tracking-[0.4em] uppercase font-bold text-ink-medium mb-6 block">
                         Project 0{selectedItem.id}
                     </span>
-                    <h2 className="font-serif italic font-light text-6xl md:text-8xl text-ink-black dark:text-paper-light mb-8 leading-none">
+                    <h2 className="font-serif italic font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light mb-8 leading-none">
                         {selectedItem.title}
                     </h2>
                     <div className="w-12 h-[1px] bg-ink-black dark:bg-paper-light mb-8"></div>
@@ -202,7 +204,8 @@ const Portfolio: React.FC = () => {
                             <p className="font-serif text-2xl text-ink-black dark:text-paper-light">Fine Line / Texture</p>
                         </div>
                     </div>
-                    <p className="font-sans text-xs leading-loose text-ink-dark dark:text-gray-400 max-w-md">
+                    {/* Constrained text width for readability */}
+                    <p className="font-sans text-xs 3xl:text-sm leading-loose text-ink-dark dark:text-gray-400 max-w-md">
                         This piece explores the relationship between organic form and geometric constraint. 
                         Designed specifically to flow with the muscle structure of the {selectedItem.placement.toLowerCase()}.
                     </p>

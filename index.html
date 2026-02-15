@@ -24,7 +24,23 @@
         tailwind.config = {
             darkMode: "class",
             theme: {
+                // Breakpoints estendidos para Monitores Ultra-Wide
+                screens: {
+                    'sm': '640px',
+                    'md': '768px',
+                    'lg': '1024px',
+                    'xl': '1280px',
+                    '2xl': '1536px',
+                    '3xl': '1920px', // Full HD Native / Cinema
+                    '4xl': '2560px', // 2K/4K Ultra
+                },
                 extend: {
+                    maxWidth: {
+                        '8xl': '88rem',
+                        '9xl': '96rem',
+                        'screen-3xl': '1920px',
+                        'screen-4xl': '2400px', // Controlled ultra-wide
+                    },
                     colors: {
                         // PALETA "PAPEL & NANQUIM" (WARM MONOCHROME)
                         
