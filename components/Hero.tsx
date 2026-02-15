@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { TEXTOS_GERAIS } from '../data';
 
+// Declare GSAP
+declare global {
+  interface Window {
+    gsap: any;
+  }
+}
+
 const Hero: React.FC = () => {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!window.gsap || !titleRef.current) return;
+
+    const ctx = window.gsap.context(() => {
+      // Animate Main Title: Reveal from bottom
+      window.gsap.fromTo(titleRef.current, 
+        { y: '110%', opacity: 0 }, 
+        { 
+          y: '0%', 
+          opacity: 1, 
+          duration: 1.8, 
+          ease: 'power4.out',
+          delay: 0.5 // Wait a bit for preloader to clear
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <header 
       id="home" 
+      ref={containerRef}
       className="relative h-screen w-full flex flex-col justify-end overflow-hidden bg-background-light dark:bg-background-dark text-primary dark:text-gray-100 transition-colors duration-500"
     >
       
@@ -20,9 +51,11 @@ const Hero: React.FC = () => {
       </div>
 
       {/* MAIN TITLE: Huge Typography Anchored Bottom */}
+      {/* Mask Container for Reveal Effect */}
       <div className="relative w-full overflow-hidden select-none pb-0 md:pb-0 z-0 leading-none">
         <h1 
-          className="font-sans font-black text-[26vw] md:text-[24vw] tracking-tighter text-primary dark:text-white leading-[0.75] text-center md:text-left transform origin-bottom scale-y-110"
+          ref={titleRef}
+          className="font-sans font-black text-[26vw] md:text-[24vw] tracking-tighter text-primary dark:text-white leading-[0.75] text-center md:text-left transform origin-bottom"
         >
           {TEXTOS_GERAIS.heroTituloPrincipal}
         </h1>
