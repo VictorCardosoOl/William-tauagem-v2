@@ -9,15 +9,15 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: Text Content (Right Aligned) */}
-        <div className="flex flex-col items-start md:items-end text-left md:text-right mb-24">
-          <div className="max-w-2xl">
-            <h2 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl leading-tight uppercase text-primary dark:text-white mb-6">
+        <div className="flex flex-col items-start md:items-end text-left md:text-right mb-32">
+          <div className="max-w-3xl">
+            <h2 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl leading-[0.9] uppercase text-primary dark:text-white mb-8 tracking-tighter">
               {sobre.tituloParte1} <br />
-              <span className="font-serif italic text-accent-sepia dark:text-gray-500 font-normal">{sobre.tituloDestaque}</span> <br />
+              <span className="font-serif italic text-accent-sepia dark:text-gray-500 font-light">{sobre.tituloDestaque}</span> <br />
               {sobre.tituloParte2}
             </h2>
             
-            <p className="font-sans text-lg md:text-xl text-gray-700 dark:text-gray-400 leading-relaxed max-w-lg ml-auto font-light">
+            <p className="font-sans text-sm md:text-base text-gray-700 dark:text-gray-400 leading-loose tracking-wide max-w-lg ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
               {sobre.descricao}
             </p>
           </div>
@@ -44,8 +44,8 @@ const About: React.FC = () => {
                 />
               </div>
               
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-                <span className="font-mono text-[10px] bg-primary text-white px-2 py-1 uppercase">Fig. 0{index + 1}</span>
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+                <span className="font-sans text-[9px] tracking-[0.3em] bg-primary text-white px-3 py-1 uppercase font-bold">Fig. 0{index + 1}</span>
               </div>
 
             </div>

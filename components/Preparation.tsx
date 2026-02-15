@@ -7,9 +7,9 @@ const Preparation: React.FC = () => {
       <div className="max-w-[1400px] mx-auto">
         
         {/* Header Decorator */}
-        <div className="mb-20">
-            <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-[#5a4242] dark:text-white/80 flex items-center gap-4">
-                <span className="w-12 h-px bg-[#d48d92]"></span>
+        <div className="mb-24">
+            <h3 className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-[#5a4242] dark:text-white/80 flex items-center gap-6">
+                <span className="w-16 h-px bg-[#d48d92]"></span>
                 O Preparo
             </h3>
         </div>
@@ -20,19 +20,19 @@ const Preparation: React.FC = () => {
             <div key={item.id} className="group relative">
               
               {/* Giant Number */}
-              <div className="mb-4">
-                <span className="font-serif text-7xl md:text-8xl text-[#d48d92] opacity-30 group-hover:opacity-50 transition-opacity duration-500">
+              <div className="mb-4 transform group-hover:-translate-y-2 transition-transform duration-500">
+                <span className="font-serif italic font-thin text-8xl md:text-9xl text-[#d48d92] opacity-20 group-hover:opacity-40 transition-opacity duration-500">
                   0{item.id}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="font-serif text-3xl font-bold text-[#1a1a1a] dark:text-white mb-6 relative inline-block">
+              <h3 className="font-serif text-3xl font-light italic text-[#1a1a1a] dark:text-white mb-6 relative inline-block">
                 {item.titulo}
               </h3>
 
               {/* Description */}
-              <p className="font-sans text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="font-sans text-xs leading-loose tracking-wide text-gray-600 dark:text-gray-400 font-light">
                 {item.descricao}
               </p>
 

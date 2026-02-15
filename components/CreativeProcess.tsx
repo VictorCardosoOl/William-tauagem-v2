@@ -47,9 +47,9 @@ const CreativeProcess: React.FC = () => {
     <section className="bg-background-rose dark:bg-[#1f1f1f] py-32 px-6 md:px-12 transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
             {/* Section Header */}
-            <div className="flex items-center gap-4 mb-20">
+            <div className="flex items-center gap-6 mb-24">
                 <div className="w-2.5 h-2.5 border border-accent-sepia dark:border-white/60 rounded-full"></div> 
-                <h3 className="font-sans text-xs tracking-[0.2em] uppercase font-bold text-accent-sepia dark:text-white/80">
+                <h3 className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-accent-sepia dark:text-white/80">
                     O Processo Criativo
                 </h3>
             </div>
@@ -65,24 +65,24 @@ const CreativeProcess: React.FC = () => {
                             <div 
                                 key={item.id}
                                 onMouseEnter={() => setActiveProcess(index)}
-                                className={`relative cursor-pointer py-10 border-b border-primary/10 dark:border-white/10 transition-all duration-300 group`}
+                                className={`relative cursor-pointer py-12 border-b border-primary/5 dark:border-white/5 transition-all duration-300 group`}
                             >
                                 {/* Active Left Bar Indicator */}
-                                <div className={`absolute left-[-2rem] top-10 bottom-10 w-1 bg-accent-pink dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
+                                <div className={`absolute left-[-2rem] top-10 bottom-10 w-0.5 bg-accent-pink dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
 
                                 <div className="flex justify-between items-baseline">
                                     
                                     {/* Texts */}
                                     <div className="pr-8">
-                                        <h4 className={`text-4xl md:text-5xl transition-all duration-300 ${
+                                        <h4 className={`text-5xl md:text-6xl transition-all duration-500 ${
                                             isActive 
-                                            ? 'font-serif italic text-primary dark:text-white translate-x-2' 
-                                            : 'font-serif text-primary/60 dark:text-gray-500 group-hover:text-primary'
+                                            ? 'font-serif italic font-light text-primary dark:text-white translate-x-4' 
+                                            : 'font-serif font-thin text-primary/40 dark:text-gray-500 group-hover:text-primary'
                                         }`}>
                                             {item.titulo}
                                         </h4>
-                                        <p className={`font-sans text-sm mt-3 transition-all duration-300 ${
-                                            isActive ? 'opacity-100 text-accent-sepia dark:text-gray-300 translate-x-2' : 'opacity-40 text-gray-500'
+                                        <p className={`font-sans text-[10px] tracking-[0.2em] uppercase mt-4 transition-all duration-300 ${
+                                            isActive ? 'opacity-100 text-accent-sepia dark:text-gray-300 translate-x-4' : 'opacity-0'
                                         }`}>
                                             {item.subtitulo}
                                         </p>
@@ -90,8 +90,7 @@ const CreativeProcess: React.FC = () => {
 
                                     {/* Right Side: Dot + Number */}
                                     <div className="flex items-center gap-4 shrink-0">
-                                        <div className={`w-1.5 h-1.5 rounded-full bg-accent-pink dark:bg-white transition-all duration-300 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}></div>
-                                        <span className={`font-sans text-xs font-bold transition-colors duration-300 ${isActive ? 'text-accent-pink dark:text-white opacity-100' : 'text-gray-400 opacity-30'}`}>
+                                        <span className={`font-sans text-[10px] font-bold tracking-widest transition-colors duration-300 ${isActive ? 'text-accent-pink dark:text-white opacity-100' : 'text-gray-400 opacity-20'}`}>
                                             0{item.id}
                                         </span>
                                     </div>
@@ -103,20 +102,20 @@ const CreativeProcess: React.FC = () => {
                 </div>
 
                 {/* RIGHT: Content Display */}
-                <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[400px] flex items-center justify-center lg:justify-start lg:pl-12">
+                <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[400px] flex items-center justify-center lg:justify-start lg:pl-16">
                     <div className="relative w-full max-w-lg" ref={contentRef}>
                         
                         {/* Giant Background Number */}
-                        <div className="absolute -top-32 -left-12 text-[15rem] md:text-[20rem] leading-none font-serif text-primary opacity-[0.02] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700">
+                        <div className="absolute -top-40 -left-20 text-[18rem] md:text-[25rem] leading-none font-serif text-primary opacity-[0.03] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700 font-thin italic">
                             0{activeProcess + 1}
                         </div>
 
                         {/* Details Content */}
                         <div className="relative z-10" key={activeProcess}>
-                            <h3 className="anim-text font-serif text-3xl mb-8 text-primary dark:text-white border-b border-accent-pink/30 dark:border-white/20 pb-4 inline-block">
+                            <h3 className="anim-text font-serif italic text-4xl mb-8 text-primary dark:text-white border-b border-accent-pink/30 dark:border-white/20 pb-4 inline-block font-light">
                                 Detalhes da Etapa
                             </h3>
-                            <p className="anim-text font-sans text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 font-light">
+                            <p className="anim-text font-sans text-sm md:text-base leading-[2.5] tracking-wide text-gray-700 dark:text-gray-300 font-light">
                                 {PROCESSO_CRIATIVO[activeProcess].descricao}
                             </p>
                         </div>
