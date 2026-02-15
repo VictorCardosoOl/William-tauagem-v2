@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TEXTOS_GERAIS } from '../data';
 
 const Concept: React.FC = () => {
   const { concept } = TEXTOS_GERAIS;
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+        
+        // Parallax for left image
+        window.gsap.to(".concept-img-1", {
+            yPercent: -20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".concept-img-1-wrapper",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Parallax for right image (reverse direction or slower)
+        window.gsap.to(".concept-img-2", {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".concept-img-2-wrapper",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="relative w-full py-32 3xl:py-48 px-6 md:px-12 bg-paper-warm dark:bg-[#181818] overflow-hidden transition-colors duration-1000">
+    <section ref={containerRef} className="relative w-full py-32 3xl:py-48 px-6 md:px-12 bg-paper-warm dark:bg-[#181818] overflow-hidden transition-colors duration-1000">
       
       <div className="max-w-screen-3xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32">
         
@@ -31,12 +66,12 @@ const Concept: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 3xl:gap-24 items-center">
              
-             <div className="relative md:-mt-24 group">
+             <div className="concept-img-1-wrapper relative md:-mt-24 group">
                 <div className="overflow-hidden aspect-[4/5] shadow-none border border-ink-light relative">
                   <img 
                     src={concept.imagens[0].url} 
                     alt={concept.imagens[0].alt} 
-                    className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-1 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
                   />
                   <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
                      <img 
@@ -55,11 +90,11 @@ const Concept: React.FC = () => {
                 <p className="font-sans text-xs md:text-sm 3xl:text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light border-l border-ink-black/20 pl-6">
                   {concept.textoSecundario}
                 </p>
-                <div className="overflow-hidden aspect-square shadow-none border border-ink-light w-3/4 self-end group relative">
+                <div className="concept-img-2-wrapper overflow-hidden aspect-square shadow-none border border-ink-light w-3/4 self-end group relative">
                    <img 
                     src={concept.imagens[1].url} 
                     alt={concept.imagens[1].alt} 
-                    className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-2 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
                   />
                   <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
                      <img 

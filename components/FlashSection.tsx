@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Zap, Crown, CheckCircle2, Calendar, ArrowRight } from 'lucide-react';
 import { TEXTOS_GERAIS } from '../data';
 
 const FlashSection: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  
   const flashFeatures = [
     "Desenhos exclusivos",
     "Valores promocionais",
@@ -15,11 +17,47 @@ const FlashSection: React.FC = () => {
     "Privacidade total"
   ];
 
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+        // Animate Header
+        window.gsap.from(".flash-header", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 70%"
+            }
+        });
+
+        // Animate Cards with stagger
+        window.gsap.from(".flash-card", {
+            y: 100,
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power4.out",
+            scrollTrigger: {
+                trigger: ".flash-grid",
+                start: "top 75%"
+            }
+        });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+
   return (
-    <section id="flash" className="bg-paper-light dark:bg-black py-32 3xl:py-48 px-6 border-y border-ink-light dark:border-white/10 transition-colors duration-500">
+    <section id="flash" ref={containerRef} className="bg-paper-light dark:bg-black py-32 3xl:py-48 px-6 border-y border-ink-light dark:border-white/10 transition-colors duration-500">
       <div className="max-w-screen-3xl mx-auto">
         
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-ink-light dark:border-white/10 pb-8">
+        <div className="flash-header flex flex-col md:flex-row justify-between items-end mb-24 border-b border-ink-light dark:border-white/10 pb-8">
             <div>
               <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-ink-medium font-bold mb-6">
                 Eventos & Agenda
@@ -36,10 +74,10 @@ const FlashSection: React.FC = () => {
             </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-ink-light dark:bg-white/10 border border-ink-light dark:border-white/10">
+        <div className="flash-grid grid grid-cols-1 lg:grid-cols-2 gap-px bg-ink-light dark:bg-white/10 border border-ink-light dark:border-white/10">
           
           {/* CARD 1: FLASH DAY */}
-          <div className="bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] relative overflow-hidden">
+          <div className="flash-card bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] relative overflow-hidden">
             
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
                 <Zap size={300} strokeWidth={0.2} />
@@ -91,7 +129,7 @@ const FlashSection: React.FC = () => {
 
 
           {/* CARD 2: FULL DAY */}
-          <div className="relative bg-[#1A1A1A] text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] overflow-hidden group">
+          <div className="flash-card relative bg-[#1A1A1A] text-white p-12 md:p-20 3xl:p-28 flex flex-col justify-between min-h-[700px] 3xl:min-h-[850px] overflow-hidden group">
             
             <div className="absolute inset-0 z-0">
                <div className="absolute inset-0 bg-black/70 z-10"></div>

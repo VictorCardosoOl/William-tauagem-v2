@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TEXTOS_GERAIS, ITENS_METODOLOGIA, IMAGENS } from '../data';
 
 const Methodology: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+      
+      const tl = window.gsap.timeline({
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 60%"
+        }
+      });
+
+      tl.from(".method-title span", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out"
+      })
+      .from(".method-item", {
+        x: -30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out"
+      }, "-=0.5")
+      .from(".method-image", {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.5,
+        ease: "expo.out"
+      }, "-=1");
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="methodology" className="relative py-24 md:py-40 3xl:py-64 px-6 md:px-12 max-w-screen-3xl mx-auto">
+    <section id="methodology" ref={containerRef} className="relative py-24 md:py-40 3xl:py-64 px-6 md:px-12 max-w-screen-3xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 3xl:gap-24 items-center">
         
         <div className="lg:col-span-5 space-y-20 3xl:space-y-32">
@@ -11,9 +51,9 @@ const Methodology: React.FC = () => {
             <p className="text-ink-black font-sans text-[10px] tracking-[0.3em] uppercase font-bold">
               Metodologia
             </p>
-            <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl leading-[0.85] text-ink-black dark:text-gray-100">
+            <h2 className="method-title font-serif font-light text-6xl md:text-8xl 3xl:text-9xl leading-[0.85] text-ink-black dark:text-gray-100 overflow-hidden">
               <span className="block">{TEXTOS_GERAIS.tituloMetodologia.linha1}</span>
-              <span className="italic font-thin ml-8 md:ml-16 text-ink-medium dark:text-gray-500">
+              <span className="italic font-thin ml-8 md:ml-16 text-ink-medium dark:text-gray-500 block">
                 {TEXTOS_GERAIS.tituloMetodologia.linha2}
               </span>
             </h2>
@@ -21,7 +61,7 @@ const Methodology: React.FC = () => {
 
           <div className="space-y-16">
             {ITENS_METODOLOGIA.map((item) => (
-              <div key={item.id} className="group cursor-pointer">
+              <div key={item.id} className="method-item group cursor-pointer">
                 <div className="flex items-baseline gap-6 mb-4">
                   <span className="text-ink-medium font-serif italic text-xl 3xl:text-2xl">
                     {item.numero}
@@ -41,7 +81,7 @@ const Methodology: React.FC = () => {
         </div>
 
         <div className="lg:col-span-7 relative flex justify-center lg:justify-end mt-12 lg:mt-0">
-          <div className="relative w-full max-w-md 3xl:max-w-2xl aspect-[3/4] rounded-t-[1000px] overflow-hidden shadow-none group">
+          <div className="method-image relative w-full max-w-md 3xl:max-w-2xl aspect-[3/4] rounded-t-[1000px] overflow-hidden shadow-none group">
             <img
               src={IMAGENS.metodologiaDestaque}
               alt="Textura de pele em close"
