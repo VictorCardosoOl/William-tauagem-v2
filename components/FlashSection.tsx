@@ -1,5 +1,6 @@
 import React from 'react';
 import { Zap, Crown, CheckCircle2, Calendar, ArrowRight } from 'lucide-react';
+import { TEXTOS_GERAIS } from '../data';
 
 const FlashSection: React.FC = () => {
   const flashFeatures = [
@@ -18,6 +19,24 @@ const FlashSection: React.FC = () => {
     <section id="flash" className="bg-background-light dark:bg-black py-32 px-6 border-y border-white/10 transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
         
+        {/* Section Header Reintroduced */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-gray-200 dark:border-white/10 pb-8">
+            <div>
+              <p className="font-sans text-xs tracking-[0.2em] uppercase text-accent-pink font-bold mb-4">
+                Eventos & Agenda
+              </p>
+              <h2 className="font-serif text-5xl md:text-7xl text-primary dark:text-white uppercase leading-none whitespace-pre-line">
+                {TEXTOS_GERAIS.tituloFlash}
+              </h2>
+            </div>
+            
+            <div className="mt-8 md:mt-0">
+               <p className="font-sans text-xs tracking-widest uppercase opacity-50 text-right">
+                 Próxima Abertura: {TEXTOS_GERAIS.dataProximoEvento}
+               </p>
+            </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 shadow-2xl">
           
           {/* CARD 1: FLASH DAY (Light) */}
