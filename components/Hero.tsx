@@ -1,29 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { TEXTOS_GERAIS } from '../data';
 
 const Hero: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Simple Parallax Effect on Scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const scrollY = window.scrollY;
-      const title = containerRef.current.querySelector('#hero-title') as HTMLElement;
-      
-      if (title) {
-        title.style.transform = `translateY(${scrollY * 0.2}px)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <header 
       id="home" 
-      ref={containerRef}
       className="relative h-screen w-full flex flex-col justify-end overflow-hidden bg-[#fff0f0] dark:bg-background-dark text-primary dark:text-gray-100 transition-colors duration-500"
     >
       
@@ -40,7 +21,6 @@ const Hero: React.FC = () => {
       {/* MAIN TITLE: Huge Typography Anchored Bottom */}
       <div className="relative w-full overflow-hidden select-none pb-0 md:pb-0 z-0 leading-none">
         <h1 
-          id="hero-title"
           className="font-sans font-black text-[26vw] md:text-[24vw] tracking-tighter text-[#1a1a1a] dark:text-white leading-[0.75] text-center md:text-left transform origin-bottom"
         >
           {TEXTOS_GERAIS.heroTituloPrincipal}
