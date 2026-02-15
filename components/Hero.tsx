@@ -1,44 +1,49 @@
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
-import { TEXTOS_GERAIS, IMAGENS } from '../data';
+import { ArrowDown } from 'lucide-react';
+import { TEXTOS_GERAIS } from '../data';
 
 const Hero: React.FC = () => {
   return (
-    <header id="work" className="relative h-screen flex flex-col justify-center items-center overflow-hidden border-b border-gray-300 dark:border-gray-800">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={IMAGENS.heroBg}
-          alt="Fundo abstrato com textura de pele"
-          className="w-full h-full object-cover opacity-20 dark:opacity-10 grayscale"
-        />
-        {/* Subtle mesh gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background-light/20 dark:to-background-dark/50"></div>
-      </div>
+    <header id="work" className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden border-b border-gray-300 dark:border-gray-800 bg-background-light dark:bg-background-dark transition-colors duration-500">
+      
+      {/* Wave Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-40 pointer-events-none"
+        style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='40' viewBox='0 0 100 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q25 40 50 20 T100 20' fill='none' stroke='%23a1a1aa' stroke-opacity='0.1' stroke-width='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '100px 40px'
+        }}
+      ></div>
 
       {/* Main Content */}
-      <div className="z-10 text-center space-y-6 px-4 animate-fade-in-up">
-        <p className="font-sans text-xs tracking-[0.3em] uppercase opacity-70">
+      <div className="z-10 text-center flex flex-col items-center px-4 animate-fade-in-up">
+        
+        {/* Slogan */}
+        <p className="font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase opacity-50 mb-4 md:mb-6 text-primary dark:text-gray-300">
           {TEXTOS_GERAIS.slogan}
         </p>
-        <h1 className="font-serif text-6xl md:text-9xl italic font-light leading-none text-primary dark:text-gray-100">
-          {TEXTOS_GERAIS.heroTituloPrincipal} <br />
-          <span className="not-italic font-display block mt-2">
-            {TEXTOS_GERAIS.heroTituloSecundario}
-          </span>
+        
+        {/* Main Title "WILLIAM" */}
+        <h1 className="font-serif text-[15vw] md:text-9xl lg:text-[10rem] leading-[0.8] text-primary dark:text-gray-100 uppercase tracking-tight">
+          {TEXTOS_GERAIS.heroTituloPrincipal}
         </h1>
+        
+        {/* Subtitle "Etching Silence" */}
+        <p className="font-serif italic text-3xl md:text-5xl lg:text-6xl text-gray-500 dark:text-gray-400 mt-2 font-light">
+          {TEXTOS_GERAIS.heroTituloSecundario}
+        </p>
       </div>
 
-      {/* Vertical Text (EST. 2018) */}
-      <div className="absolute bottom-10 left-6 hidden md:block">
-        <p className="text-xs font-sans rotate-180 text-vertical tracking-widest opacity-60 dark:text-white">
+      {/* Vertical Text (EST. 2018) - Bottom Left */}
+      <div className="absolute bottom-12 left-8 hidden md:block">
+        <p className="text-[10px] font-sans -rotate-90 text-vertical tracking-[0.2em] opacity-40 text-primary dark:text-white uppercase">
           {TEXTOS_GERAIS.anoEstabelecimento}
         </p>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 right-6 animate-bounce">
-        <ChevronDown className="h-6 w-6 opacity-60 dark:text-white" />
+      {/* Scroll Indicator - Bottom Right */}
+      <div className="absolute bottom-12 right-8">
+        <ArrowDown className="h-5 w-5 opacity-40 text-primary dark:text-white stroke-[1.5]" />
       </div>
     </header>
   );

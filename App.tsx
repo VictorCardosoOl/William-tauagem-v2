@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Manifesto from './components/Manifesto';
 import Methodology from './components/Methodology';
 import FlashSection from './components/FlashSection';
 import Aftercare from './components/Aftercare';
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
+        <Manifesto />
         <Methodology />
         <FlashSection />
         <Aftercare />

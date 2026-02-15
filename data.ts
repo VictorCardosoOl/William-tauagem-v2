@@ -7,9 +7,9 @@ import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial } from './types';
 
 export const TEXTOS_GERAIS = {
   marca: "W. Siqueira",
-  slogan: "Fine Line & Tatuagem Contemporânea",
-  heroTituloPrincipal: "Traço",
-  heroTituloSecundario: "Silêncio",
+  slogan: "FINE LINE & CONTEMPORARY TATTOO",
+  heroTituloPrincipal: "WILLIAM",
+  heroTituloSecundario: "Etching Silence",
   anoEstabelecimento: "EST. 2018",
   tituloMetodologia: {
     linha1: "INTENSIDADE",
@@ -26,7 +26,17 @@ export const TEXTOS_GERAIS = {
     "Studio W. Siqueira",
     "São Paulo, SP",
     "Apenas com agendamento"
-  ]
+  ],
+  manifesto: {
+    titulo: "O MANIFESTO",
+    fraseParte1: "Não apenas adornamos o corpo; nós o",
+    fraseDestaque: "consagramos",
+    fraseParte2: "com memória e intenção.",
+    card1Titulo: "PREPARAÇÃO",
+    card1Texto: "A tela deve estar pura. Hidrate-se profundamente por 48 horas. Evite álcool e anticoagulantes. O sono é a base da resistência.",
+    card2Titulo: "PÓS-CUIDADO",
+    card2Texto: "Trate o artefato como uma ferida. Mantenha limpo, hidrate com moderação. Deixe a pele respirar e se reformar em torno de sua nova história."
+  }
 };
 
 export const IMAGENS = {

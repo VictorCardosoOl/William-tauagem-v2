@@ -7,22 +7,23 @@ const Navbar: React.FC = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Updated links to match the "Stitch" design (English)
   const links = [
-    { name: 'Trabalhos', href: '#work' },
-    { name: 'Metodologia', href: '#methodology' },
-    { name: 'Flash Day', href: '#flash' },
-    { name: 'Agenda', href: '#booking' },
+    { name: 'WORK', href: '#work' },
+    { name: 'METHODOLOGY', href: '#methodology' },
+    { name: 'FLASH DAY', href: '#flash' },
+    { name: 'BOOKING', href: '#booking' },
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 mix-blend-difference text-white px-6 py-6 flex justify-between items-center bg-transparent">
+    <nav className="fixed top-0 w-full z-50 mix-blend-difference text-white px-6 md:px-12 py-8 flex justify-between items-center bg-transparent">
       {/* Brand */}
-      <div className="font-display text-2xl tracking-widest uppercase z-50">
+      <div className="font-serif text-2xl tracking-widest uppercase z-50">
         {TEXTOS_GERAIS.marca}
       </div>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex gap-12 font-sans text-sm tracking-widest uppercase">
+      <div className="hidden md:flex gap-12 font-sans text-xs tracking-[0.15em] uppercase">
         {links.map((link) => (
           <a
             key={link.name}
