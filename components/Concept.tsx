@@ -38,8 +38,8 @@ const Concept: React.FC = () => {
              <div className="relative md:-mt-12 group">
                 <div className="overflow-hidden aspect-[4/5] shadow-xl">
                   <img 
-                    src={concept.imagens[0]} 
-                    alt="Process Sketch" 
+                    src={concept.imagens[0].url} 
+                    alt={concept.imagens[0].alt} 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
                   />
                 </div>
@@ -55,8 +55,8 @@ const Concept: React.FC = () => {
                 </p>
                 <div className="overflow-hidden aspect-square shadow-xl w-3/4 self-end group">
                    <img 
-                    src={concept.imagens[1]} 
-                    alt="Ink Texture" 
+                    src={concept.imagens[1].url} 
+                    alt={concept.imagens[1].alt} 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
                   />
                 </div>

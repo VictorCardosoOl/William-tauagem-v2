@@ -3,6 +3,10 @@ import { TEXTOS_GERAIS, REDES_SOCIAIS } from '../data';
 import { ArrowRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  // Assume the first link is always WhatsApp based on data.ts structure, 
+  // or filter for it specifically if needed in future.
+  const whatsappLink = REDES_SOCIAIS.find(social => social.nome === 'WhatsApp')?.url || '#';
+
   return (
     <footer id="contact" className="bg-background-light dark:bg-background-dark pt-32 pb-12 px-6 md:px-12 border-t border-gray-200 dark:border-white/5">
       <div className="max-w-[1400px] mx-auto">
@@ -17,7 +21,9 @@ const Footer: React.FC = () => {
               {TEXTOS_GERAIS.rodapeTexto}
             </p>
             <a 
-              href="#" 
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-6 text-xl md:text-2xl font-serif italic border-b border-primary/30 dark:border-white/30 pb-2 hover:border-primary dark:hover:border-white hover:opacity-70 transition-all duration-500 text-primary dark:text-white"
             >
               <span>{TEXTOS_GERAIS.rodapeBotao}</span>
@@ -35,7 +41,12 @@ const Footer: React.FC = () => {
               <ul className="space-y-4 text-sm font-light text-primary dark:text-gray-300 tracking-wide">
                 {REDES_SOCIAIS.map((social) => (
                   <li key={social.nome}>
-                    <a href={social.url} className="hover:text-accent-pink transition-colors relative group">
+                    <a 
+                      href={social.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-accent-pink transition-colors relative group"
+                    >
                       {social.nome}
                       <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent-pink transition-all duration-300 group-hover:w-full"></span>
                     </a>

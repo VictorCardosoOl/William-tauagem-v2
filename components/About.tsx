@@ -25,11 +25,11 @@ const About: React.FC = () => {
 
         {/* Bottom Section: Image Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {sobre.imagens.map((imgUrl, index) => (
+          {sobre.imagens.map((item, index) => (
             <div key={index} className="aspect-[3/4] overflow-hidden w-full relative">
               <img 
-                src={imgUrl} 
-                alt={`Atmosphere ${index + 1}`} 
+                src={item.url} 
+                alt={item.alt} 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
               />
               {/* Optional: Add a subtle darkening overlay that vanishes on hover if desired, 

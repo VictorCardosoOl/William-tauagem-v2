@@ -32,10 +32,12 @@ const Navbar: React.FC = () => {
   ];
 
   // ==========================================
-  // 1. SMART VISIBILITY & INACTIVITY LOGIC
+  // 1. SMART VISIBILITY & INACTIVITY LOGIC (OPTIMIZED WITH RAF)
   // ==========================================
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateVisibility = () => {
       const currentScrollY = window.scrollY;
       
       // Show on scroll up or at top
@@ -49,11 +51,22 @@ const Navbar: React.FC = () => {
 
       lastScrollY.current = currentScrollY;
       resetInactivityTimer();
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateVisibility);
+        ticking = true;
+      }
     };
 
     const handleMouseMove = () => {
-      if (!isVisible && !isExpanded) setIsVisible(true);
-      resetInactivityTimer();
+      // Direct update for mouse move is usually fine, but throttling protects cheap devices
+      if (!isVisible && !isExpanded) {
+        setIsVisible(true);
+        resetInactivityTimer();
+      }
     };
 
     const resetInactivityTimer = () => {
@@ -66,8 +79,8 @@ const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
