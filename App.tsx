@@ -46,6 +46,9 @@ const App: React.FC = () => {
     <>
       {isLoading && <Preloader onComplete={handleLoadingComplete} />}
       
+      {/* Global Texture Layer - Film Grain/Noise */}
+      <div className="noise-bg" aria-hidden="true"></div>
+      
       <div className="w-full min-h-screen overflow-hidden opacity-100">
         <Navbar />
         <main>
