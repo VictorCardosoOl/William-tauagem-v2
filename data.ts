@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem } from './types';
+import { MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -77,8 +77,7 @@ export const TEXTOS_GERAIS = {
 };
 
 export const IMAGENS = {
-  heroBg: "https://lh3.googleusercontent.com/aida-public/AB6AXuDB0_HVgS98Rtv-hrJ5JiYtYulRMkLWemS_1JQqOGa4ljieuMkCU8gjl2CdvOfsXzMbChkTodA2X15Pw4p69K-PyOlcOpk-KouK-TaYP0DmgL0XeZWmj4ecDMW25Qnf9J6Ykn2Vu9_xGXVL4L4zGdlzT4LfY3bLUK6D_WVNXNgYMrwZ4Phf46E8bFiSRZK56oaueaF9OaSUKYEyZliV70EEP0113czAGJ3ir-_uBgYAWFu86ZBvABO4lfa7WsYaLPT-Dl7YqnAWkj-S",
-  metodologiaDestaque: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-STUzuKJJHSBUZaOzfh9tc-i-BEj_eGW9OGvJsp36ABI46CSgyp0wR-dGQB7Ckn2hssdL-4x_gK5FO8XvCwaDM6H3gW5ek0zlUvGA7yhS1mwfrYKjqksapE_49ZYVKvy08kLdcF6TKyojvoGZcDuBefxd74uAO3KNdCC4n60Sf5iAgyTz4i3pRWbj51OD83USXZvy24jz5nMqDWQXI5RHnFpgzf6eo7v9VOW8MmuZKEIQLKW-31-JA_mZR1VVY5VIfkBF_wllCxQ4"
+  metodologiaDestaque: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-STUzuKJJHSBUZaOzfh9tc-i-BEj_eGW9OGvJsp36ABI46CSgyp0wR-dGQB7Ckn2hssdL-4x_gK5FO8XvCwaDM6H3gW5ek0zlUvGA7yhS1mwfrYKjqksapE_49ZYVKvy08kLdcF6TKyojvoGZcDuBefxd74uAO3KNdCC4n60Sf5iAgyTz4i3pRWbj51OD83USXZvy24jz5nMqDWQXI5RHnFpgzf6eo7v9VOW8MmuZKEIQLKW-3-JA_mZR1VVY5VIfkBF_wllCxQ4"
 };
 
 // ==========================================
@@ -144,42 +143,6 @@ export const ITENS_METODOLOGIA: MetodologiaItem[] = [
     numero: '03',
     titulo: 'Execução',
     descricao: 'O instrumento final da descoberta. Precisão encontra movimento orgânico.'
-  }
-];
-
-// ==========================================
-// ITENS DO FLASH DAY
-// ==========================================
-export const ITENS_FLASH: FlashItem[] = [
-  {
-    id: 'f1',
-    status: 'DISPONIVEL',
-    numero: '001',
-    titulo: 'Espiral da Serpente',
-    detalhes: '15cm x 5cm • Antebraço',
-    svgPath: React.createElement(React.Fragment, null,
-      React.createElement('circle', { cx: "50", cy: "50", r: "40", className: "stroke-white fill-none stroke-1" }),
-      React.createElement('path', { d: "M50 10 L50 90 M10 50 L90 50", className: "stroke-white fill-none stroke-1" })
-    )
-  },
-  {
-    id: 'f2',
-    status: 'VENDIDO',
-    numero: '002',
-    titulo: 'Costela Botânica',
-    detalhes: '20cm x 10cm • Costela',
-    svgPath: React.createElement(React.Fragment, null,
-      React.createElement('rect', { height: "60", width: "60", x: "20", y: "20", className: "stroke-white fill-none stroke-1" }),
-      React.createElement('circle', { cx: "50", cy: "50", r: "20", className: "stroke-white fill-none stroke-1" })
-    )
-  },
-  {
-    id: 'f3',
-    status: 'DISPONIVEL',
-    numero: '003',
-    titulo: 'Fases da Lua',
-    detalhes: '10cm x 3cm • Coluna',
-    svgPath: React.createElement('path', { d: "M50 10 Q90 50 50 90 Q10 50 50 10", className: "stroke-white fill-none stroke-1" })
   }
 ];
 
