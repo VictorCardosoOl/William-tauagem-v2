@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { TEXTOS_GERAIS } from '../data';
 
 // Define GSAP on window for TS

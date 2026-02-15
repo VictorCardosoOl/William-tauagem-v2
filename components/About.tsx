@@ -5,7 +5,7 @@ const About: React.FC = () => {
   const { sobre } = TEXTOS_GERAIS;
 
   return (
-    <section className="bg-white dark:bg-background-dark py-32 px-6 w-full">
+    <section id="about" className="bg-white dark:bg-background-dark py-32 px-6 w-full">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: Text Content (Right Aligned) */}

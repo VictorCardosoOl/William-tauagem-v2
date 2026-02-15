@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
 import Manifesto from './components/Manifesto';
 import About from './components/About';
+import Methodology from './components/Methodology';
 import Concept from './components/Concept';
 import CreativeProcess from './components/CreativeProcess';
 import Preparation from './components/Preparation';
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Portfolio />
         <Manifesto />
         <About />
+        <Methodology />
         <Concept />
         <CreativeProcess />
         <Preparation />
