@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PORTFOLIO_ITEMS } from '../data';
+import { PortfolioItem } from '../types';
 import { X, ArrowRight, ArrowDown } from 'lucide-react';
 
-// ==========================================
-// SUB-COMPONENT: PROJECT DETAIL (THE OVERLAY)
-// ==========================================
 interface ProjectDetailProps {
-  item: typeof PORTFOLIO_ITEMS[0];
+  item: PortfolioItem;
   onClose: () => void;
 }
 
@@ -14,42 +12,37 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Lock Body Scroll
     document.body.style.overflow = 'hidden';
 
-    // Entrance Animation
-    if (window.gsap && containerRef.current) {
+    const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Reveal Container
       tl.fromTo(containerRef.current, 
         { clipPath: "inset(100% 0% 0% 0%)" },
         { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power4.inOut" }
       );
 
-      // 2. Reveal Left Content (Staggered)
       tl.fromTo(".detail-anim-text", 
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
         "-=0.4"
       );
 
-      // 3. Reveal Right Images (Slide Up)
       tl.fromTo(".detail-anim-img",
         { y: 100, opacity: 0, scale: 1.1 },
         { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.2, ease: "expo.out" },
         "-=0.6"
       );
-    }
+    }, containerRef) : null;
 
     return () => {
       document.body.style.overflow = '';
+      if (ctx) ctx.revert();
     };
   }, []);
 
   const handleClose = () => {
     if (window.gsap && containerRef.current) {
-        // Exit Animation
         window.gsap.to(containerRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
             duration: 0.6,
@@ -65,34 +58,31 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     <div 
       ref={containerRef}
       className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden scrollbar-hide"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-title"
     >
       <div className="flex flex-col lg:flex-row min-h-screen">
-        
-        {/* ==========================================
-            LEFT COLUMN (CONTEXT) - STICKY
-           ========================================== */}
         <div className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20">
           
-          {/* Header */}
           <div className="detail-anim-text flex justify-between items-start mb-12 lg:mb-0">
             <div>
                <p className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
-               <h1 className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
+               <h1 id="project-title" className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
             </div>
             <button 
                 onClick={handleClose} 
                 className="group flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-ink-medium transition-colors"
+                aria-label="Close project details"
             >
                 Close <X size={20} className="group-hover:rotate-90 transition-transform duration-300" strokeWidth={1} />
             </button>
           </div>
 
-          {/* Scroll Indicator (Mobile Only) */}
           <div className="lg:hidden detail-anim-text mb-8 text-ink-medium animate-bounce">
             <ArrowDown size={24} />
           </div>
 
-          {/* Description Content */}
           <div className="hidden lg:block space-y-12 detail-anim-text">
              <div className="space-y-6">
                 <div className="w-12 h-px bg-ink-black dark:bg-white mb-6"></div>
@@ -122,7 +112,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
              </div>
           </div>
 
-          {/* Action Footer */}
           <div className="detail-anim-text pt-12 lg:pt-0">
              <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors">
                 <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">Agendar Projeto Similar</span>
@@ -131,93 +120,50 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
           </div>
         </div>
 
-        {/* ==========================================
-            RIGHT COLUMN (GALLERY) - SCROLLABLE
-           ========================================== */}
         <div className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col">
-           
-           {/* Image 1: Main Hero */}
            <div className="w-full h-screen relative overflow-hidden detail-anim-img">
-              <img 
-                src={item.image} 
-                alt="Main View" 
-                className="w-full h-full object-cover"
-              />
+              <img src={item.image} alt={`${item.title} main view`} className="w-full h-full object-cover" />
            </div>
 
-           {/* Image 2: Detail Crop (Simulated) */}
            <div className="w-full h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center detail-anim-img">
               <div className="w-full h-full relative overflow-hidden shadow-2xl">
-                 <img 
-                    src={item.image} 
-                    alt="Detail View" 
-                    className="w-full h-full object-cover scale-150 origin-top-left"
-                 />
+                 <img src={item.image} alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left" />
               </div>
            </div>
 
-           {/* Image 3: Context / Texture */}
            <div className="w-full h-screen relative overflow-hidden detail-anim-img grayscale">
-              <img 
-                src={item.image} 
-                alt="Texture View" 
-                className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[2s]"
-              />
+              <img src={item.image} alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[2s]" />
               <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
                  <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
               </div>
            </div>
 
-           {/* ==========================================
-               PROJECT FOOTER (BRUTALIST STYLE)
-              ========================================== */}
            <div className="bg-ink-black text-paper-light py-24 px-8 md:px-12 flex flex-col gap-12 overflow-hidden relative">
-               
-               {/* Metadata Grid */}
                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 border-b border-gray-800 pb-12">
-                   <div>
-                       <span className="block text-white mb-2">Client</span>
-                       Private
-                   </div>
-                   <div>
-                       <span className="block text-white mb-2">Year</span>
-                       2024
-                   </div>
-                   <div>
-                       <span className="block text-white mb-2">Location</span>
-                       São Paulo, SP
-                   </div>
-                   <div className="text-right">
-                       <span className="block text-white mb-2">Next Project</span>
-                       <ArrowRight size={14} className="inline ml-2" />
-                   </div>
+                   <div><span className="block text-white mb-2">Client</span>Private</div>
+                   <div><span className="block text-white mb-2">Year</span>2024</div>
+                   <div><span className="block text-white mb-2">Location</span>São Paulo, SP</div>
+                   <div className="text-right"><span className="block text-white mb-2">Next Project</span><ArrowRight size={14} className="inline ml-2" /></div>
                </div>
-
-               {/* Massive Typography */}
                <div className="relative">
-                   <h1 className="font-serif font-bold text-[18vw] leading-[0.75] tracking-tighter text-white mix-blend-overlay select-none">
-                       SIQUEIRA
-                   </h1>
+                   <h1 className="font-serif font-bold text-[18vw] leading-[0.75] tracking-tighter text-white mix-blend-overlay select-none">SIQUEIRA</h1>
                    <div className="absolute bottom-2 right-2 text-right">
                         <p className="font-serif italic text-2xl md:text-4xl text-white">Fine Line & <br/> Contemporary Art</p>
                    </div>
                </div>
-
            </div>
-
         </div>
-
       </div>
     </div>
   );
 };
 
+interface PortfolioItemProps {
+    item: PortfolioItem;
+    onClick: (item: PortfolioItem) => void;
+}
 
-// ==========================================
-// MAIN COMPONENT: PORTFOLIO GRID
-// ==========================================
-
-const PortfolioItem: React.FC<{ item: typeof PORTFOLIO_ITEMS[0]; onClick: (item: typeof PORTFOLIO_ITEMS[0]) => void }> = ({ item, onClick }) => {
+const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const filterRef = useRef<SVGFEDisplacementMapElement>(null);
   const filterId = `liquid-${item.id}`;
@@ -242,6 +188,9 @@ const PortfolioItem: React.FC<{ item: typeof PORTFOLIO_ITEMS[0]; onClick: (item:
         onClick={() => onClick(item)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if(e.key === 'Enter' || e.key === ' ') onClick(item); }}
     >
         <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
             <defs>
@@ -256,12 +205,11 @@ const PortfolioItem: React.FC<{ item: typeof PORTFOLIO_ITEMS[0]; onClick: (item:
             <img 
                 ref={imageRef}
                 src={item.image} 
-                alt={item.title}
+                alt={`${item.title} tattoo on ${item.placement}`}
                 loading="lazy"
                 style={{ filter: `url(#${filterId})` }} 
                 className="absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale hover:grayscale-0 opacity-100 will-change-transform"
             />
-            {/* Hover Indicator */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 rounded-full">
                     <span className="text-white text-[10px] uppercase tracking-widest font-bold">View Project</span>
@@ -282,23 +230,13 @@ const PortfolioItem: React.FC<{ item: typeof PORTFOLIO_ITEMS[0]; onClick: (item:
 };
 
 const Portfolio: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<typeof PORTFOLIO_ITEMS[0] | null>(null);
-
-  const handleItemClick = (item: typeof PORTFOLIO_ITEMS[0]) => {
-    setSelectedItem(item);
-  };
-
-  const handleClose = () => {
-    setSelectedItem(null);
-  };
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
 
   const col1 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 === 0);
   const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);
 
   return (
     <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-24 md:py-32 3xl:py-48 px-6 relative">
-      
-      {/* HEADER */}
       <div className="max-w-screen-3xl mx-auto mb-32 border-b border-ink-light dark:border-white/10 pb-8 flex flex-col md:flex-row justify-between items-end">
           <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 
@@ -309,25 +247,22 @@ const Portfolio: React.FC = () => {
           </p>
       </div>
 
-      {/* GRID CONTAINER */}
       <div className="max-w-screen-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 3xl:gap-32">
           <div className="flex flex-col gap-16 md:gap-32">
             {col1.map((item) => (
-              <PortfolioItem key={item.id} item={item} onClick={handleItemClick} />
+              <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
             ))}
           </div>
           <div className="flex flex-col gap-16 md:gap-32 md:mt-48">
             {col2.map((item) => (
-              <PortfolioItem key={item.id} item={item} onClick={handleItemClick} />
+              <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
             ))}
           </div>
       </div>
 
-      {/* DETAIL OVERLAY (New Sticky Split-Screen Layout) */}
       {selectedItem && (
-        <ProjectDetail item={selectedItem} onClose={handleClose} />
+        <ProjectDetail item={selectedItem} onClose={() => setSelectedItem(null)} />
       )}
-
     </section>
   );
 };

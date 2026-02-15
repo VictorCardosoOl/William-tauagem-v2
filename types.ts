@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface MetodologiaItem {
   id: string;
   numero: string;
@@ -30,4 +28,11 @@ export interface PreparoItem {
   id: number;
   titulo: string;
   descricao: string;
+}
+
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  placement: string;
+  image: string;
 }

@@ -1,5 +1,4 @@
-import React from 'react';
-import { MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem } from './types';
+import { MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -83,7 +82,7 @@ export const IMAGENS = {
 // ==========================================
 // PORTFOLIO ITEMS
 // ==========================================
-export const PORTFOLIO_ITEMS = [
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     {
         id: 1,
         title: "FLORA OBSCURA",

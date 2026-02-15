@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 
 export interface Message {
   id: string;
@@ -20,18 +20,29 @@ export const useChatEngine = () => {
   const [step, setStep] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [userData, setUserData] = useState<ChatState>({ name: '', placement: '', idea: '' });
+  
+  // Track mounted state to prevent state updates after unmount
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const processInput = useCallback((text: string) => {
-    // 1. Add User Message
     const userMsg: Message = { id: Date.now().toString(), text, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
     setIsTyping(true);
 
-    // 2. Simulate Thinking / Business Logic
-    setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    timerRef.current = setTimeout(() => {
       let nextBotMsg = '';
       let nextStep = step + 1;
 
+      // Safe state updates based on current step via functional updates or refs usually preferred,
+      // but 'step' dependency in useCallback ensures freshness here.
       if (step === 0) {
         setUserData(prev => ({ ...prev, name: text }));
         nextBotMsg = `Prazer, ${text}. Em qual parte do corpo você imagina sua tatuagem?`;
