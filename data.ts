@@ -36,6 +36,17 @@ export const TEXTOS_GERAIS = {
     card1Texto: "A tela deve estar pura. Hidrate-se profundamente por 48 horas. Evite álcool e anticoagulantes. O sono é a base da resistência.",
     card2Titulo: "PÓS-CUIDADO",
     card2Texto: "Trate o artefato como uma ferida. Mantenha limpo, hidrate com moderação. Deixe a pele respirar e se reformar em torno de sua nova história."
+  },
+  sobre: {
+    tituloParte1: "EU SOU WILLIAM SIQUEIRA, E EU",
+    tituloDestaque: "MATERIALIZO",
+    tituloParte2: "HISTÓRIAS.",
+    descricao: "Especialista em Neotradicional. Transformo narrativas pessoais em anatomia e arte perene.",
+    imagens: [
+      "https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop", // Industrial/Silo vibe
+      "https://images.unsplash.com/photo-1572978398450-4886e0624d55?q=80&w=800&auto=format&fit=crop", // Corner building vibe
+      "https://images.unsplash.com/photo-1440635592348-167b1b30296f?q=80&w=800&auto=format&fit=crop"  // Misty forest vibe
+    ]
   }
 };
 
