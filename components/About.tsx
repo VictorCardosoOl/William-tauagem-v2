@@ -10,42 +10,42 @@ const About: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // Animate Title text
+      // Animate Title text - triggers sooner, moves faster
       window.gsap.from(".about-title-line", {
-        y: 100,
+        y: 80,
         opacity: 0,
-        duration: 1,
-        stagger: 0.1,
+        duration: 0.7, // Reduced from 1
+        stagger: 0.05, // Much tighter stagger
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 80%",
+          start: "top 85%", // Starts earlier
         }
       });
 
-      // Animate Description Paragraph
+      // Animate Description Paragraph - immediate follow up
       window.gsap.from(".about-desc", {
         x: 20,
         opacity: 0,
-        duration: 1,
-        delay: 0.3,
+        duration: 0.6,
+        delay: 0.1, // Reduced delay
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 80%",
+          start: "top 85%",
         }
       });
 
       // Animate Images Stagger
       window.gsap.from(".about-image-card", {
-        y: 100,
+        y: 60, // Less distance to travel
         opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power4.out",
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ".about-grid",
-          start: "top 75%",
+          start: "top 85%", // Starts earlier
         }
       });
 

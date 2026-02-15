@@ -21,29 +21,29 @@ const FlashSection: React.FC = () => {
     if (!window.gsap || !window.ScrollTrigger) return;
 
     const ctx = window.gsap.context(() => {
-        // Animate Header
+        // Animate Header - Fast
         window.gsap.from(".flash-header", {
-            y: 50,
+            y: 30,
             opacity: 0,
-            duration: 1,
+            duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 70%"
+                start: "top 85%"
             }
         });
 
-        // Animate Cards with stagger
+        // Animate Cards with tight stagger
         window.gsap.from(".flash-card", {
-            y: 100,
+            y: 50,
             opacity: 0,
-            scale: 0.95,
-            duration: 1.2,
-            stagger: 0.2,
+            scale: 0.98,
+            duration: 0.8,
+            stagger: 0.1,
             ease: "power4.out",
             scrollTrigger: {
                 trigger: ".flash-grid",
-                start: "top 75%"
+                start: "top 85%"
             }
         });
 

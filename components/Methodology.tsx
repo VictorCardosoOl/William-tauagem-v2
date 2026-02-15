@@ -12,30 +12,30 @@ const Methodology: React.FC = () => {
       const tl = window.gsap.timeline({
         scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 60%"
+            start: "top 80%" // Earlier trigger
         }
       });
 
       tl.from(".method-title span", {
-        y: 100,
+        y: 80,
         opacity: 0,
-        duration: 1,
-        stagger: 0.1,
+        duration: 0.7, // Faster title
+        stagger: 0.05,
         ease: "power4.out"
       })
       .from(".method-item", {
-        x: -30,
+        x: -20,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.6,
+        stagger: 0.08, // Very fast ripple
         ease: "power2.out"
-      }, "-=0.5")
+      }, "-=0.4") // Larger overlap
       .from(".method-image", {
-        scale: 0.8,
+        scale: 0.9,
         opacity: 0,
-        duration: 1.5,
+        duration: 1.0, // Reduced from 1.5
         ease: "expo.out"
-      }, "-=1");
+      }, "-=0.8");
 
     }, containerRef);
 

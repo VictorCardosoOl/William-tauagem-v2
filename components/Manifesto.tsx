@@ -10,41 +10,41 @@ const Manifesto: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // 1. Draw Lines Animation
+      // 1. Draw Lines Animation - Faster
       window.gsap.from(".manifesto-line", {
-        scaleY: 0, // or scaleX depending on orientation, handled below
+        scaleY: 0, 
         opacity: 0,
-        duration: 1.5,
-        ease: "power3.inOut",
+        duration: 0.8, // Reduced from 1.5
+        ease: "power2.inOut",
         scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 60%"
+            start: "top 80%" // Starts earlier
         }
       });
 
-      // 2. Central Text Reveal
+      // 2. Central Text Reveal - Snappier
       window.gsap.from(".manifesto-text span", {
-        y: 50,
+        y: 40,
         opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
+        duration: 0.8, // Reduced from 1.2
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
             trigger: ".manifesto-center",
-            start: "top 70%"
+            start: "top 80%"
         }
       });
 
       // 3. Cards Slide In
       window.gsap.from(".manifesto-card", {
-        x: 50,
+        x: 30,
         opacity: 0,
-        duration: 1,
-        stagger: 0.2,
+        duration: 0.8,
+        stagger: 0.1,
         ease: "power2.out",
         scrollTrigger: {
             trigger: ".manifesto-center",
-            start: "top 60%"
+            start: "top 70%"
         }
       });
 

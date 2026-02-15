@@ -12,20 +12,20 @@ const Hero: React.FC = () => {
     const ctx = window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Title Reveal (Mask effect via overflow-hidden parent)
+      // 1. Title Reveal - Much faster
       tl.fromTo(titleRef.current,
         { y: "100%", rotate: 2 },
-        { y: "0%", rotate: 0, duration: 1.8, ease: "power4.out", delay: 0.5 }
+        { y: "0%", rotate: 0, duration: 1.1, ease: "power3.out" } // Reduced from 1.8 to 1.1
       );
 
-      // 2. Text & Line Reveal
+      // 2. Text & Line Reveal - Almost immediate overlap
       tl.fromTo(textRef.current, 
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-        "-=1"
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+        "-=0.8" // Large overlap to start appearing while title is still moving
       );
 
-      // 3. Parallax Effect on Scroll
+      // 3. Parallax Effect on Scroll (Kept same as it is user controlled)
       if (window.ScrollTrigger) {
         window.gsap.to(titleRef.current, {
           yPercent: 50,

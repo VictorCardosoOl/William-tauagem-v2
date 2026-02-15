@@ -17,21 +17,24 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
+      // Faster panel reveal
       tl.fromTo(containerRef.current, 
         { clipPath: "inset(100% 0% 0% 0%)" },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power4.inOut" }
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "power4.inOut" }
       );
 
+      // Faster text stagger
       tl.fromTo(".detail-anim-text", 
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
-        "-=0.4"
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power3.out" },
+        "-=0.2"
       );
 
+      // Faster image reveal
       tl.fromTo(".detail-anim-img",
-        { y: 100, opacity: 0, scale: 1.1 },
-        { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.2, ease: "expo.out" },
-        "-=0.6"
+        { y: 60, opacity: 0, scale: 1.1 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.1, ease: "expo.out" },
+        "-=0.4"
       );
     }, containerRef) : null;
 
@@ -45,7 +48,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     if (window.gsap && containerRef.current) {
         window.gsap.to(containerRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
-            duration: 0.6,
+            duration: 0.5,
             ease: "power4.inOut",
             onComplete: onClose
         });
