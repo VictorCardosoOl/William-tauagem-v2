@@ -5,7 +5,7 @@ const Concept: React.FC = () => {
   const { concept } = TEXTOS_GERAIS;
 
   return (
-    <section className="relative w-full py-32 px-6 md:px-12 bg-gradient-to-br from-skin-light to-skin-medium dark:from-background-dark dark:to-gray-900 overflow-hidden transition-colors duration-1000">
+    <section className="relative w-full py-32 px-6 md:px-12 bg-[#f2eaea] dark:bg-[#1f1f1f] overflow-hidden transition-colors duration-1000">
       
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32">
         

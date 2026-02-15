@@ -5,7 +5,7 @@ import Portfolio from './components/Portfolio';
 import Manifesto from './components/Manifesto';
 import About from './components/About';
 import Concept from './components/Concept';
-import Methodology from './components/Methodology';
+import CreativeProcess from './components/CreativeProcess';
 import FlashSection from './components/FlashSection';
 import Aftercare from './components/Aftercare';
 import Footer from './components/Footer';
@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <Manifesto />
         <About />
         <Concept />
-        <Methodology />
+        <CreativeProcess />
         <FlashSection />
         <Aftercare />
       </main>
