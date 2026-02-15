@@ -3,64 +3,58 @@ import { TEXTOS_GERAIS, REDES_SOCIAIS } from '../data';
 import { ArrowRight } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  // Assume the first link is always WhatsApp based on data.ts structure, 
-  // or filter for it specifically if needed in future.
   const whatsappLink = REDES_SOCIAIS.find(social => social.nome === 'WhatsApp')?.url || '#';
 
   return (
-    <footer id="contact" className="bg-background-light dark:bg-background-dark pt-40 pb-12 px-6 md:px-12 border-t border-gray-200 dark:border-white/5">
+    <footer id="contact" className="bg-paper-light dark:bg-paper-dark pt-40 pb-12 px-6 md:px-12 border-t border-ink-light dark:border-white/5">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-start mb-40">
           
-          {/* Left Column: CTA */}
           <div className="max-w-xl">
-            <h2 className="font-serif italic font-thin text-5xl md:text-7xl text-primary dark:text-gray-100 mb-10 leading-[1.1]">
+            <h2 className="font-serif italic font-thin text-5xl md:text-7xl text-ink-black dark:text-gray-100 mb-10 leading-[1.1]">
               {TEXTOS_GERAIS.rodapeChamada}
             </h2>
-            <p className="font-sans text-gray-600 dark:text-gray-400 mb-16 max-w-sm leading-loose text-xs tracking-wide font-light">
+            <p className="font-sans text-ink-medium dark:text-gray-400 mb-16 max-w-sm leading-loose text-xs tracking-wide font-light">
               {TEXTOS_GERAIS.rodapeTexto}
             </p>
             <a 
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-8 text-2xl md:text-3xl font-serif italic font-light border-b border-primary/30 dark:border-white/30 pb-4 hover:border-primary dark:hover:border-white hover:opacity-70 transition-all duration-500 text-primary dark:text-white"
+              className="group inline-flex items-center gap-8 text-2xl md:text-3xl font-serif italic font-light border-b border-ink-black/30 dark:border-white/30 pb-4 hover:border-ink-black dark:hover:border-white hover:opacity-70 transition-all duration-500 text-ink-black dark:text-white"
             >
               <span>{TEXTOS_GERAIS.rodapeBotao}</span>
               <ArrowRight className="h-6 w-6 group-hover:translate-x-6 transition-transform duration-500 font-light" strokeWidth={1} />
             </a>
           </div>
 
-          {/* Right Column: Info Grid */}
           <div className="flex gap-24 lg:gap-40 mt-24 lg:mt-0 font-sans">
-            {/* Contact Column */}
             <div>
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">
+              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-10">
                 Contato
               </h4>
-              <ul className="space-y-6 text-[10px] font-bold uppercase tracking-[0.2em] text-primary dark:text-gray-300">
+              <ul className="space-y-6 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-gray-300">
                 {REDES_SOCIAIS.map((social) => (
                   <li key={social.nome}>
                     <a 
                       href={social.url} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="hover:text-accent-pink transition-colors relative group"
+                      className="hover:text-ink-medium transition-colors relative group"
                     >
                       {social.nome}
-                      <span className="absolute -bottom-2 left-0 w-0 h-px bg-accent-pink transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute -bottom-2 left-0 w-0 h-px bg-ink-black transition-all duration-300 group-hover:w-full"></span>
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Location Column */}
             <div>
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">
+              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-10">
                 Local
               </h4>
-              <address className="not-italic space-y-4 text-[10px] font-medium tracking-wide text-primary dark:text-gray-300 leading-relaxed opacity-80">
+              <address className="not-italic space-y-4 text-[10px] font-medium tracking-wide text-ink-black dark:text-gray-300 leading-relaxed opacity-80">
                 {TEXTOS_GERAIS.endereco.map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
@@ -69,20 +63,16 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Separator Line */}
-        <div className="w-full h-px bg-gray-200 dark:bg-white/5 mb-20"></div>
+        <div className="w-full h-px bg-ink-light dark:bg-white/5 mb-20"></div>
 
-        {/* Big Typography & Copyright Row */}
         <div className="relative overflow-hidden">
-            {/* Big Text with Gradient (Dark Top -> Light Bottom) */}
             <div className="flex justify-center mb-10">
-                <h1 className="font-serif font-bold text-[16vw] md:text-[19vw] leading-[0.7] text-center tracking-tighter select-none bg-gradient-to-b from-gray-900 to-transparent dark:from-white dark:to-transparent bg-clip-text text-transparent opacity-90 mix-blend-overlay">
+                <h1 className="font-serif font-bold text-[16vw] md:text-[19vw] leading-[0.7] text-center tracking-tighter select-none text-ink-black opacity-10 dark:text-white dark:opacity-10 mix-blend-multiply dark:mix-blend-overlay">
                     SIQUEIRA
                 </h1>
             </div>
 
-            {/* Bottom Info */}
-            <div className="flex flex-col md:flex-row justify-between items-center md:items-end text-[9px] uppercase tracking-[0.3em] text-gray-400 font-sans gap-8 font-bold">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-end text-[9px] uppercase tracking-[0.3em] text-ink-medium font-sans gap-8 font-bold">
                 <span>© 2024 William Siqueira</span>
                 <span>Fine Line & Contemporary Art</span>
             </div>

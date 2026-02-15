@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,31 +7,16 @@
     <!-- SEO & Meta Tags -->
     <title>W. Siqueira - Tattoo Artist | Fine Line & Blackwork SP</title>
     <meta name="description" content="Especialista em tatuagens neotradicionais, blackwork e fine line em São Paulo. Projetos exclusivos desenhados para sua anatomia. Agende sua consultoria." />
-    <meta name="keywords" content="tatuagem, tattoo, são paulo, blackwork, fine line, w siqueira, tatuador sp" />
-    <meta name="author" content="W. Siqueira" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wsiqueira.com/" />
-    <meta property="og:title" content="W. Siqueira - Tattoo Artist" />
-    <meta property="og:description" content="A pele fala. Eu escuto. Tatuagem autoral e exclusiva em São Paulo." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=1200&auto=format&fit=crop" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://wsiqueira.com/" />
-    <meta property="twitter:title" content="W. Siqueira - Tattoo Artist" />
-    <meta property="twitter:description" content="A pele fala. Eu escuto. Tatuagem autoral e exclusiva em São Paulo." />
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=1200&auto=format&fit=crop" />
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&amp;family=Inter:wght@200;300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
 
-    <!-- GSAP for Advanced Animations -->
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -41,14 +26,23 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#111111", // Ink (Soft Black)
-                        "background-light": "#F4F4F0", // Bone / Off-white texturizado
-                        "background-dark": "#0A0A0A", // Deep Black
-                        "background-rose": "#E5E0DC", // Muted Bone for sections (Substituindo o Rosa antigo)
-                        "skin-light": "#fdf2f2",
-                        "skin-medium": "#ebd5d5",
-                        "accent-pink": "#8A2525", // REBRAND: Dried Blood Red (Mantendo o nome da variavel para compatibilidade)
-                        "accent-sepia": "#685A4F", // Sepia Grey
+                        // PALETA "PAPEL & NANQUIM" (WARM MONOCHROME)
+                        
+                        // Bases
+                        "paper-light": "#F6F5F0", // Warm Cream / Bone White
+                        "paper-dark": "#0F0F0F",  // Deep Charcoal (Not pure black)
+                        "paper-warm": "#E8E6E1",  // Darker Cream for sections
+                        
+                        // Ink Scale (Substituindo cores primárias)
+                        primary: "#1A1A1A",       // Ink Black
+                        "ink-black": "#1A1A1A",   // Strong text
+                        "ink-dark": "#3D3D3D",    // Secondary text
+                        "ink-medium": "#8C8C8C",  // Muted text / descriptions
+                        "ink-light": "#D4D3D0",   // Borders / Hairlines
+                        
+                        // Accents (Minimalist)
+                        "accent-clay": "#C95D46", // Muted terracotta (subtle usage only)
+                        "accent-sepia": "#685A4F", // Warm Grey
                     },
                     fontFamily: {
                         serif: ["'Cormorant Garamond'", "serif"],
@@ -61,20 +55,11 @@
                         wide: '0.025em',
                         wider: '0.05em',
                         widest: '0.1em',
-                        'ultra': '0.25em', // Micro-labels
-                        'mega': '0.35em', // Fashion headings
+                        'ultra': '0.25em',
+                        'mega': '0.35em',
                     },
                     borderRadius: {
                         'arch': '20rem 20rem 0 0',
-                    },
-                    keyframes: {
-                        breathe: {
-                            '0%, 100%': { backgroundColor: '#F4F4F0' },
-                            '50%': { backgroundColor: '#E5E0DC' },
-                        }
-                    },
-                    animation: {
-                        'breathe': 'breathe 10s ease-in-out infinite',
                     }
                 },
             },
@@ -85,19 +70,20 @@
             writing-mode: vertical-lr;
             text-orientation: mixed;
         }
-        /* Custom scrollbar for webkit */
+        
+        /* Custom scrollbar matched to paper theme */
         ::-webkit-scrollbar {
-            width: 6px; /* Thinner scrollbar */
+            width: 8px; /* Slightly wider for usability */
         }
         ::-webkit-scrollbar-track {
-            background: #F4F4F0;
+            background: #F6F5F0;
         }
         ::-webkit-scrollbar-thumb {
-            background: #8A2525;
+            background: #8C8C8C;
             border-radius: 4px;
         }
         .dark ::-webkit-scrollbar-track {
-            background: #0f0f0f;
+            background: #0F0F0F;
         }
         
         .sticky-title {
@@ -105,7 +91,7 @@
             top: 20vh;
         }
 
-        /* NOISE / GRAIN TEXTURE */
+        /* NOISE / GRAIN TEXTURE - Essential for the Paper look */
         .noise-bg {
             position: fixed;
             top: 0;
@@ -113,41 +99,15 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 90; /* High z-index but below Preloader (100) */
-            opacity: 0.04; /* 4% Opacity as requested */
+            z-index: 90; 
+            opacity: 0.05; 
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-            mix-blend-mode: overlay;
+            mix-blend-mode: multiply; /* Better for paper effect */
         }
         
         .dark .noise-bg {
-             mix-blend-mode: screen; /* Overlay can disappear on black, screen/soft-light works better */
-             opacity: 0.03;
-        }
-
-        /* Optional: Animate the grain slightly to feel alive */
-        .noise-bg::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: inherit;
-            animation: noise-shift 8s steps(10) infinite;
-        }
-
-        @keyframes noise-shift {
-            0% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -5%); }
-            20% { transform: translate(-10%, 5%); }
-            30% { transform: translate(5%, -10%); }
-            40% { transform: translate(-5%, 15%); }
-            50% { transform: translate(-10%, 5%); }
-            60% { transform: translate(15%, 0); }
-            70% { transform: translate(0, 10%); }
-            80% { transform: translate(-15%, 0); }
-            90% { transform: translate(10%, 5%); }
-            100% { transform: translate(5%, 0); }
+             mix-blend-mode: screen;
+             opacity: 0.04;
         }
     </style>
 <script type="importmap">
@@ -161,7 +121,7 @@
 }
 </script>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-primary dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-primary selection:text-white dark:selection:bg-white dark:selection:text-primary overflow-x-hidden">
+<body class="bg-paper-light dark:bg-paper-dark text-ink-black dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-ink-black selection:text-paper-light dark:selection:bg-paper-light dark:selection:text-ink-black overflow-x-hidden">
     
     <!-- Global SVG Filters -->
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
