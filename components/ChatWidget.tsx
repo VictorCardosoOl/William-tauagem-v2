@@ -105,7 +105,6 @@ const ChatWidget: React.FC = () => {
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder="Digite sua resposta..."
                         className="w-full bg-transparent border-none focus:ring-0 text-sm font-sans text-ink-black dark:text-white placeholder:text-ink-medium px-0"
-                        autoFocus
                     />
                     <button 
                         type="submit"

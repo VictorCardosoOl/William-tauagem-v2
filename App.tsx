@@ -18,7 +18,14 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleLoadingComplete = () => {
+    // Force scroll to top prevents browser from remembering scroll position or jumping to inputs
+    window.scrollTo(0, 0);
     setIsLoading(false);
+    
+    // Refresh GSAP ScrollTrigger after layout settles
+    setTimeout(() => {
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }, 100);
   };
 
   useEffect(() => {
@@ -26,6 +33,11 @@ const App: React.FC = () => {
     if (window.gsap) {
       if (window.Flip) window.gsap.registerPlugin(window.Flip);
       if (window.ScrollTrigger) window.gsap.registerPlugin(window.ScrollTrigger);
+    }
+    
+    // Manual scroll restoration to ensure we start at top
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
     }
   }, []);
 
