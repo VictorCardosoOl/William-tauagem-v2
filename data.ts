@@ -7,9 +7,10 @@ import { FlashItem, MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativo
 
 export const TEXTOS_GERAIS = {
   marca: "W. Siqueira",
-  slogan: "A PELE FALA. EU ESCUTO.", // Updated per "Linguagem Textual Sugerida"
+  slogan: "A PELE FALA. EU ESCUTO.", 
   heroTituloPrincipal: "WILLIAM",
   heroTituloSecundario: "Etching Silence",
+  heroTextoDescritivo: "A WILLIAM SIQUEIRA é um estúdio de arte na pele que elabora experiências únicas e perenes. Conectamos sua história à sua anatomia, transformando valores e memórias em narrativas visuais neotradicionais. Nossa missão é criar uma conexão emocional profunda através da tinta.",
   anoEstabelecimento: "EST. 2018",
   tituloMetodologia: {
     linha1: "INTENSIDADE",
@@ -19,7 +20,7 @@ export const TEXTOS_GERAIS = {
   tituloFlash: "Flash\nDay",
   dataProximoEvento: "14 de Outubro, 2023",
   tituloPosCuidado: "A longevidade da sua arte depende da sua dedicação.",
-  rodapeChamada: "Vamos conversar sobre a próxima marca que você quer carregar para sempre.", // Updated
+  rodapeChamada: "Vamos conversar sobre a próxima marca que você quer carregar para sempre.", 
   rodapeTexto: "O suporte pós-tatuagem é vitalício. Se notar qualquer anormalidade, entre em contato imediatamente.",
   rodapeBotao: "Falar com o Especialista",
   endereco: [
