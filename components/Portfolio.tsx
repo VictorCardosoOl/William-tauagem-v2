@@ -7,7 +7,6 @@ declare global {
   interface Window {
     gsap: any;
     Flip: any;
-    ScrollTrigger: any;
   }
 }
 
@@ -100,30 +99,6 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
 const Portfolio: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<typeof PORTFOLIO_ITEMS[0] | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const col2Ref = useRef<HTMLDivElement>(null);
-
-  // Parallax Effect
-  useLayoutEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger || !col2Ref.current || !containerRef.current) return;
-    
-    // Only apply parallax on desktop
-    if (window.innerWidth >= 768) {
-      const ctx = window.gsap.context(() => {
-        window.gsap.to(col2Ref.current, {
-          y: -120, // Move up slightly faster than scroll
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1 // Smooth scrubbing
-          }
-        });
-      }, containerRef);
-      
-      return () => ctx.revert();
-    }
-  }, []);
 
   // FLIP Logic
   const handleItemClick = (item: typeof PORTFOLIO_ITEMS[0]) => {
@@ -202,7 +177,7 @@ const Portfolio: React.FC = () => {
               <PortfolioItem key={item.id} item={item} onClick={handleItemClick} />
             ))}
           </div>
-          <div ref={col2Ref} className="flex flex-col gap-16 md:gap-32 md:mt-48 will-change-transform">
+          <div className="flex flex-col gap-16 md:gap-32 md:mt-48">
             {col2.map((item) => (
               <PortfolioItem key={item.id} item={item} onClick={handleItemClick} />
             ))}

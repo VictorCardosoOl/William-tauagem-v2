@@ -18,8 +18,6 @@ declare global {
   interface Window {
     gsap: any;
     Flip: any;
-    ScrollTrigger: any;
-    Lenis: any;
   }
 }
 
@@ -31,40 +29,12 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    // Register GSAP Plugins
-    if (window.gsap) {
-      if (window.Flip) window.gsap.registerPlugin(window.Flip);
-      if (window.ScrollTrigger) window.gsap.registerPlugin(window.ScrollTrigger);
+    // Register GSAP Flip if available
+    if (window.gsap && window.Flip) {
+      window.gsap.registerPlugin(window.Flip);
     }
 
-    // Initialize Lenis for Smooth Scrolling
-    if (window.Lenis && !isLoading) {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-      });
-
-      // Integrate Lenis with GSAP ScrollTrigger
-      lenis.on('scroll', window.ScrollTrigger.update);
-
-      // Animation Loop
-      const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-
-      requestAnimationFrame(raf);
-      
-      // Cleanup
-      return () => {
-         lenis.destroy();
-      };
-    }
-
-    // Lock scroll while loading (native lock, Lenis handles its own locking if needed)
+    // Lock scroll while loading
     if (isLoading) {
       document.body.style.overflow = 'hidden';
     } else {
