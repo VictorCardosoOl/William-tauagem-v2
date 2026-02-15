@@ -31,6 +31,7 @@
 
     <!-- GSAP for Advanced Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -116,6 +117,17 @@
 </script>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-primary dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-primary selection:text-white dark:selection:bg-white dark:selection:text-primary overflow-x-hidden">
+    
+    <!-- Global SVG Filters -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <filter id="liquid-distortion">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" result="warp" />
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="0" in="SourceGraphic" in2="warp" />
+            </filter>
+        </defs>
+    </svg>
+
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

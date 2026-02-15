@@ -1,67 +1,73 @@
 import React from 'react';
 import { TEXTOS_GERAIS } from '../data';
-import { Quote } from 'lucide-react';
 
 const Manifesto: React.FC = () => {
   const { manifesto } = TEXTOS_GERAIS;
 
   return (
-    <section>
-        {/* ====================
-            PART 1: O MANIFESTO
-           ==================== */}
-        <div className="bg-background-rose dark:bg-[#5a4242] py-32 px-6 md:px-12 w-full text-primary dark:text-gray-100 transition-colors duration-500">
-            <div className="max-w-6xl mx-auto flex flex-col items-center">
+    <section className="bg-[#EAE6E3] dark:bg-[#1a1a1a] transition-colors duration-500 overflow-hidden">
+        {/* Editorial Grid Wrapper */}
+        <div className="w-full border-t border-primary/5 dark:border-white/5">
+            <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 min-h-screen">
                 
-                {/* Small Header */}
-                <h3 className="font-sans text-[10px] tracking-[0.4em] uppercase font-bold opacity-60 mb-16">
-                {manifesto.titulo}
-                </h3>
+                {/* LEFT COL: Vertical Label */}
+                <div className="hidden md:flex md:col-span-1 border-r border-primary/5 dark:border-white/5 justify-center py-12">
+                     <span className="writing-mode-vertical text-[9px] uppercase tracking-[0.4em] text-primary/40 dark:text-white/40 font-bold rotate-180">
+                        {manifesto.titulo} — Est. 2018
+                     </span>
+                </div>
 
-                {/* Big Quote Area */}
-                <div className="relative mb-32 w-full text-center">
-                    {/* Decorative Quotes */}
-                    <div className="absolute -top-16 left-0 md:-left-12 opacity-5 pointer-events-none">
-                        <Quote className="w-32 h-32 transform scale-x-[-1]" fill="currentColor" />
-                    </div>
+                {/* MIDDLE COL: Massive Whitespace & Quote */}
+                <div className="md:col-span-7 border-r border-primary/5 dark:border-white/5 flex flex-col justify-center items-center py-32 md:py-0 px-8 relative">
+                    {/* Decorative Hairlines */}
+                    <div className="absolute top-12 left-12 w-8 h-[1px] bg-primary/20 dark:bg-white/20"></div>
+                    <div className="absolute top-12 left-12 w-[1px] h-8 bg-primary/20 dark:bg-white/20"></div>
                     
-                    <h2 className="font-serif font-light text-5xl md:text-7xl lg:text-9xl leading-[0.9] tracking-tight text-primary dark:text-white mix-blend-darken dark:mix-blend-normal">
-                        <span className="block mb-4">{manifesto.fraseParte1}</span>
-                        <span className="font-serif italic font-thin text-accent-pink dark:text-accent-pink px-2">
-                        {manifesto.fraseDestaque}
-                        </span>
-                        <span className="block mt-4">{manifesto.fraseParte2}</span>
-                    </h2>
+                    <div className="absolute bottom-12 right-12 w-8 h-[1px] bg-primary/20 dark:bg-white/20"></div>
+                    <div className="absolute bottom-12 right-12 w-[1px] h-8 bg-primary/20 dark:bg-white/20"></div>
 
-                    <div className="absolute -bottom-16 right-0 md:-right-12 opacity-5 pointer-events-none">
-                        <Quote className="w-32 h-32" fill="currentColor" />
+                    <div className="max-w-2xl text-center">
+                        <h2 className="font-serif font-extralight text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight text-primary dark:text-white">
+                            <span className="block opacity-100">{manifesto.fraseParte1}</span>
+                            <span className="block italic font-thin text-accent-pink my-4">
+                                {manifesto.fraseDestaque}
+                            </span>
+                            <span className="block opacity-100">{manifesto.fraseParte2}</span>
+                        </h2>
                     </div>
                 </div>
 
-                {/* Bottom Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 w-full border-t border-primary/10 dark:border-white/10 pt-20">
-                
-                {/* Card 1 */}
-                <div className="p-10 bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300 group">
-                    <h4 className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-primary dark:text-white border-b border-primary/20 dark:border-white/20 pb-4 inline-block group-hover:border-accent-pink transition-colors">
-                    {manifesto.card1Titulo}
-                    </h4>
-                    <p className="font-serif italic text-2xl md:text-3xl leading-snug text-primary/80 dark:text-white/80 font-light">
-                    {manifesto.card1Texto}
-                    </p>
+                {/* RIGHT COL: Information Stack */}
+                <div className="md:col-span-4 flex flex-col">
+                    
+                    {/* Card 1 */}
+                    <div className="flex-1 p-12 md:p-16 border-b border-primary/5 dark:border-white/5 hover:bg-white/40 dark:hover:bg-black/20 transition-colors duration-500 flex flex-col justify-center group">
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-accent-pink">01</span>
+                            <h4 className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold text-primary dark:text-white">
+                                {manifesto.card1Titulo}
+                            </h4>
+                        </div>
+                        <p className="font-serif italic text-2xl leading-relaxed text-primary/80 dark:text-white/80 font-light group-hover:translate-x-2 transition-transform duration-500">
+                            {manifesto.card1Texto}
+                        </p>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="flex-1 p-12 md:p-16 hover:bg-white/40 dark:hover:bg-black/20 transition-colors duration-500 flex flex-col justify-center group">
+                         <div className="flex items-center gap-4 mb-8">
+                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-accent-pink">02</span>
+                            <h4 className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold text-primary dark:text-white">
+                                {manifesto.card2Titulo}
+                            </h4>
+                        </div>
+                        <p className="font-serif italic text-2xl leading-relaxed text-primary/80 dark:text-white/80 font-light group-hover:translate-x-2 transition-transform duration-500">
+                            {manifesto.card2Texto}
+                        </p>
+                    </div>
+
                 </div>
 
-                {/* Card 2 */}
-                <div className="p-10 bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors duration-300 group">
-                    <h4 className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold mb-8 text-primary dark:text-white border-b border-primary/20 dark:border-white/20 pb-4 inline-block group-hover:border-accent-pink transition-colors">
-                    {manifesto.card2Titulo}
-                    </h4>
-                    <p className="font-serif italic text-2xl md:text-3xl leading-snug text-primary/80 dark:text-white/80 font-light">
-                    {manifesto.card2Texto}
-                    </p>
-                </div>
-
-                </div>
             </div>
         </div>
     </section>
