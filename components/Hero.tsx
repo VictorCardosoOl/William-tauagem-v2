@@ -4,7 +4,7 @@ import { TEXTOS_GERAIS } from '../data';
 
 const Hero: React.FC = () => {
   return (
-    <header id="work" className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden border-b border-gray-300 dark:border-gray-800 bg-background-light dark:bg-background-dark transition-colors duration-500">
+    <header id="home" className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden border-b border-gray-300 dark:border-gray-800 bg-background-light dark:bg-background-dark transition-colors duration-500">
       
       {/* Wave Background Pattern */}
       <div 

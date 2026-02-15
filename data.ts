@@ -66,6 +66,48 @@ export const IMAGENS = {
 };
 
 // ==========================================
+// PORTFOLIO ITEMS
+// ==========================================
+export const PORTFOLIO_ITEMS = [
+    {
+        id: 1,
+        title: "FLORA OBSCURA",
+        placement: "Antebraço",
+        image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+        id: 2,
+        title: "ATLAS",
+        placement: "Costas",
+        image: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+        id: 3,
+        title: "GEOMETRIA SACRA",
+        placement: "Ombro",
+        image: "https://images.unsplash.com/photo-1565431665671-55447a06f35b?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+        id: 4,
+        title: "SERPENTINE",
+        placement: "Braço",
+        image: "https://images.unsplash.com/photo-1590246296335-e11dd82eb619?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+        id: 5,
+        title: "MEMENTO MORI",
+        placement: "Peito",
+        image: "https://images.unsplash.com/photo-1590520637380-60df0897b77f?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+        id: 6,
+        title: "ETHEREAL HANDS",
+        placement: "Costela",
+        image: "https://images.unsplash.com/photo-1562962230-16e4623d36e6?q=80&w=800&auto=format&fit=crop"
+    }
+];
+
+// ==========================================
 // ITENS DE METODOLOGIA
 // ==========================================
 export const ITENS_METODOLOGIA: MetodologiaItem[] = [
