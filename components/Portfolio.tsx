@@ -45,12 +45,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
         "-=0.6"
       );
       
-      // 5. Footer Reveal (Ensure it's visible but off-screen initially by scroll)
-      tl.fromTo(".modal-footer-anim",
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-        "-=0.5"
-      );
+      // Footer animation removed
 
     }, containerRef) : null;
 
@@ -67,7 +62,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             onComplete: onClose
         });
 
-        tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary", ".modal-footer-anim"], {
+        // Removed .modal-footer-anim from array
+        tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary"], {
             opacity: 0,
             y: -20,
             duration: 0.4,
@@ -105,15 +101,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
       aria-modal="true"
       aria-labelledby="project-title"
     >
-      <div className="flex flex-col w-full relative">
+      <div className="flex flex-col w-full relative min-h-screen">
         
         {/* WRAPPER FOR SPLIT CONTENT */}
-        {/* This wrapper contains the sticky side and the scrolling side */}
-        <div className="flex flex-col lg:flex-row w-full relative z-10">
+        <div className="flex flex-col lg:flex-row w-full relative z-10 flex-grow">
             
             {/* LEFT PANEL: TEXT & INFO (Sticky) */}
-            {/* z-index must be lower than footer when footer scrolls up */}
-            <div className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10">
+            <div className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20">
               
               <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
                 <div>
@@ -170,8 +164,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               </div>
             </div>
 
-            {/* RIGHT PANEL: VISUALS */}
-            <div className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col">
+            {/* RIGHT PANEL: VISUALS (Scrolling) */}
+            <div className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col pb-24 lg:pb-0">
               
               {/* Main Hero Image */}
               <div className="w-full h-screen relative overflow-hidden">
@@ -182,7 +176,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
                   />
               </div>
 
-              {/* Detail Box - Added Padding for breathing room */}
+              {/* Detail Box */}
               <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
                   <div className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl">
                     <img src={item.image} alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
@@ -199,37 +193,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
             </div>
         </div>
-
-        {/* SIGNATURE FOOTER (Compact & Editorial) */}
-        {/* Z-30 ensures it slides OVER the sticky panel on the left */}
-        <div className="relative z-30 w-full bg-ink-black text-paper-light py-20 px-8 md:px-16 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 modal-footer-anim">
-            
-            {/* Brand Signature */}
-            <div className="text-center md:text-left">
-                <h1 className="font-serif italic text-5xl md:text-6xl text-white tracking-wide">W. Siqueira</h1>
-                <div className="flex items-center justify-center md:justify-start gap-4 mt-4 text-white/40">
-                    <span className="w-8 h-px bg-white/20"></span>
-                    <p className="font-sans text-[9px] uppercase tracking-[0.3em]">Project Complete</p>
-                </div>
-            </div>
-
-            {/* Navigation / Action */}
-            <div 
-                className="group cursor-pointer flex items-center gap-6"
-                onClick={onClose}
-            >
-                <div className="text-right hidden md:block">
-                    <span className="block font-sans text-[9px] uppercase tracking-widest font-bold text-white group-hover:text-white/80 transition-colors">Próximo Projeto</span>
-                    <span className="block font-serif italic text-xl text-white/50 group-hover:text-white transition-colors">Voltar para Galeria</span>
-                </div>
-                
-                <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
-                    <ArrowRight size={24} className="text-white group-hover:text-ink-black transition-colors duration-500" />
-                </div>
-            </div>
-
-        </div>
-
       </div>
     </div>
   );
