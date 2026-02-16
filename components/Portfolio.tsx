@@ -10,8 +10,6 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const leftPanelRef = useRef<HTMLDivElement>(null);
-  const rightPanelRef = useRef<HTMLDivElement>(null);
 
   // Entrance Animation
   useEffect(() => {
@@ -30,7 +28,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
       tl.fromTo(".modal-img-hero",
         { scale: 1.15, filter: "blur(10px)" },
         { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
-        "-=0.6" // Starts while curtain is still moving
+        "-=0.6"
       );
 
       // 3. Left Panel Content Stagger
@@ -46,6 +44,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
         { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
         "-=0.6"
       );
+      
+      // 5. Footer Reveal (Ensure it's visible but off-screen initially by scroll)
+      tl.fromTo(".modal-footer-anim",
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+        "-=0.5"
+      );
 
     }, containerRef) : null;
 
@@ -55,22 +60,20 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     };
   }, []);
 
-  // Close Logic with Reverse Animation
+  // Close Logic
   const handleClose = useCallback(() => {
     if (window.gsap && containerRef.current) {
         const tl = window.gsap.timeline({
             onComplete: onClose
         });
 
-        // Faster fade out for content to keep it clean
-        tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary"], {
+        tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary", ".modal-footer-anim"], {
             opacity: 0,
             y: -20,
             duration: 0.4,
             ease: "power2.in"
         });
 
-        // Curtain wipe down
         tl.to(containerRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
             duration: 0.6,
@@ -102,109 +105,152 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
       aria-modal="true"
       aria-labelledby="project-title"
     >
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col w-full relative">
         
-        {/* LEFT PANEL: TEXT & INFO */}
-        <div ref={leftPanelRef} className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20">
-          
-          <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
-            <div>
-               <p className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
-               <h1 id="project-title" className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
+        {/* WRAPPER FOR SPLIT CONTENT */}
+        {/* This wrapper contains the sticky side and the scrolling side */}
+        <div className="flex flex-col lg:flex-row w-full relative z-10">
+            
+            {/* LEFT PANEL: TEXT & INFO (Sticky) */}
+            {/* z-index must be lower than footer when footer scrolls up */}
+            <div className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10">
+              
+              <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
+                <div>
+                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
+                  <h1 id="project-title" className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
+                </div>
+                <button 
+                    onClick={handleClose} 
+                    className="group flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-ink-medium transition-colors p-2"
+                    aria-label="Close project details"
+                >
+                    Close <X size={20} className="group-hover:rotate-90 transition-transform duration-300" strokeWidth={1} />
+                </button>
+              </div>
+
+              <div className="lg:hidden modal-text-anim mb-8 text-ink-medium animate-bounce">
+                <ArrowDown size={24} />
+              </div>
+
+              <div className="hidden lg:block space-y-12">
+                <div className="space-y-6 modal-text-anim">
+                    <div className="w-12 h-px bg-ink-black dark:bg-white mb-6"></div>
+                    <p className="font-serif text-2xl italic leading-relaxed text-ink-dark dark:text-gray-300">
+                        "A anatomia dita o fluxo. A tinta sela o pacto."
+                    </p>
+                    <p className="font-sans text-sm leading-loose text-ink-medium dark:text-gray-400 max-w-sm">
+                        Este projeto explora a tensão entre o orgânico e o geométrico. 
+                        Desenhado à mão livre (freehand) para se adaptar perfeitamente à curvatura do {item.placement.toLowerCase()}.
+                        A cicatrização respeita o tom de pele natural, garantindo contraste vitalício.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-8 border-t border-ink-black/10 dark:border-white/10 pt-8 modal-text-anim">
+                    <div>
+                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
+                        <p className="font-serif text-xl">Fine Line / Dotwork</p>
+                    </div>
+                    <div>
+                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Session</h4>
+                        <p className="font-serif text-xl">6 Hours</p>
+                    </div>
+                    <div>
+                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
+                        <p className="font-serif text-xl">4 Weeks</p>
+                    </div>
+                </div>
+              </div>
+
+              <div className="pt-12 lg:pt-0 modal-text-anim">
+                <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors">
+                    <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">Agendar Projeto Similar</span>
+                    <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                </button>
+              </div>
             </div>
-            <button 
-                onClick={handleClose} 
-                className="group flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-ink-medium transition-colors p-2"
-                aria-label="Close project details"
-            >
-                Close <X size={20} className="group-hover:rotate-90 transition-transform duration-300" strokeWidth={1} />
-            </button>
-          </div>
 
-          <div className="lg:hidden modal-text-anim mb-8 text-ink-medium animate-bounce">
-            <ArrowDown size={24} />
-          </div>
+            {/* RIGHT PANEL: VISUALS */}
+            <div className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col">
+              
+              {/* Main Hero Image */}
+              <div className="w-full h-screen relative overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={`${item.title} main view`} 
+                    className="modal-img-hero w-full h-full object-cover origin-center" 
+                  />
+              </div>
 
-          <div className="hidden lg:block space-y-12">
-             <div className="space-y-6 modal-text-anim">
-                <div className="w-12 h-px bg-ink-black dark:bg-white mb-6"></div>
-                <p className="font-serif text-2xl italic leading-relaxed text-ink-dark dark:text-gray-300">
-                    "A anatomia dita o fluxo. A tinta sela o pacto."
-                </p>
-                <p className="font-sans text-sm leading-loose text-ink-medium dark:text-gray-400 max-w-sm">
-                    Este projeto explora a tensão entre o orgânico e o geométrico. 
-                    Desenhado à mão livre (freehand) para se adaptar perfeitamente à curvatura do {item.placement.toLowerCase()}.
-                    A cicatrização respeita o tom de pele natural, garantindo contraste vitalício.
-                </p>
-             </div>
+              {/* Detail Box - Added Padding for breathing room */}
+              <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
+                  <div className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl">
+                    <img src={item.image} alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
+                  </div>
+              </div>
 
-             <div className="grid grid-cols-2 gap-8 border-t border-ink-black/10 dark:border-white/10 pt-8 modal-text-anim">
-                <div>
-                    <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
-                    <p className="font-serif text-xl">Fine Line / Dotwork</p>
-                </div>
-                <div>
-                    <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Session</h4>
-                    <p className="font-serif text-xl">6 Hours</p>
-                </div>
-                <div>
-                    <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
-                    <p className="font-serif text-xl">4 Weeks</p>
-                </div>
-             </div>
-          </div>
+              {/* Texture/Artistic View - Full Height */}
+              <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
+                  <img src={item.image} alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
+                  <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
+                    <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
+                  </div>
+              </div>
 
-          <div className="pt-12 lg:pt-0 modal-text-anim">
-             <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors">
-                <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">Agendar Projeto Similar</span>
-                <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-             </button>
-          </div>
+            </div>
         </div>
 
-        {/* RIGHT PANEL: VISUALS */}
-        <div ref={rightPanelRef} className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col">
-           
-           {/* Main Hero Image */}
-           <div className="w-full h-screen relative overflow-hidden">
-              <img 
-                src={item.image} 
-                alt={`${item.title} main view`} 
-                className="modal-img-hero w-full h-full object-cover origin-center" 
-              />
-           </div>
+        {/* PROPORTIONAL FOOTER (Z-30 to cover the sticky panel) */}
+        {/* This creates the effect of the footer sliding OVER the previous content */}
+        <div className="relative z-30 w-full min-h-[85vh] bg-ink-black text-paper-light flex flex-col justify-between p-8 md:p-16 3xl:p-24 overflow-hidden border-t border-white/10">
+            
+            {/* Footer Top Info */}
+            <div className="modal-footer-anim grid grid-cols-2 md:grid-cols-4 gap-12 font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 border-b border-gray-800 pb-12">
+                <div>
+                    <span className="block text-white mb-2">Client</span>
+                    Private
+                </div>
+                <div>
+                    <span className="block text-white mb-2">Year</span>
+                    2024
+                </div>
+                <div>
+                    <span className="block text-white mb-2">Location</span>
+                    São Paulo, SP
+                </div>
+                <div className="text-right">
+                    <span className="block text-white mb-2">Style</span>
+                    Blackwork
+                </div>
+            </div>
+            
+            {/* Center Content / Next Project Trigger */}
+            <div className="flex-grow flex flex-col items-center justify-center py-20 relative group cursor-pointer" onClick={onClose}>
+                <p className="font-sans text-xs tracking-[0.4em] uppercase text-white/50 mb-8 group-hover:text-white transition-colors duration-300">Next Project</p>
+                <div className="relative overflow-hidden">
+                    <h1 className="font-serif font-bold text-[15vw] leading-[0.8] tracking-tighter text-white mix-blend-overlay select-none transition-transform duration-700 group-hover:scale-105">
+                        SIQUEIRA
+                    </h1>
+                </div>
+                <ArrowRight className="text-white w-12 h-12 mt-12 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500" strokeWidth={1} />
+            </div>
 
-           {/* Detail Box */}
-           <div className="w-full h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
-              <div className="modal-img-secondary w-full h-full relative overflow-hidden shadow-2xl">
-                 <img src={item.image} alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
-              </div>
-           </div>
-
-           {/* Texture/Artistic View */}
-           <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
-              <img src={item.image} alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
-              <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
-                 <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
-              </div>
-           </div>
-
-           {/* Footer Info */}
-           <div className="modal-img-secondary bg-ink-black text-paper-light py-24 px-8 md:px-12 flex flex-col gap-12 overflow-hidden relative">
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 border-b border-gray-800 pb-12">
-                   <div><span className="block text-white mb-2">Client</span>Private</div>
-                   <div><span className="block text-white mb-2">Year</span>2024</div>
-                   <div><span className="block text-white mb-2">Location</span>São Paulo, SP</div>
-                   <div className="text-right"><span className="block text-white mb-2">Next Project</span><ArrowRight size={14} className="inline ml-2" /></div>
-               </div>
-               <div className="relative">
-                   <h1 className="font-serif font-bold text-[18vw] leading-[0.75] tracking-tighter text-white mix-blend-overlay select-none">SIQUEIRA</h1>
-                   <div className="absolute bottom-2 right-2 text-right">
-                        <p className="font-serif italic text-2xl md:text-4xl text-white">Fine Line & <br/> Contemporary Art</p>
-                   </div>
-               </div>
-           </div>
+            {/* Footer Bottom */}
+            <div className="modal-footer-anim flex justify-between items-end">
+                <div className="hidden md:block">
+                     <p className="font-serif italic text-2xl md:text-3xl text-white/40">
+                        Fine Line & <br/> Contemporary Art
+                     </p>
+                </div>
+                <button 
+                    onClick={onClose} 
+                    className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-white border border-white/20 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300"
+                >
+                    Back to Gallery
+                </button>
+            </div>
         </div>
+
       </div>
     </div>
   );
