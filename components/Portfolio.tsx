@@ -200,55 +200,34 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             </div>
         </div>
 
-        {/* PROPORTIONAL FOOTER (Z-30 to cover the sticky panel) */}
-        {/* This creates the effect of the footer sliding OVER the previous content */}
-        <div className="relative z-30 w-full min-h-[85vh] bg-ink-black text-paper-light flex flex-col justify-between p-8 md:p-16 3xl:p-24 overflow-hidden border-t border-white/10">
+        {/* SIGNATURE FOOTER (Compact & Editorial) */}
+        {/* Z-30 ensures it slides OVER the sticky panel on the left */}
+        <div className="relative z-30 w-full bg-ink-black text-paper-light py-20 px-8 md:px-16 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 modal-footer-anim">
             
-            {/* Footer Top Info */}
-            <div className="modal-footer-anim grid grid-cols-2 md:grid-cols-4 gap-12 font-sans text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 border-b border-gray-800 pb-12">
-                <div>
-                    <span className="block text-white mb-2">Client</span>
-                    Private
+            {/* Brand Signature */}
+            <div className="text-center md:text-left">
+                <h1 className="font-serif italic text-5xl md:text-6xl text-white tracking-wide">W. Siqueira</h1>
+                <div className="flex items-center justify-center md:justify-start gap-4 mt-4 text-white/40">
+                    <span className="w-8 h-px bg-white/20"></span>
+                    <p className="font-sans text-[9px] uppercase tracking-[0.3em]">Project Complete</p>
                 </div>
-                <div>
-                    <span className="block text-white mb-2">Year</span>
-                    2024
-                </div>
-                <div>
-                    <span className="block text-white mb-2">Location</span>
-                    São Paulo, SP
-                </div>
-                <div className="text-right">
-                    <span className="block text-white mb-2">Style</span>
-                    Blackwork
-                </div>
-            </div>
-            
-            {/* Center Content / Next Project Trigger */}
-            <div className="flex-grow flex flex-col items-center justify-center py-20 relative group cursor-pointer" onClick={onClose}>
-                <p className="font-sans text-xs tracking-[0.4em] uppercase text-white/50 mb-8 group-hover:text-white transition-colors duration-300">Next Project</p>
-                <div className="relative overflow-hidden">
-                    <h1 className="font-serif font-bold text-[15vw] leading-[0.8] tracking-tighter text-white mix-blend-overlay select-none transition-transform duration-700 group-hover:scale-105">
-                        SIQUEIRA
-                    </h1>
-                </div>
-                <ArrowRight className="text-white w-12 h-12 mt-12 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500" strokeWidth={1} />
             </div>
 
-            {/* Footer Bottom */}
-            <div className="modal-footer-anim flex justify-between items-end">
-                <div className="hidden md:block">
-                     <p className="font-serif italic text-2xl md:text-3xl text-white/40">
-                        Fine Line & <br/> Contemporary Art
-                     </p>
+            {/* Navigation / Action */}
+            <div 
+                className="group cursor-pointer flex items-center gap-6"
+                onClick={onClose}
+            >
+                <div className="text-right hidden md:block">
+                    <span className="block font-sans text-[9px] uppercase tracking-widest font-bold text-white group-hover:text-white/80 transition-colors">Próximo Projeto</span>
+                    <span className="block font-serif italic text-xl text-white/50 group-hover:text-white transition-colors">Voltar para Galeria</span>
                 </div>
-                <button 
-                    onClick={onClose} 
-                    className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-white border border-white/20 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300"
-                >
-                    Back to Gallery
-                </button>
+                
+                <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
+                    <ArrowRight size={24} className="text-white group-hover:text-ink-black transition-colors duration-500" />
+                </div>
             </div>
+
         </div>
 
       </div>
