@@ -33,6 +33,7 @@ const STYLES = `
   background: transparent;
   pointer-events: none;
   z-index: 20;
+  /* Smart Navbar Transition handled by Tailwind classes in the component */
 }
 
 @media (max-width: 768px) {
@@ -94,7 +95,7 @@ const STYLES = `
   text-transform: uppercase;
   letter-spacing: 0.25em;
   font-weight: 700;
-  min-width: 70px; /* Slightly wider for Portuguese text */
+  min-width: 70px;
   text-align: right;
 }
 
@@ -392,6 +393,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Fechar']);
 
+  // Smart Navbar State
+  const [isVisible, setIsVisible] = useState(true);
+
   const openTlRef = useRef<any | null>(null);
   const closeTweenRef = useRef<any | null>(null);
   const spinTweenRef = useRef<any | null>(null);
@@ -402,6 +406,51 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
   // Use global GSAP from window to avoid import issues
   const gsap = window.gsap;
+
+  // --- SMART NAVBAR LOGIC (Focus Mode) ---
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      // RULES:
+      // 1. If menu is OPEN, always show navbar (so user can close it)
+      if (openRef.current) {
+        setIsVisible(true);
+        ticking = false;
+        return;
+      }
+
+      // 2. If at TOP of page (within 50px), always show
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+      } 
+      // 3. Scroll DOWN -> Hide
+      else if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } 
+      // 4. Scroll UP -> Show (Navigation Mode)
+      else {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [open]); // Re-bind if open state changes (though ref handles value check)
+
 
   useLayoutEffect(() => {
     if (!gsap) return;
@@ -427,11 +476,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
       gsap.set(textInner, { yPercent: 0 });
-      
-      // Explicitly set button color via GSAP to ensure it sticks
-      if (toggleBtnRef.current) {
-         // Rely on CSS classes for color to handle Dark Mode better than inline styles
-      }
     });
     return () => ctx.revert();
   }, [menuButtonColor, position, gsap]);
@@ -654,6 +698,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (target) {
       onMenuOpen?.();
       playOpen();
+      // Ensure visibility when opening
+      setIsVisible(true);
     } else {
       onMenuClose?.();
       playClose();
@@ -723,7 +769,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             <div key={i} className="sm-prelayer" style={{ background: c }} />
         ))}
       </div>
-      <header className="staggered-menu-header" aria-label="Main navigation header">
+      
+      {/* 
+         SMART NAVBAR HEADER 
+         Applied Tailwind transitions for smooth show/hide behavior based on scroll state
+      */}
+      <header 
+        className={`staggered-menu-header transition-transform duration-300 ease-in-out ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        aria-label="Main navigation header"
+      >
         <div 
             className="sm-logo" 
             aria-label="Logo" 
