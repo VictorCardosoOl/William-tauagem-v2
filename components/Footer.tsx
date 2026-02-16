@@ -35,9 +35,9 @@ const Footer: React.FC = () => {
         </svg>
       </div>
 
-      {/* 2. BACKGROUND TYPOGRAPHY - Adjusted position (moved up) */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none select-none pointer-events-none z-0 flex justify-center">
-         <h1 className="font-serif font-bold text-[18vw] text-[#1A1A1A] opacity-[0.03] dark:opacity-[0.05] text-center whitespace-nowrap tracking-tighter leading-[0.75] transform translate-y-[5%]">
+      {/* 2. BACKGROUND TYPOGRAPHY - Raised and Darkened */}
+      <div className="absolute bottom-16 md:bottom-12 left-0 w-full overflow-hidden leading-none select-none pointer-events-none z-0 flex justify-center">
+         <h1 className="font-serif font-bold text-[18vw] text-[#1A1A1A] opacity-[0.08] dark:opacity-[0.1] text-center whitespace-nowrap tracking-tighter leading-[0.8]">
             SIQUEIRA
          </h1>
       </div>
