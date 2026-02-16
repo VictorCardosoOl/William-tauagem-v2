@@ -3,10 +3,10 @@ import { ITENS_PREPARO } from '../data';
 
 const Preparation: React.FC = () => {
   return (
-    <section className="bg-white dark:bg-[#1a1a1a] py-32 px-6 md:px-12 w-full transition-colors duration-500 border-t border-ink-light dark:border-white/5">
-      <div className="max-w-screen-3xl mx-auto">
+    <section className="min-h-screen flex flex-col bg-white dark:bg-[#1a1a1a] py-20 md:py-32 px-6 md:px-12 w-full transition-colors duration-500 border-t border-ink-light dark:border-white/5 relative">
+      <div className="max-w-screen-3xl mx-auto w-full my-auto">
         
-        <div className="mb-24">
+        <div className="mb-16 md:mb-24">
             <h3 className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium dark:text-white/80 flex items-center gap-6">
                 <span className="w-16 h-px bg-ink-medium"></span>
                 O Preparo
