@@ -18,13 +18,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Cinematic Curtain Reveal (Bottom to Top)
+      // 1. Cinematic Curtain Reveal
       tl.fromTo(containerRef.current, 
         { clipPath: "inset(100% 0% 0% 0%)" },
         { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power4.inOut" }
       );
 
-      // 2. Image "Landing" Effect (Scale Down + Blur Out)
+      // 2. Image "Landing" Effect
       tl.fromTo(".modal-img-hero",
         { scale: 1.15, filter: "blur(10px)" },
         { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
@@ -44,8 +44,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
         { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
         "-=0.6"
       );
-      
-      // Footer animation removed
 
     }, containerRef) : null;
 
@@ -62,7 +60,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             onComplete: onClose
         });
 
-        // Removed .modal-footer-anim from array
         tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary"], {
             opacity: 0,
             y: -20,
@@ -111,7 +108,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               
               <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
                 <div>
-                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
+                  <p className="font-sans text-xs tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
                   <h1 id="project-title" className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
                 </div>
                 <button 
@@ -133,7 +130,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
                     <p className="font-serif text-2xl italic leading-relaxed text-ink-dark dark:text-gray-300">
                         "A anatomia dita o fluxo. A tinta sela o pacto."
                     </p>
-                    <p className="font-sans text-sm leading-loose text-ink-medium dark:text-gray-400 max-w-sm">
+                    <p className="font-sans text-base leading-loose text-ink-medium dark:text-gray-400 max-w-sm">
                         Este projeto explora a tensão entre o orgânico e o geométrico. 
                         Desenhado à mão livre (freehand) para se adaptar perfeitamente à curvatura do {item.placement.toLowerCase()}.
                         A cicatrização respeita o tom de pele natural, garantindo contraste vitalício.
@@ -142,15 +139,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
                 <div className="grid grid-cols-2 gap-8 border-t border-ink-black/10 dark:border-white/10 pt-8 modal-text-anim">
                     <div>
-                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
+                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
                         <p className="font-serif text-xl">Fine Line / Dotwork</p>
                     </div>
                     <div>
-                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Session</h4>
+                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Session</h4>
                         <p className="font-serif text-xl">6 Hours</p>
                     </div>
                     <div>
-                        <h4 className="font-sans text-[9px] uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
+                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
                         <p className="font-serif text-xl">4 Weeks</p>
                     </div>
                 </div>
@@ -213,7 +210,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
          window.gsap.to(filterRef.current, { 
              attr: { scale: 25 }, 
              duration: 1.2, 
-             ease: "expo.out" // Snappier start, smoother settle
+             ease: "expo.out" 
          });
          if (imageRef.current) {
              window.gsap.to(imageRef.current, { 
@@ -244,7 +241,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
 
   return (
     <div 
-        className="group relative cursor-pointer mb-24 3xl:mb-32 w-full block"
+        className="group relative cursor-pointer mb-16 md:mb-20 w-full block"
         onClick={() => onClick(item)}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -277,11 +274,11 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
             </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-start gap-2 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="mt-5 flex flex-col items-start gap-1 group-hover:opacity-100 transition-opacity duration-500">
             <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
                 {item.placement}
             </span>
-            <h3 className="font-serif font-light italic text-4xl md:text-5xl 3xl:text-6xl text-ink-black dark:text-paper-light">
+            <h3 className="font-serif font-light italic text-3xl md:text-4xl text-ink-black dark:text-paper-light">
                 {item.title}
             </h3>
         </div>
@@ -296,24 +293,24 @@ const Portfolio: React.FC = () => {
   const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-24 md:py-32 3xl:py-48 px-6 relative">
-      <div className="max-w-screen-3xl mx-auto mb-32 border-b border-ink-light dark:border-white/10 pb-8 flex flex-col md:flex-row justify-between items-end">
+    <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative">
+      <div className="max-w-screen-3xl mx-auto mb-20 border-b border-ink-light dark:border-white/10 pb-6 flex flex-col md:flex-row justify-between items-end">
           <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 
             <span className="italic font-extralight text-ink-medium">Works</span>
           </h2>
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase opacity-100 text-right font-bold text-ink-black mt-6 md:mt-0">
+          <p className="font-sans text-xs tracking-[0.3em] uppercase opacity-100 text-right font-bold text-ink-black mt-6 md:mt-0">
             Galeria da Pele
           </p>
       </div>
 
-      <div className="max-w-screen-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 3xl:gap-32">
-          <div className="flex flex-col gap-16 md:gap-32">
+      <div className="max-w-screen-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 3xl:gap-24">
+          <div className="flex flex-col gap-10 md:gap-16">
             {col1.map((item) => (
               <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
             ))}
           </div>
-          <div className="flex flex-col gap-16 md:gap-32 md:mt-48">
+          <div className="flex flex-col gap-10 md:gap-16 md:mt-24">
             {col2.map((item) => (
               <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
             ))}

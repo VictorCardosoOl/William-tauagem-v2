@@ -21,16 +21,16 @@ const CreativeProcess: React.FC = () => {
   }, [activeProcess]);
 
   return (
-    <section className="bg-paper-warm dark:bg-[#121212] py-32 px-6 md:px-12 transition-colors duration-500">
+    <section className="bg-paper-warm dark:bg-[#121212] py-24 md:py-32 px-6 md:px-12 transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-6 mb-24">
+            <div className="flex items-center gap-6 mb-16 md:mb-20">
                 <div className="w-2.5 h-2.5 border border-ink-medium dark:border-white/60 rounded-full"></div> 
-                <h3 className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium dark:text-white/80">
+                <h3 className="font-sans text-xs tracking-[0.3em] uppercase font-bold text-ink-medium dark:text-white/80">
                     O Processo Criativo
                 </h3>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-20 items-start">
+            <div className="flex flex-col lg:flex-row gap-16 items-start">
                 <div className="flex-1 w-full flex flex-col">
                     {PROCESSO_CRIATIVO.map((item, index) => {
                         const isActive = activeProcess === index;
@@ -38,19 +38,19 @@ const CreativeProcess: React.FC = () => {
                             <div 
                                 key={item.id}
                                 onMouseEnter={() => setActiveProcess(index)}
-                                className={`relative cursor-pointer py-12 border-b border-ink-black/5 dark:border-white/5 transition-all duration-300 group`}
+                                className={`relative cursor-pointer py-8 md:py-10 border-b border-ink-black/5 dark:border-white/5 transition-all duration-300 group`}
                             >
-                                <div className={`absolute left-[-2rem] top-10 bottom-10 w-0.5 bg-ink-black dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
+                                <div className={`absolute left-[-2rem] top-8 bottom-8 w-0.5 bg-ink-black dark:bg-white transition-all duration-500 ease-in-out ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`}></div>
                                 <div className="flex justify-between items-baseline">
                                     <div className="pr-8">
-                                        <h4 className={`text-5xl md:text-6xl transition-all duration-500 ${
+                                        <h4 className={`text-4xl md:text-5xl transition-all duration-500 ${
                                             isActive 
                                             ? 'font-serif italic font-light text-ink-black dark:text-white translate-x-4' 
                                             : 'font-serif font-thin text-ink-medium/40 dark:text-gray-500 group-hover:text-ink-black'
                                         }`}>
                                             {item.titulo}
                                         </h4>
-                                        <p className={`font-sans text-[10px] tracking-[0.2em] uppercase mt-4 transition-all duration-300 ${
+                                        <p className={`font-sans text-[10px] tracking-[0.2em] uppercase mt-3 transition-all duration-300 ${
                                             isActive ? 'opacity-100 text-ink-medium dark:text-gray-300 translate-x-4' : 'opacity-0'
                                         }`}>
                                             {item.subtitulo}
@@ -67,16 +67,16 @@ const CreativeProcess: React.FC = () => {
                     })}
                 </div>
 
-                <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[400px] flex items-center justify-center lg:justify-start lg:pl-16">
+                <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[350px] flex items-center justify-center lg:justify-start lg:pl-16 mt-8 lg:mt-0">
                     <div className="relative w-full max-w-lg" ref={contentRef}>
-                        <div className="absolute -top-40 -left-20 text-[18rem] md:text-[25rem] leading-none font-serif text-ink-black opacity-[0.03] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700 font-thin italic">
+                        <div className="absolute -top-32 -left-20 text-[15rem] md:text-[20rem] leading-none font-serif text-ink-black opacity-[0.03] dark:text-white dark:opacity-[0.03] select-none pointer-events-none transition-all duration-700 font-thin italic">
                             0{activeProcess + 1}
                         </div>
                         <div className="relative z-10" key={activeProcess}>
-                            <h3 className="anim-text font-serif italic text-4xl mb-8 text-ink-black dark:text-white border-b border-ink-black/10 dark:border-white/20 pb-4 inline-block font-light">
+                            <h3 className="anim-text font-serif italic text-3xl md:text-4xl mb-6 text-ink-black dark:text-white border-b border-ink-black/10 dark:border-white/20 pb-4 inline-block font-light">
                                 Detalhes da Etapa
                             </h3>
-                            <p className="anim-text font-sans text-sm md:text-base leading-[2.5] tracking-wide text-ink-dark dark:text-gray-300 font-light">
+                            <p className="anim-text font-sans text-base md:text-lg leading-[2.2] tracking-wide text-ink-dark dark:text-gray-300 font-light">
                                 {PROCESSO_CRIATIVO[activeProcess].descricao}
                             </p>
                         </div>

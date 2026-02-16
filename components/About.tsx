@@ -10,25 +10,25 @@ const About: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // Animate Title text - triggers sooner, moves faster
+      // Animate Title text
       window.gsap.from(".about-title-line", {
         y: 80,
         opacity: 0,
-        duration: 0.7, // Reduced from 1
-        stagger: 0.05, // Much tighter stagger
+        duration: 0.7,
+        stagger: 0.05,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 85%", // Starts earlier
+          start: "top 85%",
         }
       });
 
-      // Animate Description Paragraph - immediate follow up
+      // Animate Description Paragraph
       window.gsap.from(".about-desc", {
         x: 20,
         opacity: 0,
         duration: 0.6,
-        delay: 0.1, // Reduced delay
+        delay: 0.1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".about-text-container",
@@ -38,18 +38,18 @@ const About: React.FC = () => {
 
       // Animate Images Stagger
       window.gsap.from(".about-image-card", {
-        y: 60, // Less distance to travel
+        y: 60,
         opacity: 0,
         duration: 0.8,
         stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".about-grid",
-          start: "top 85%", // Starts earlier
+          start: "top 85%",
         }
       });
 
-      // Parallax for Images (subtle movement on scroll)
+      // Parallax for Images
       window.gsap.utils.toArray(".about-image-card").forEach((card: any, i) => {
         window.gsap.to(card.querySelector('img'), {
           yPercent: 15,
@@ -69,26 +69,26 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-32 3xl:py-48 px-6 w-full overflow-hidden">
+    <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-20 md:py-32 px-6 w-full overflow-hidden">
       <div className="max-w-screen-3xl mx-auto">
         
         {/* Top Section: Text Content */}
-        <div className="about-text-container flex flex-col items-start md:items-end text-left md:text-right mb-32">
-          <div className="max-w-3xl 3xl:max-w-4xl overflow-hidden">
+        <div className="about-text-container flex flex-col items-start md:items-end text-left md:text-right mb-20 md:mb-24">
+          <div className="max-w-4xl 3xl:max-w-5xl overflow-hidden">
             <h2 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl 3xl:text-8xl leading-[0.9] uppercase text-primary dark:text-white mb-8 tracking-tighter">
               <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte1}</span></div>
               <div className="overflow-hidden"><span className="about-title-line block font-serif italic text-accent-sepia dark:text-gray-500 font-light">{sobre.tituloDestaque}</span></div>
               <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte2}</span></div>
             </h2>
             
-            <p className="about-desc font-sans text-sm md:text-base 3xl:text-lg text-gray-700 dark:text-gray-400 leading-loose tracking-wide max-w-lg 3xl:max-w-xl ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
+            <p className="about-desc font-sans text-base md:text-lg text-gray-700 dark:text-gray-400 leading-relaxed tracking-wide max-w-xl 3xl:max-w-2xl ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
               {sobre.descricao}
             </p>
           </div>
         </div>
 
         {/* Bottom Section: Image Grid */}
-        <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-8 3xl:gap-12">
+        <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 3xl:gap-12">
           {sobre.imagens.map((item, index) => (
             <div key={index} className="about-image-card aspect-[3/4] overflow-hidden w-full relative group cursor-crosshair">
               
