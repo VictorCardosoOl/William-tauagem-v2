@@ -50,9 +50,13 @@ const STYLES = `
   align-items: center;
   user-select: none;
   cursor: pointer;
-  mix-blend-mode: difference;
-  color: #F6F5F0;
+  color: #1A1A1A; /* Ink Black Default */
   z-index: 100;
+  transition: color 0.3s ease;
+}
+
+.dark .sm-logo {
+  color: #F6F5F0; /* Paper Light on Dark */
 }
 
 .sm-toggle {
@@ -63,13 +67,16 @@ const STYLES = `
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #1A1A1A;
+  color: #1A1A1A; /* Ink Black Default - High Contrast */
   font-weight: 500;
   line-height: 1;
   overflow: visible;
   z-index: 100;
-  mix-blend-mode: difference;
-  color: #F6F5F0; /* Blend mode ensures visibility */
+  transition: color 0.3s ease;
+}
+
+.dark .sm-toggle {
+  color: #F6F5F0; /* Paper Light on Dark */
 }
 
 .sm-toggle:focus-visible {
@@ -87,7 +94,7 @@ const STYLES = `
   text-transform: uppercase;
   letter-spacing: 0.25em;
   font-weight: 700;
-  min-width: 60px;
+  min-width: 70px; /* Slightly wider for Portuguese text */
   text-align: right;
 }
 
@@ -205,6 +212,10 @@ const STYLES = `
   letter-spacing: 0.25em;
   color: var(--sm-accent, #1A1A1A);
   opacity: 0.5;
+}
+
+.dark .sm-socials-title {
+    color: #F6F5F0;
 }
 
 .sm-socials-list {
@@ -359,7 +370,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   socialItems = [],
   displaySocials = true,
   displayItemNumbering = true,
-  menuButtonColor = '#F6F5F0',
+  menuButtonColor = '#1A1A1A',
   openMenuButtonColor = '#1A1A1A',
   accentColor = '#1A1A1A',
   changeMenuColorOnOpen = true,
@@ -379,7 +390,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
-  const [textLines, setTextLines] = useState(['Menu', 'Close']);
+  const [textLines, setTextLines] = useState(['Menu', 'Fechar']);
 
   const openTlRef = useRef<any | null>(null);
   const closeTweenRef = useRef<any | null>(null);
@@ -416,9 +427,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
       gsap.set(textInner, { yPercent: 0 });
-      // Keep initial color as provided
+      
+      // Explicitly set button color via GSAP to ensure it sticks
       if (toggleBtnRef.current) {
-          // No op, handle in css mix-blend
+         // Rely on CSS classes for color to handle Dark Mode better than inline styles
       }
     });
     return () => ctx.revert();
@@ -601,23 +613,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
   const animateColor = useCallback(
     (opening: boolean) => {
-      if (!gsap) return;
-      const btn = toggleBtnRef.current;
-      if (!btn) return;
-      colorTweenRef.current?.kill();
-      if (changeMenuColorOnOpen) {
-        // We use mix-blend-mode difference, so color change might not be strictly necessary 
-        // if background changes significantly, but let's keep logic
-        const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        // colorTweenRef.current = gsap.to(btn, {
-        //   color: targetColor,
-        //   delay: 0.18,
-        //   duration: 0.3,
-        //   ease: 'power2.out'
-        // });
-      } else {
-        // gsap.set(btn, { color: menuButtonColor });
-      }
+      // Color animation handled by CSS classes for better theme support
     },
     [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen, gsap]
   );
@@ -628,13 +624,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (!inner) return;
     textCycleAnimRef.current?.kill();
 
-    const currentLabel = opening ? 'Menu' : 'Close';
-    const targetLabel = opening ? 'Close' : 'Menu';
+    const currentLabel = opening ? 'Menu' : 'Fechar';
+    const targetLabel = opening ? 'Fechar' : 'Menu';
     const cycles = 3;
     const seq = [currentLabel];
     let last = currentLabel;
     for (let i = 0; i < cycles; i++) {
-      last = last === 'Menu' ? 'Close' : 'Menu';
+      last = last === 'Menu' ? 'Fechar' : 'Menu';
       seq.push(last);
     }
     if (last !== targetLabel) seq.push(targetLabel);
@@ -740,7 +736,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         <button
           ref={toggleBtnRef}
           className="sm-toggle"
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
           aria-controls="staggered-menu-panel"
           onClick={toggleMenu}
@@ -780,8 +776,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             ))}
           </ul>
           {displaySocials && socialItems && socialItems.length > 0 && (
-            <div className="sm-socials" aria-label="Social links">
-              <h3 className="sm-socials-title">Follow Us</h3>
+            <div className="sm-socials" aria-label="Redes Sociais">
+              <h3 className="sm-socials-title">Redes Sociais</h3>
               <ul className="sm-socials-list" role="list">
                 {socialItems.map((s, i) => (
                   <li key={s.label + i} className="sm-socials-item">
@@ -803,12 +799,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 const Navbar: React.FC = () => {
     // Mapping existing app data to StaggeredMenu format
     const menuItems: MenuItem[] = [
-        { label: 'Home', ariaLabel: 'Go to home', link: '#home' },
-        { label: 'Work', ariaLabel: 'View Portfolio', link: '#work' },
-        { label: 'About', ariaLabel: 'Artist Bio', link: '#about' },
-        { label: 'Method', ariaLabel: 'Our Process', link: '#concept' },
-        { label: 'Flash Day', ariaLabel: 'Events', link: '#flash' },
-        { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
+        { label: 'Início', ariaLabel: 'Ir para o início', link: '#home' },
+        { label: 'Portfólio', ariaLabel: 'Ver trabalhos', link: '#work' },
+        { label: 'Sobre', ariaLabel: 'Sobre o artista', link: '#about' },
+        { label: 'Método', ariaLabel: 'Nosso processo', link: '#concept' },
+        { label: 'Agenda', ariaLabel: 'Eventos e Flash Day', link: '#flash' },
+        { label: 'Contato', ariaLabel: 'Entrar em contato', link: '#contact' }
     ];
 
     const socialItems: SocialItem[] = REDES_SOCIAIS.map(s => ({
@@ -825,10 +821,10 @@ const Navbar: React.FC = () => {
                 socialItems={socialItems}
                 displaySocials={true}
                 displayItemNumbering={true}
-                // Colors matched to the Paper & Ink Theme
+                // Explicit colors handled by CSS now for reliability
                 menuButtonColor="#1A1A1A"
                 openMenuButtonColor="#1A1A1A"
-                changeMenuColorOnOpen={false} // Handled by mix-blend-mode in CSS
+                changeMenuColorOnOpen={false} 
                 colors={['#1a1a1a', '#333333']} // Pre-layers (dark reveal)
                 accentColor="#1A1A1A"
                 isFixed={true}
