@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { PORTFOLIO_ITEMS } from '../data';
 import { PortfolioItem } from '../types';
 import { X, ArrowRight, ArrowDown } from 'lucide-react';
@@ -11,6 +11,7 @@ interface ProjectDetailProps {
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Entrance Animation
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -44,7 +45,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     };
   }, []);
 
-  const handleClose = () => {
+  // Close Logic with Animation
+  const handleClose = useCallback(() => {
     if (window.gsap && containerRef.current) {
         window.gsap.to(containerRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
@@ -55,7 +57,19 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     } else {
         onClose();
     }
-  };
+  }, [onClose]);
+
+  // Handle ESC Key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleClose]);
 
   return (
     <div 
