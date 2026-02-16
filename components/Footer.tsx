@@ -1,83 +1,160 @@
 import React from 'react';
 import { TEXTOS_GERAIS, REDES_SOCIAIS } from '../data';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Instagram, Mail, MessageCircle, MapPin, Copyright } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const whatsappLink = REDES_SOCIAIS.find(social => social.nome === 'WhatsApp')?.url || '#';
+  const currentYear = new Date().getFullYear();
+  
+  // Mapeamento de ícones
+  const getIcon = (name: string) => {
+    switch(name.toLowerCase()) {
+      case 'instagram': return <Instagram size={18} />;
+      case 'whatsapp': return <MessageCircle size={18} />;
+      case 'e-mail': return <Mail size={18} />;
+      default: return <ArrowUpRight size={18} />;
+    }
+  };
+
+  const navLinks = [
+    { label: 'Início', href: '#home' },
+    { label: 'Portfólio', href: '#work' },
+    { label: 'O Processo', href: '#concept' },
+    { label: 'Flash Day', href: '#flash' },
+  ];
 
   return (
-    <footer id="contact" className="bg-paper-light dark:bg-paper-dark pt-24 pb-12 px-6 md:px-12 border-t border-ink-light dark:border-white/5">
-      <div className="max-w-screen-3xl mx-auto">
-        <div className="flex flex-col lg:flex-row justify-between items-start mb-24 lg:mb-32">
-          
-          <div className="max-w-xl 3xl:max-w-2xl">
-            <h2 className="font-serif italic font-thin text-5xl md:text-7xl 3xl:text-8xl text-ink-black dark:text-gray-100 mb-8 leading-[1.1]">
-              {TEXTOS_GERAIS.rodapeChamada}
-            </h2>
-            <p className="font-sans text-ink-medium dark:text-gray-400 mb-12 max-w-sm leading-relaxed text-sm tracking-wide font-light">
-              {TEXTOS_GERAIS.rodapeTexto}
-            </p>
-            <a 
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-8 text-2xl md:text-3xl font-serif italic font-light border-b border-ink-black/30 dark:border-white/30 pb-4 hover:border-ink-black dark:hover:border-white hover:opacity-70 transition-all duration-500 text-ink-black dark:text-white"
-            >
-              <span>{TEXTOS_GERAIS.rodapeBotao}</span>
-              <ArrowRight className="h-6 w-6 group-hover:translate-x-6 transition-transform duration-500 font-light" strokeWidth={1} />
-            </a>
+    <footer id="contact" className="relative w-full bg-[#F6F5F0] dark:bg-[#0c0a09] text-[#1A1A1A] dark:text-[#e7e5e4] overflow-hidden selection:bg-[#1A1A1A] selection:text-[#F6F5F0] transition-colors duration-500">
+      
+      {/* 1. TEXTURA DE FUNDO (NOISE) - Adjusted for Light Theme */}
+      <div className="absolute inset-0 w-full h-full opacity-[0.03] mix-blend-multiply dark:mix-blend-overlay pointer-events-none z-0">
+        <svg className="w-full h-full">
+            <filter id="noiseFilterFooter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilterFooter)" />
+        </svg>
+      </div>
+
+      {/* 2. BACKGROUND TYPOGRAPHY - Adjusted position (moved up) */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none select-none pointer-events-none z-0 flex justify-center">
+         <h1 className="font-serif font-bold text-[18vw] text-[#1A1A1A] opacity-[0.03] dark:opacity-[0.05] text-center whitespace-nowrap tracking-tighter leading-[0.75] transform translate-y-[5%]">
+            SIQUEIRA
+         </h1>
+      </div>
+
+      {/* 3. MAIN GRID CONTENT */}
+      <div className="relative z-10 max-w-screen-4xl mx-auto border-t border-[#1A1A1A]/10 dark:border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* COL 1: IDENTITY */}
+          <div className="p-10 md:p-14 lg:p-16 border-b md:border-b-0 border-r-0 md:border-r border-[#1A1A1A]/10 dark:border-white/10 flex flex-col justify-between min-h-[320px] group hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
+            <div>
+              <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] dark:text-[#fafaf9] tracking-tight mb-2">
+                Studio <br /> W. Siqueira
+              </h2>
+              <span className="font-serif italic text-xl text-[#685A4F] dark:text-[#a8a29e]">
+                Fine Line & Art
+              </span>
+            </div>
+            <div className="mt-8">
+               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-2">
+                 Estabelecido
+               </p>
+               <p className="font-sans text-xs text-[#3D3D3D] dark:text-[#d6d3d1]">São Paulo, BR — {currentYear}</p>
+            </div>
           </div>
 
-          <div className="flex gap-16 lg:gap-32 mt-20 lg:mt-0 font-sans">
-            <div>
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-8">
-                Contato
-              </h4>
-              <ul className="space-y-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-ink-black dark:text-gray-300">
-                {REDES_SOCIAIS.map((social) => (
-                  <li key={social.nome}>
-                    <a 
-                      href={social.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="hover:text-ink-medium transition-colors relative group"
-                    >
-                      {social.nome}
-                      <span className="absolute -bottom-2 left-0 w-0 h-px bg-ink-black transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          {/* COL 2: LOCATION & CTA */}
+          <div className="p-10 md:p-14 lg:p-16 border-b md:border-b-0 lg:border-r border-[#1A1A1A]/10 dark:border-white/10 flex flex-col justify-between min-h-[320px] group hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500 cursor-pointer">
+            <div className="flex flex-col gap-4">
+               <div className="flex items-start gap-3 text-[#685A4F] dark:text-[#a8a29e]">
+                  <MapPin size={18} className="mt-1 shrink-0" />
+                  <address className="not-italic font-sans text-sm leading-relaxed text-[#3D3D3D] dark:text-[#d6d3d1]">
+                    Vila Madalena<br/>
+                    São Paulo - SP<br/>
+                    Brasil
+                  </address>
+               </div>
             </div>
-
-            <div>
-              <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium mb-8">
-                Local
-              </h4>
-              <address className="not-italic space-y-3 text-[10px] md:text-xs font-medium tracking-wide text-ink-black dark:text-gray-300 leading-relaxed opacity-80">
-                {TEXTOS_GERAIS.endereco.map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </address>
+            
+            <div className="mt-8">
+               <div className="flex items-center justify-between group-hover:px-2 transition-all duration-500">
+                 <span className="font-serif italic text-2xl text-[#1A1A1A] dark:text-[#fafaf9]">Agendar Visita</span>
+                 <div className="w-10 h-10 rounded-full border border-[#1A1A1A]/20 dark:border-[#44403c] flex items-center justify-center group-hover:bg-[#1A1A1A] group-hover:text-white dark:group-hover:bg-[#fafaf9] dark:group-hover:text-black transition-all duration-300">
+                    <ArrowUpRight size={18} />
+                 </div>
+               </div>
             </div>
           </div>
-        </div>
 
-        <div className="w-full h-px bg-ink-light dark:bg-white/5 mb-16"></div>
+          {/* COL 3: SOCIALS */}
+          <div className="p-10 md:p-14 lg:p-16 border-b md:border-b-0 border-r-0 md:border-r border-[#1A1A1A]/10 dark:border-white/10 flex flex-col min-h-[320px] hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
+             <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8">
+               Conexões
+             </span>
+             <ul className="flex flex-col gap-6">
+               {REDES_SOCIAIS.map((social, idx) => (
+                 <li key={idx}>
+                   <a 
+                     href={social.url}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="group/link flex items-center justify-between py-2 border-b border-[#1A1A1A]/10 dark:border-[#292524] hover:border-[#685A4F] dark:hover:border-[#a8a29e] transition-colors duration-300"
+                   >
+                     <span className="font-sans text-xs uppercase tracking-widest text-[#3D3D3D] dark:text-[#d6d3d1] group-hover/link:text-[#1A1A1A] dark:group-hover/link:text-white transition-colors">
+                       {social.nome}
+                     </span>
+                     <span className="text-[#8C8C8C] dark:text-[#57534e] group-hover/link:text-[#1A1A1A] dark:group-hover/link:text-white transition-colors duration-300 transform group-hover/link:rotate-45">
+                        {getIcon(social.nome)}
+                     </span>
+                   </a>
+                 </li>
+               ))}
+             </ul>
+          </div>
 
-        <div className="relative overflow-hidden">
-            <div className="flex justify-center mb-8">
-                <h1 className="font-serif font-bold text-[16vw] md:text-[19vw] leading-[0.7] text-center tracking-tighter select-none text-ink-black opacity-10 dark:text-white dark:opacity-10 mix-blend-multiply dark:mix-blend-overlay">
-                    SIQUEIRA
-                </h1>
-            </div>
+          {/* COL 4: NAVIGATION & CREDITS */}
+          <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-between min-h-[320px] hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
+             <div>
+               <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8 block">
+                 Menu
+               </span>
+               <nav className="flex flex-col gap-3">
+                 {navLinks.map((link, i) => (
+                   <a 
+                     key={i} 
+                     href={link.href} 
+                     className="font-serif text-2xl text-[#685A4F] dark:text-[#a8a29e] hover:text-[#1A1A1A] dark:hover:text-[#fafaf9] hover:translate-x-2 transition-all duration-300 block w-fit"
+                   >
+                     {link.label}
+                   </a>
+                 ))}
+               </nav>
+             </div>
+             
+             <div className="mt-12 pt-6 border-t border-[#1A1A1A]/10 dark:border-[#292524] flex justify-between items-end">
+                <div className="flex flex-col gap-1">
+                   <span className="font-sans text-[10px] uppercase tracking-widest text-[#8C8C8C] dark:text-[#57534e]">Dev & Design</span>
+                   <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#a8a29e]">L'Effet Monstre</span>
+                </div>
+                <Copyright size={14} className="text-[#8C8C8C] dark:text-[#57534e]" />
+             </div>
+          </div>
 
-            <div className="flex flex-col md:flex-row justify-between items-center md:items-end text-[9px] uppercase tracking-[0.3em] text-ink-medium font-sans gap-6 font-bold">
-                <span>© 2024 William Siqueira</span>
-                <span>Fine Line & Contemporary Art</span>
-            </div>
         </div>
       </div>
+      
+      {/* BOTTOM BAR */}
+      <div className="relative z-10 border-t border-[#1A1A1A]/10 dark:border-[#292524] py-6 px-6 md:px-12 bg-[#F6F5F0] dark:bg-[#0c0a09]">
+        <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-sans text-[#8C8C8C] dark:text-[#57534e]">
+           <span>© {currentYear} {TEXTOS_GERAIS.marca}. All rights reserved.</span>
+           <div className="flex gap-6">
+             <a href="#" className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors">Privacy Policy</a>
+             <a href="#" className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors">Terms of Use</a>
+           </div>
+        </div>
+      </div>
+
     </footer>
   );
 };
