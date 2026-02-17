@@ -29,7 +29,7 @@ const Aftercare: React.FC = () => {
             className="bg-white dark:bg-white/5 p-10 md:p-12 3xl:p-16 border border-ink-light dark:border-white/5 shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             <div className="flex justify-between items-center mb-10">
-              <span className="font-sans text-[9px] tracking-[0.3em] font-bold text-ink-medium uppercase">
+              <span className="font-sans text-xs tracking-[0.25em] font-bold text-ink-medium uppercase">
                 {item.fase}
               </span>
               <span className="text-ink-light dark:text-gray-500">
@@ -41,7 +41,7 @@ const Aftercare: React.FC = () => {
               {item.titulo}
             </h3>
             
-            <p className="font-sans text-xs 3xl:text-sm text-ink-medium dark:text-gray-400 leading-loose tracking-wide mb-10 font-light">
+            <p className="font-sans text-sm md:text-base text-ink-medium dark:text-gray-400 leading-loose tracking-wide mb-10 font-light">
               {item.descricao}
             </p>
             
@@ -49,8 +49,8 @@ const Aftercare: React.FC = () => {
             
             <ul className="space-y-4">
               {item.lista.map((step, stepIndex) => (
-                <li key={stepIndex} className="flex items-start font-sans text-[10px] 3xl:text-xs tracking-wide text-ink-black dark:text-gray-300 leading-relaxed font-bold">
-                  <span className="text-ink-medium mr-4 text-xs">•</span>
+                <li key={stepIndex} className="flex items-start font-sans text-sm tracking-wide text-ink-black dark:text-gray-300 leading-relaxed font-bold">
+                  <span className="text-ink-medium mr-4 text-sm">•</span>
                   <span>{step}</span>
                 </li>
               ))}

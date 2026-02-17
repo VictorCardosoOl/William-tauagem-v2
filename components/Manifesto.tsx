@@ -60,7 +60,7 @@ const Manifesto: React.FC = () => {
             <div className="max-w-screen-4xl mx-auto grid grid-cols-1 md:grid-cols-12 min-h-screen">
                 
                 <div className="hidden md:flex md:col-span-1 border-r border-ink-black/5 dark:border-white/5 justify-center py-12">
-                     <span className="writing-mode-vertical text-[9px] uppercase tracking-[0.4em] text-ink-medium dark:text-white/40 font-bold rotate-180">
+                     <span className="writing-mode-vertical text-xs uppercase tracking-[0.4em] text-ink-medium dark:text-white/40 font-bold rotate-180">
                         {manifesto.titulo} — Est. 2018
                      </span>
                 </div>
@@ -89,8 +89,8 @@ const Manifesto: React.FC = () => {
                     
                     <div className="manifesto-card flex-1 p-12 md:p-16 3xl:p-24 border-b border-ink-black/5 dark:border-white/5 hover:bg-white/40 dark:hover:bg-black/20 transition-colors duration-500 flex flex-col justify-center group">
                         <div className="flex items-center gap-4 mb-8">
-                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium">01</span>
-                            <h4 className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold text-ink-black dark:text-paper-light">
+                            <span className="text-sm font-bold uppercase tracking-[0.3em] text-ink-medium">01</span>
+                            <h4 className="font-sans text-xs uppercase tracking-[0.3em] font-bold text-ink-black dark:text-paper-light">
                                 {manifesto.card1Titulo}
                             </h4>
                         </div>
@@ -101,8 +101,8 @@ const Manifesto: React.FC = () => {
 
                     <div className="manifesto-card flex-1 p-12 md:p-16 3xl:p-24 hover:bg-white/40 dark:hover:bg-black/20 transition-colors duration-500 flex flex-col justify-center group">
                          <div className="flex items-center gap-4 mb-8">
-                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-ink-medium">02</span>
-                            <h4 className="font-sans text-[9px] uppercase tracking-[0.3em] font-bold text-ink-black dark:text-paper-light">
+                            <span className="text-sm font-bold uppercase tracking-[0.3em] text-ink-medium">02</span>
+                            <h4 className="font-sans text-xs uppercase tracking-[0.3em] font-bold text-ink-black dark:text-paper-light">
                                 {manifesto.card2Titulo}
                             </h4>
                         </div>

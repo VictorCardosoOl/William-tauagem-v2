@@ -139,15 +139,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
                 <div className="grid grid-cols-2 gap-8 border-t border-ink-black/10 dark:border-white/10 pt-8 modal-text-anim">
                     <div>
-                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
+                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
                         <p className="font-serif text-xl">Fine Line / Dotwork</p>
                     </div>
                     <div>
-                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Session</h4>
+                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Session</h4>
                         <p className="font-serif text-xl">6 Hours</p>
                     </div>
                     <div>
-                        <h4 className="font-sans text-[10px] uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
+                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
                         <p className="font-serif text-xl">4 Weeks</p>
                     </div>
                 </div>
@@ -269,13 +269,13 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
             />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 rounded-full transform scale-90 group-hover:scale-100 transition-transform duration-500">
-                    <span className="text-white text-[10px] uppercase tracking-widest font-bold">View Project</span>
+                    <span className="text-white text-xs uppercase tracking-widest font-bold">View Project</span>
                 </div>
             </div>
         </div>
 
         <div className="mt-5 flex flex-col items-start gap-1 group-hover:opacity-100 transition-opacity duration-500">
-            <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
                 {item.placement}
             </span>
             <h3 className="font-serif font-light italic text-3xl md:text-4xl text-ink-black dark:text-paper-light">

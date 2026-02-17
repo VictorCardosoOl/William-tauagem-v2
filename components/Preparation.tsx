@@ -7,7 +7,7 @@ const Preparation: React.FC = () => {
       <div className="max-w-screen-3xl mx-auto w-full my-auto">
         
         <div className="mb-16 md:mb-24">
-            <h3 className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium dark:text-white/80 flex items-center gap-6">
+            <h3 className="font-sans text-xs tracking-[0.3em] uppercase font-bold text-ink-medium dark:text-white/80 flex items-center gap-6">
                 <span className="w-16 h-px bg-ink-medium"></span>
                 O Preparo
             </h3>
@@ -27,7 +27,7 @@ const Preparation: React.FC = () => {
                 {item.titulo}
               </h3>
 
-              <p className="font-sans text-xs 3xl:text-sm leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light">
+              <p className="font-sans text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light">
                 {item.descricao}
               </p>
 

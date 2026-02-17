@@ -57,10 +57,10 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <div className="mt-8">
-               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-2">
+               <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-2">
                  Estabelecido
                </p>
-               <p className="font-sans text-xs text-[#3D3D3D] dark:text-[#d6d3d1]">São Paulo, BR — {currentYear}</p>
+               <p className="font-sans text-sm md:text-base text-[#3D3D3D] dark:text-[#d6d3d1]">São Paulo, BR — {currentYear}</p>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-col gap-4">
                <div className="flex items-start gap-3 text-[#685A4F] dark:text-[#a8a29e]">
                   <MapPin size={18} className="mt-1 shrink-0" />
-                  <address className="not-italic font-sans text-sm leading-relaxed text-[#3D3D3D] dark:text-[#d6d3d1]">
+                  <address className="not-italic font-sans text-base leading-relaxed text-[#3D3D3D] dark:text-[#d6d3d1]">
                     Vila Madalena<br/>
                     São Paulo - SP<br/>
                     Brasil
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
 
           {/* COL 3: SOCIALS */}
           <div className="p-10 md:p-14 lg:p-16 border-b md:border-b-0 border-r-0 md:border-r border-[#1A1A1A]/10 dark:border-white/10 flex flex-col min-h-[320px] hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
-             <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8">
+             <span className="font-sans text-xs tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8">
                Conexões
              </span>
              <ul className="flex flex-col gap-6">
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
           {/* COL 4: NAVIGATION & CREDITS */}
           <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-between min-h-[320px] hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
              <div>
-               <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8 block">
+               <span className="font-sans text-xs tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-8 block">
                  Menu
                </span>
                <nav className="flex flex-col gap-3">
@@ -134,8 +134,8 @@ const Footer: React.FC = () => {
              
              <div className="mt-12 pt-6 border-t border-[#1A1A1A]/10 dark:border-[#292524] flex justify-between items-end">
                 <div className="flex flex-col gap-1">
-                   <span className="font-sans text-[10px] uppercase tracking-widest text-[#8C8C8C] dark:text-[#57534e]">Dev & Design</span>
-                   <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#a8a29e]">L'Effet Monstre</span>
+                   <span className="font-sans text-xs uppercase tracking-widest text-[#8C8C8C] dark:text-[#57534e]">Dev & Design</span>
+                   <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#a8a29e]">L'Effet Monstre</span>
                 </div>
                 <Copyright size={14} className="text-[#8C8C8C] dark:text-[#57534e]" />
              </div>
@@ -146,7 +146,7 @@ const Footer: React.FC = () => {
       
       {/* BOTTOM BAR */}
       <div className="relative z-10 border-t border-[#1A1A1A]/10 dark:border-[#292524] py-6 px-6 md:px-12 bg-[#F6F5F0] dark:bg-[#0c0a09]">
-        <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-sans text-[#8C8C8C] dark:text-[#57534e]">
+        <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs uppercase tracking-[0.2em] font-sans text-[#8C8C8C] dark:text-[#57534e]">
            <span>© {currentYear} {TEXTOS_GERAIS.marca}. All rights reserved.</span>
            <div className="flex gap-6">
              <a href="#" className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors">Privacy Policy</a>

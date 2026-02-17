@@ -68,7 +68,7 @@ const FlashSection: React.FC = () => {
             </div>
             
             <div className="mt-10 md:mt-0">
-               <p className="font-sans text-[10px] tracking-[0.2em] uppercase opacity-50 text-right font-bold">
+               <p className="font-sans text-xs tracking-[0.2em] uppercase opacity-50 text-right font-bold">
                  Próxima Abertura: {TEXTOS_GERAIS.dataProximoEvento}
                </p>
             </div>
@@ -84,8 +84,8 @@ const FlashSection: React.FC = () => {
             </div>
 
             <div>
-              <div className="inline-flex items-center gap-3 border border-ink-black/20 dark:border-white/20 px-4 py-2 text-[9px] tracking-[0.25em] uppercase font-bold mb-12">
-                <Zap size={10} fill="currentColor" />
+              <div className="inline-flex items-center gap-3 border border-ink-black/20 dark:border-white/20 px-4 py-2 text-xs tracking-[0.25em] uppercase font-bold mb-12">
+                <Zap size={12} fill="currentColor" />
                 Flash Day
               </div>
 
@@ -94,15 +94,15 @@ const FlashSection: React.FC = () => {
                 <span className="italic font-thin text-ink-medium">Catálogo Pronto</span>
               </h2>
 
-              <p className="font-sans text-sm text-ink-dark dark:text-gray-400 leading-relaxed tracking-wide max-w-sm mb-10 font-light">
+              <p className="font-sans text-base text-ink-dark dark:text-gray-400 leading-relaxed tracking-wide max-w-sm mb-10 font-light">
                 O estúdio abre as portas para o público. Desenhos autorais pré-definidos, 
                 valores especiais e atendimento por ordem de chegada.
               </p>
 
               <ul className="space-y-4 mb-12">
                 {flashFeatures.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-4 font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-ink-medium">
-                    <CheckCircle2 size={14} className="text-ink-black dark:text-white" />
+                  <li key={idx} className="flex items-center gap-4 font-sans text-xs font-bold uppercase tracking-[0.15em] text-ink-medium">
+                    <CheckCircle2 size={16} className="text-ink-black dark:text-white" />
                     {feature}
                   </li>
                 ))}
@@ -111,8 +111,8 @@ const FlashSection: React.FC = () => {
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-ink-light dark:border-white/10 pt-8">
               <div>
-                <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-ink-medium mb-2">
-                  <Calendar size={12} />
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-ink-medium mb-2">
+                  <Calendar size={14} />
                   Próxima Data:
                 </div>
                 <div className="font-serif italic text-3xl text-ink-black dark:text-white">
@@ -120,9 +120,9 @@ const FlashSection: React.FC = () => {
                 </div>
               </div>
 
-              <button className="bg-ink-black dark:bg-white text-paper-light dark:text-primary px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-ink-dark transition-colors flex items-center gap-4 group w-full md:w-auto justify-center">
+              <button className="bg-ink-black dark:bg-white text-paper-light dark:text-primary px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-ink-dark transition-colors flex items-center gap-4 group w-full md:w-auto justify-center">
                 Ver Designs
-                <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
               </button>
             </div>
           </div>
@@ -141,8 +141,8 @@ const FlashSection: React.FC = () => {
             </div>
 
             <div className="relative z-20">
-              <div className="inline-flex items-center gap-3 bg-white text-black px-4 py-2 text-[9px] tracking-[0.25em] uppercase font-bold mb-12">
-                <Crown size={10} fill="currentColor" />
+              <div className="inline-flex items-center gap-3 bg-white text-black px-4 py-2 text-xs tracking-[0.25em] uppercase font-bold mb-12">
+                <Crown size={12} fill="currentColor" />
                 Experiência VIP
               </div>
 
@@ -151,15 +151,15 @@ const FlashSection: React.FC = () => {
                 <span className="italic font-thin text-gray-400">& Imersão Total</span>
               </h2>
 
-              <p className="font-sans text-sm text-gray-300 leading-relaxed tracking-wide max-w-sm mb-10 font-light">
+              <p className="font-sans text-base text-gray-300 leading-relaxed tracking-wide max-w-sm mb-10 font-light">
                 "Aluga" o artista por um dia inteiro. Foco absoluto no seu projeto, sem pressa. 
                 Ideal para fechamentos de braço/costas.
               </p>
 
               <ul className="space-y-4 mb-12">
                 {fullDayFeatures.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-4 font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
-                    <CheckCircle2 size={14} className="text-white" />
+                  <li key={idx} className="flex items-center gap-4 font-sans text-xs font-bold uppercase tracking-[0.15em] text-gray-400">
+                    <CheckCircle2 size={16} className="text-white" />
                     {feature}
                   </li>
                 ))}
@@ -168,8 +168,8 @@ const FlashSection: React.FC = () => {
 
             <div className="relative z-20 flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-white/10 pt-8">
               <div>
-                <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
-                  <Calendar size={12} />
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">
+                  <Calendar size={14} />
                   Disponibilidade:
                 </div>
                 <div className="font-serif italic text-3xl text-white">
@@ -177,9 +177,9 @@ const FlashSection: React.FC = () => {
                 </div>
               </div>
 
-              <button className="bg-transparent border border-white text-white px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors flex items-center gap-4 group w-full md:w-auto justify-center">
+              <button className="bg-transparent border border-white text-white px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors flex items-center gap-4 group w-full md:w-auto justify-center">
                 Solicitar Orçamento
-                <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
               </button>
             </div>
           </div>
