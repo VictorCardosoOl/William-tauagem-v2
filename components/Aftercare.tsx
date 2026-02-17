@@ -1,62 +1,157 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { TEXTOS_GERAIS, ITENS_CUIDADOS } from '../data';
-import { Scissors, Brush, Droplet, Sun } from 'lucide-react';
+import { Plus, Minus, ShieldCheck, Droplet, Sun } from 'lucide-react';
 
 const Aftercare: React.FC = () => {
-  const getIcon = (index: number) => {
-    switch(index) {
-      case 0: return <Brush className="w-5 h-5" />;
-      case 1: return <Droplet className="w-5 h-5" />;
-      case 2: return <Sun className="w-5 h-5" />;
-      default: return <Brush className="w-5 h-5" />;
-    }
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const containerRef = useRef<HTMLElement>(null);
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
+  const getIcon = (index: number) => {
+     switch(index) {
+       case 0: return <ShieldCheck className="w-4 h-4" />;
+       case 1: return <Droplet className="w-4 h-4" />;
+       case 2: return <Sun className="w-4 h-4" />;
+       default: return <ShieldCheck className="w-4 h-4" />;
+     }
+  };
+
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+        // Animação do Título
+        window.gsap.from(".aftercare-title", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 75%"
+            }
+        });
+
+        // Animação das Linhas divisórias
+        window.gsap.from(".protocol-line", {
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: ".protocol-list",
+                start: "top 80%"
+            }
+        });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="cuidados" className="py-32 3xl:py-48 px-6 max-w-screen-3xl mx-auto bg-paper-light dark:bg-paper-dark">
-      
-      <div className="flex flex-col items-center mb-24 text-center space-y-8">
-        <Scissors className="text-ink-black w-6 h-6 transform -rotate-90" strokeWidth={1} />
-        <h2 className="font-serif font-light text-4xl md:text-6xl 3xl:text-7xl italic text-ink-black dark:text-gray-100 max-w-3xl leading-tight">
-          {TEXTOS_GERAIS.tituloPosCuidado}
-        </h2>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 3xl:gap-12">
-        {ITENS_CUIDADOS.map((item, index) => (
-          <article 
-            key={index} 
-            className="bg-white dark:bg-white/5 p-10 md:p-12 3xl:p-16 border border-ink-light dark:border-white/5 shadow-sm hover:shadow-md transition-shadow duration-300"
-          >
-            <div className="flex justify-between items-center mb-10">
-              <span className="font-sans text-xs tracking-[0.25em] font-bold text-ink-medium uppercase">
-                {item.fase}
-              </span>
-              <span className="text-ink-light dark:text-gray-500">
-                {getIcon(index)}
-              </span>
+    <section id="cuidados" ref={containerRef} className="py-24 md:py-32 px-6 bg-paper-light dark:bg-paper-dark transition-colors duration-500 overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto">
+        
+        {/* HEADER SECTION */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 gap-8 border-b border-ink-black/10 dark:border-white/10 pb-8">
+            <div className="max-w-2xl">
+                <div className="flex items-center gap-3 mb-6">
+                    <span className="w-2 h-2 bg-accent-sepia rounded-full animate-pulse"></span>
+                    <span className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium">
+                        Protocolo de Cicatrização
+                    </span>
+                </div>
+                <h2 className="aftercare-title font-serif font-light text-5xl md:text-7xl leading-[0.9] text-ink-black dark:text-gray-100">
+                    A longevidade da arte <br/>
+                    <span className="italic text-ink-medium/60 dark:text-gray-500">depende da sua dedicação.</span>
+                </h2>
             </div>
+            <div className="hidden md:block max-w-xs text-right">
+                <p className="font-sans text-xs leading-relaxed text-ink-medium uppercase tracking-wider">
+                    Siga rigorosamente as etapas abaixo para garantir a integridade do pigmento.
+                </p>
+            </div>
+        </div>
+
+        {/* PROTOCOL LIST (ACCORDION) */}
+        <div className="protocol-list flex flex-col">
+            {ITENS_CUIDADOS.map((item, index) => {
+                const isOpen = openIndex === index;
+
+                return (
+                    <article key={index} className="group cursor-pointer" onClick={() => toggleAccordion(index)}>
+                        {/* DIVIDER LINE */}
+                        <div className="protocol-line w-full h-px bg-ink-black/10 dark:bg-white/10 group-hover:bg-ink-black dark:group-hover:bg-white transition-colors duration-500"></div>
+                        
+                        {/* HEADER ROW */}
+                        <div className="py-8 md:py-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div className="flex items-baseline gap-6 md:gap-12">
+                                <span className={`font-sans text-xs font-bold tracking-[0.2em] transition-colors duration-300 ${isOpen ? 'text-accent-sepia' : 'text-ink-medium'}`}>
+                                    {item.fase}
+                                </span>
+                                <h3 className={`font-serif text-3xl md:text-5xl transition-all duration-500 ${isOpen ? 'italic text-ink-black dark:text-white translate-x-4' : 'font-light text-ink-dark dark:text-gray-400 group-hover:text-ink-black dark:group-hover:text-white'}`}>
+                                    {item.titulo}
+                                </h3>
+                            </div>
+                            
+                            <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto">
+                                <span className="md:hidden text-[10px] uppercase tracking-widest text-ink-medium">Ver Detalhes</span>
+                                <div className={`w-10 h-10 rounded-full border border-ink-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-ink-black text-white rotate-180 dark:bg-white dark:text-black' : 'group-hover:border-ink-black'}`}>
+                                    {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* EXPANDABLE CONTENT */}
+                        <div 
+                            className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'grid-rows-[1fr] opacity-100 pb-12' : 'grid-rows-[0fr] opacity-0'}`}
+                        >
+                            <div className="overflow-hidden">
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pt-4 pl-0 md:pl-[calc(4rem+20px)]">
+                                    
+                                    {/* Description Column */}
+                                    <div className="md:col-span-5">
+                                        <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300 italic mb-6">
+                                            "{item.descricao}"
+                                        </p>
+                                        <div className="flex items-center gap-2 text-ink-medium dark:text-gray-500">
+                                            {getIcon(index)}
+                                            <span className="text-[10px] uppercase tracking-widest font-bold">Recomendação Oficial</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Steps Column */}
+                                    <div className="md:col-span-6 md:col-start-7 border-l border-ink-black/10 dark:border-white/10 pl-8">
+                                        <h4 className="font-sans text-[10px] uppercase tracking-[0.25em] font-bold text-ink-black dark:text-white mb-6">
+                                            Checklist
+                                        </h4>
+                                        <ul className="space-y-4">
+                                            {item.lista.map((step, i) => (
+                                                <li key={i} className="flex items-start group/li">
+                                                    <span className="w-1.5 h-1.5 mt-2 mr-4 bg-ink-medium/40 dark:bg-white/40 rotate-45 group-hover/li:bg-accent-sepia transition-colors"></span>
+                                                    <span className="font-sans text-sm md:text-base text-ink-dark dark:text-gray-400 font-light leading-relaxed group-hover/li:text-ink-black dark:group-hover/li:text-white transition-colors">
+                                                        {step}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                );
+            })}
             
-            <h3 className="font-serif font-light text-4xl 3xl:text-5xl mb-6 italic text-ink-black dark:text-white">
-              {item.titulo}
-            </h3>
-            
-            <p className="font-sans text-sm md:text-base text-ink-medium dark:text-gray-400 leading-loose tracking-wide mb-10 font-light">
-              {item.descricao}
-            </p>
-            
-            <div className="w-full h-px bg-ink-light dark:bg-gray-800 mb-8"></div>
-            
-            <ul className="space-y-4">
-              {item.lista.map((step, stepIndex) => (
-                <li key={stepIndex} className="flex items-start font-sans text-sm tracking-wide text-ink-black dark:text-gray-300 leading-relaxed font-bold">
-                  <span className="text-ink-medium mr-4 text-sm">•</span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+            {/* FINAL LINE */}
+            <div className="w-full h-px bg-ink-black/10 dark:bg-white/10"></div>
+        </div>
+
       </div>
     </section>
   );
