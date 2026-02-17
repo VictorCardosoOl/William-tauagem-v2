@@ -113,11 +113,11 @@ const FAQ: React.FC = () => {
                                     <p className="mb-8">{item.resposta}</p>
                                     
                                     {item.detalhes && item.detalhes.length > 0 && (
-                                        <div className="bg-white dark:bg-white/5 p-6 border-l-2 border-accent-sepia shadow-sm">
-                                            <ul className="space-y-3">
+                                        <div className="mt-8 pl-6 border-l-2 border-ink-black dark:border-white">
+                                            <ul className="space-y-4">
                                                 {item.detalhes.map((detalhe, i) => (
-                                                    <li key={i} className="flex items-center gap-3 text-xs md:text-sm font-bold uppercase tracking-wider text-ink-black dark:text-gray-200">
-                                                        <span className="w-1 h-1 bg-ink-black dark:bg-white rounded-full"></span>
+                                                    <li key={i} className="flex items-center gap-3 text-xs md:text-sm font-bold uppercase tracking-wider text-ink-black dark:text-white">
+                                                        <span className="w-1.5 h-1.5 bg-ink-black dark:bg-white rounded-full"></span>
                                                         {detalhe}
                                                     </li>
                                                 ))}
