@@ -1,5 +1,4 @@
-
-import { ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem, FAQItem } from './types';
+import { ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -211,37 +210,6 @@ export const ITENS_CUIDADOS: ProtocoloItem[] = [
       'Use protetor solar FPS 50+ após 30 dias',
       'Mantenha a hidratação corporal diária'
     ]
-  }
-];
-
-// ==========================================
-// FAQ (NOVO)
-// ==========================================
-export const ITENS_FAQ: FAQItem[] = [
-  {
-    id: 1,
-    pergunta: "Qual o valor médio de uma sessão?",
-    resposta: "O valor não é cobrado por tamanho, mas pela complexidade do projeto e tempo de execução. O valor mínimo de abertura de agenda é R$ 800. Para um orçamento preciso, é necessário enviar referências, local do corpo e tamanho aproximado via WhatsApp."
-  },
-  {
-    id: 2,
-    pergunta: "Você realiza coberturas (Cover-up)?",
-    resposta: "Sim, mas sob avaliação prévia. Coberturas exigem uma análise cuidadosa do pigmento existente. Em alguns casos, recomendo algumas sessões de laser para clareamento antes de tatuar por cima, garantindo um resultado limpo e duradouro."
-  },
-  {
-    id: 3,
-    pergunta: "Posso levar acompanhante?",
-    resposta: "Para garantir o foco total e a biossegurança do ambiente, permitimos apenas um acompanhante por cliente. O estúdio é um ambiente de concentração e intimidade artística."
-  },
-  {
-    id: 4,
-    pergunta: "Quanto tempo demora para cicatrizar?",
-    resposta: "A cicatrização superficial leva cerca de 2 a 3 semanas. A regeneração completa das camadas profundas da pele pode levar até 3 meses. Siga rigorosamente o protocolo de aftercare fornecido."
-  },
-  {
-    id: 5,
-    pergunta: "Você desenha a arte antes?",
-    resposta: "Sim. O projeto é exclusivo. Apresento o desenho no dia da sessão ou envio um esboço digital (mockup) alguns dias antes, dependendo da complexidade do projeto acordado no briefing."
   }
 ];
 
