@@ -25,16 +25,15 @@ const Hero: React.FC = () => {
         "-=0.8"
       );
 
-      // 3. Parallax Effect on Scroll
+      // 3. Fade Out on Scroll (Clean, no overlap)
       if (window.ScrollTrigger) {
-        window.gsap.to(titleRef.current, {
-          yPercent: 50,
-          opacity: 0.5,
+        window.gsap.to([titleRef.current, textRef.current], {
+          opacity: 0,
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "bottom top",
+            end: "bottom center", // Fades out faster
             scrub: true
           }
         });
