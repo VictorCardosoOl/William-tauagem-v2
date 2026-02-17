@@ -69,26 +69,26 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-20 md:py-32 px-6 w-full overflow-hidden">
+    <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-16 md:py-24 px-6 w-full overflow-hidden">
       <div className="max-w-screen-3xl mx-auto">
         
         {/* Top Section: Text Content */}
-        <div className="about-text-container flex flex-col items-start md:items-end text-left md:text-right mb-20 md:mb-24">
+        <div className="about-text-container flex flex-col items-start md:items-end text-left md:text-right mb-12 md:mb-16">
           <div className="max-w-4xl 3xl:max-w-5xl overflow-hidden">
-            <h2 className="font-sans font-bold text-4xl md:text-6xl lg:text-7xl 3xl:text-8xl leading-[0.9] uppercase text-primary dark:text-white mb-8 tracking-tighter">
+            <h2 className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl 3xl:text-7xl leading-[0.9] uppercase text-primary dark:text-white mb-6 tracking-tighter">
               <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte1}</span></div>
               <div className="overflow-hidden"><span className="about-title-line block font-serif italic text-accent-sepia dark:text-gray-500 font-light">{sobre.tituloDestaque}</span></div>
               <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte2}</span></div>
             </h2>
             
-            <p className="about-desc font-sans text-base md:text-lg text-gray-700 dark:text-gray-400 leading-relaxed tracking-wide max-w-xl 3xl:max-w-2xl ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
+            <p className="about-desc font-sans text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed tracking-wide max-w-lg 3xl:max-w-xl ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
               {sobre.descricao}
             </p>
           </div>
         </div>
 
         {/* Bottom Section: Image Grid */}
-        <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 3xl:gap-12">
+        <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 3xl:gap-8">
           {sobre.imagens.map((item, index) => (
             <div key={index} className="about-image-card aspect-[3/4] overflow-hidden w-full relative group cursor-crosshair">
               
