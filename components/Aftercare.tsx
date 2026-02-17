@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { TEXTOS_GERAIS, ITENS_CUIDADOS } from '../data';
 import { Plus, Minus, ShieldCheck, Droplet, Sun } from 'lucide-react';
@@ -56,22 +57,21 @@ const Aftercare: React.FC = () => {
     <section id="cuidados" ref={containerRef} className="py-24 md:py-32 px-6 bg-paper-light dark:bg-paper-dark transition-colors duration-500 overflow-hidden">
       <div className="max-w-screen-2xl mx-auto">
         
-        {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 gap-8 border-b border-ink-black/10 dark:border-white/10 pb-8">
-            <div className="max-w-2xl">
-                <div className="flex items-center gap-3 mb-6">
+        {/* HEADER SECTION - CENTRALIZED */}
+        <div className="flex flex-col items-center text-center mb-20 md:mb-32 gap-8 border-b border-ink-black/10 dark:border-white/10 pb-12">
+            <div className="max-w-4xl mx-auto">
+                <div className="flex items-center justify-center gap-3 mb-6">
                     <span className="w-2 h-2 bg-accent-sepia rounded-full animate-pulse"></span>
                     <span className="font-sans text-[10px] tracking-[0.3em] uppercase font-bold text-ink-medium">
                         Protocolo de Cicatrização
                     </span>
+                    <span className="w-2 h-2 bg-accent-sepia rounded-full animate-pulse"></span>
                 </div>
-                <h2 className="aftercare-title font-serif font-light text-5xl md:text-7xl leading-[0.9] text-ink-black dark:text-gray-100">
+                <h2 className="aftercare-title font-serif font-light text-5xl md:text-7xl leading-[1.1] text-ink-black dark:text-gray-100 mb-6">
                     A longevidade da arte <br/>
                     <span className="italic text-ink-medium/60 dark:text-gray-500">depende da sua dedicação.</span>
                 </h2>
-            </div>
-            <div className="hidden md:block max-w-xs text-right">
-                <p className="font-sans text-xs leading-relaxed text-ink-medium uppercase tracking-wider">
+                <p className="font-sans text-xs leading-relaxed text-ink-medium uppercase tracking-wider max-w-lg mx-auto">
                     Siga rigorosamente as etapas abaixo para garantir a integridade do pigmento.
                 </p>
             </div>

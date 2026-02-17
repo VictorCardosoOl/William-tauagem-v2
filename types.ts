@@ -1,3 +1,4 @@
+
 export interface ProtocoloItem {
   fase: string;
   titulo: string;
@@ -28,4 +29,10 @@ export interface PortfolioItem {
   title: string;
   placement: string;
   image: string;
+}
+
+export interface FAQItem {
+  id: number;
+  pergunta: string;
+  resposta: string;
 }
