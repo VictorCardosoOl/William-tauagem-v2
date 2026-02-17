@@ -74,8 +74,8 @@ const About: React.FC = () => {
     <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-16 md:py-24 px-6 w-full overflow-hidden">
       <div className="max-w-screen-3xl mx-auto">
         
-        {/* Top Section: Text Content - Realigned to match design */}
-        <div className="about-text-container flex flex-col items-start text-left mb-16 md:mb-24">
+        {/* Top Section: Text Content - Aligned to RIGHT */}
+        <div className="about-text-container flex flex-col items-end text-right mb-16 md:mb-24">
           <div className="max-w-4xl 3xl:max-w-5xl">
             
             {/* New Title Format */}
@@ -86,8 +86,8 @@ const About: React.FC = () => {
               <div className="overflow-hidden"><span className="about-title-line block">HISTÓRIAS.</span></div>
             </h2>
             
-            {/* New Description Format */}
-            <div className="about-body max-w-lg mt-8 mb-10">
+            {/* New Description Format - Aligned Right */}
+            <div className="about-body max-w-lg mt-8 mb-10 ml-auto">
                <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300">
                   Especialista em Neotradicional.<br/>
                   Transformo narrativas pessoais em anatomia e arte perene.
@@ -95,7 +95,7 @@ const About: React.FC = () => {
             </div>
 
             {/* CTA Button */}
-            <div className="about-cta">
+            <div className="about-cta flex justify-end">
                 <a href="#concept" className="group inline-flex items-center gap-3 font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-sepia dark:text-gray-400 hover:text-ink-black dark:hover:text-white transition-colors">
                     Entenda o Processo 
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
