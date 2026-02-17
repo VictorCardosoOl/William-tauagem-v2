@@ -135,7 +135,14 @@ const Footer: React.FC = () => {
              <div className="mt-12 pt-6 border-t border-[#1A1A1A]/10 dark:border-[#292524] flex justify-between items-end">
                 <div className="flex flex-col gap-1">
                    <span className="font-sans text-xs uppercase tracking-widest text-[#8C8C8C] dark:text-[#57534e]">Dev & Design</span>
-                   <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#a8a29e]">L'Effet Monstre</span>
+                   <a 
+                     href="https://victor-cardoso-dev.vercel.app/"
+                     target="_blank"
+                     rel="noopener noreferrer" 
+                     className="font-sans text-xs font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#a8a29e] hover:opacity-60 transition-opacity"
+                   >
+                     Victor Cardoso
+                   </a>
                 </div>
                 <Copyright size={14} className="text-[#8C8C8C] dark:text-[#57534e]" />
              </div>
@@ -147,7 +154,16 @@ const Footer: React.FC = () => {
       {/* BOTTOM BAR */}
       <div className="relative z-10 border-t border-[#1A1A1A]/10 dark:border-[#292524] py-6 px-6 md:px-12 bg-[#F6F5F0] dark:bg-[#0c0a09]">
         <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs uppercase tracking-[0.2em] font-sans text-[#8C8C8C] dark:text-[#57534e]">
-           <span>© {currentYear} {TEXTOS_GERAIS.marca}. All rights reserved.</span>
+           
+           <a 
+             href="https://victor-cardoso-dev.vercel.app/" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors text-center md:text-left"
+           >
+             Dev by Victor Cardoso © 2026 Todos os direitos reservados.
+           </a>
+
            <div className="flex gap-6">
              <a href="#" className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors">Privacy Policy</a>
              <a href="#" className="hover:text-[#1A1A1A] dark:hover:text-[#a8a29e] transition-colors">Terms of Use</a>
