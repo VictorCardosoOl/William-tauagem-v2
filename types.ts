@@ -1,10 +1,3 @@
-export interface MetodologiaItem {
-  id: string;
-  numero: string;
-  titulo: string;
-  descricao: string;
-}
-
 export interface ProtocoloItem {
   fase: string;
   titulo: string;

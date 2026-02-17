@@ -1,4 +1,4 @@
-import { MetodologiaItem, ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem } from './types';
+import { ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -76,7 +76,7 @@ export const TEXTOS_GERAIS = {
 };
 
 export const IMAGENS = {
-  metodologiaDestaque: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-STUzuKJJHSBUZaOzfh9tc-i-BEj_eGW9OGvJsp36ABI46CSgyp0wR-dGQB7Ckn2hssdL-4x_gK5FO8XvCwaDM6H3gW5ek0zlUvGA7yhS1mwfrYKjqksapE_49ZYVKvy08kLdcF6TKyojvoGZcDuBefxd74uAO3KNdCC4n60Sf5iAgyTz4i3pRWbj51OD83USXZvy24jz5nMqDWQXI5RHnFpgzf6eo7v9VOW8MmuZKEIQLKW-3-JA_mZR1VVY5VIfkBF_wllCxQ4"
+  // Imagens gerais do sistema
 };
 
 // ==========================================
@@ -119,30 +119,6 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
         placement: "Costela",
         image: "https://images.unsplash.com/photo-1562962230-16e4623d36e6?q=80&w=800&auto=format&fit=crop"
     }
-];
-
-// ==========================================
-// ITENS DE METODOLOGIA
-// ==========================================
-export const ITENS_METODOLOGIA: MetodologiaItem[] = [
-  {
-    id: 'm1',
-    numero: '01',
-    titulo: 'Consulta',
-    descricao: 'Removemos o ruído para encontrar o significado central da sua narrativa.'
-  },
-  {
-    id: 'm2',
-    numero: '02',
-    titulo: 'Criação',
-    descricao: 'Traduzindo emoção em linha e forma, equilibrando o espaço negativo com tinta.'
-  },
-  {
-    id: 'm3',
-    numero: '03',
-    titulo: 'Execução',
-    descricao: 'O instrumento final da descoberta. Precisão encontra movimento orgânico.'
-  }
 ];
 
 // ==========================================
