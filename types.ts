@@ -5,6 +5,13 @@ export interface ProtocoloItem {
   lista: string[];
 }
 
+export interface FAQItem {
+  id: number;
+  pergunta: string;
+  resposta: string;
+  detalhes: string[];
+}
+
 export interface LinkSocial {
   nome: string;
   url: string;

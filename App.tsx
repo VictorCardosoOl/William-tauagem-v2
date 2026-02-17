@@ -9,6 +9,7 @@ import CreativeProcess from './components/CreativeProcess';
 import Preparation from './components/Preparation';
 import FlashSection from './components/FlashSection';
 import Aftercare from './components/Aftercare';
+import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import ChatWidget from './components/ChatWidget';
@@ -61,6 +62,7 @@ const App: React.FC = () => {
           <Preparation />
           <FlashSection />
           <Aftercare />
+          <FAQ />
         </main>
         <Footer />
       </div>

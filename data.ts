@@ -1,4 +1,4 @@
-import { ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem } from './types';
+import { ProtocoloItem, LinkSocial, ProcessoCriativoItem, PreparoItem, PortfolioItem, FAQItem } from './types';
 
 // ==========================================
 // CONFIGURAÇÕES GERAIS E TEXTOS
@@ -212,6 +212,53 @@ export const ITENS_CUIDADOS: ProtocoloItem[] = [
     ]
   }
 ];
+
+// ==========================================
+// FAQ
+// ==========================================
+export const ITENS_FAQ: FAQItem[] = [
+  {
+    id: 1,
+    pergunta: "Qual o valor da sessão?",
+    resposta: "O valor é calculado pela complexidade, não apenas por hora.",
+    detalhes: [
+      "Orçamento base via WhatsApp",
+      "Valor final definido no briefing presencial",
+      "Sinal de 30% para reserva da data"
+    ]
+  },
+  {
+    id: 2,
+    pergunta: "Você cria artes exclusivas?",
+    resposta: "A exclusividade é a base do meu trabalho. Não copio tatuagens.",
+    detalhes: [
+      "Desenho criado para sua anatomia",
+      "Referências são apenas inspiração",
+      "Projeto apresentado no dia da sessão"
+    ]
+  },
+  {
+    id: 3,
+    pergunta: "Dói muito?",
+    resposta: "A dor é psicológica e física. O ambiente é preparado para minimizá-la.",
+    detalhes: [
+      "Mãos leves e máquinas modernas",
+      "Anestésicos tópicos disponíveis (opcional)",
+      "Pausas estratégicas durante a sessão"
+    ]
+  },
+  {
+    id: 4,
+    pergunta: "Posso levar acompanhante?",
+    resposta: "O estúdio é um ambiente de foco e intimidade.",
+    detalhes: [
+      "Permitido 1 acompanhante maior de idade",
+      "Não permitimos crianças ou animais",
+      "Ambiente privado e seguro"
+    ]
+  }
+];
+
 
 // ==========================================
 // REDES SOCIAIS
