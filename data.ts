@@ -38,10 +38,10 @@ export const TEXTOS_GERAIS = {
     card2Texto: "Trate o artefato como uma ferida. Mantenha limpo, hidrate com moderação. Deixe a pele respirar e se reformar em torno de sua nova história."
   },
   sobre: {
-    tituloParte1: "EU SOU WILLIAM SIQUEIRA, E EU",
+    tituloParte1: "EU SOU WILLIAM",
     tituloDestaque: "MATERIALIZO",
     tituloParte2: "HISTÓRIAS.",
-    descricao: "Sua pele, minha tela. Efêmero na superfície, eterno na essência. Transformo narrativas pessoais em anatomia e arte perene.",
+    descricao: "Especialista em Neotradicional. Transformo narrativas pessoais em anatomia e arte perene.",
     imagens: [
       {
         url: "https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop",

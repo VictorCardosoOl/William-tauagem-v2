@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { TEXTOS_GERAIS } from '../data';
+import { ArrowRight } from 'lucide-react';
 
 const About: React.FC = () => {
   const { sobre } = TEXTOS_GERAIS;
@@ -10,29 +11,30 @@ const About: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // Animate Title text
+      // Animate Title text (Lines)
       window.gsap.from(".about-title-line", {
-        y: 80,
+        y: 60,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.05,
+        duration: 0.8,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 85%",
+          start: "top 80%",
         }
       });
 
-      // Animate Description Paragraph
-      window.gsap.from(".about-desc", {
-        x: 20,
+      // Animate Body Text & Button
+      window.gsap.from([".about-body", ".about-cta"], {
+        y: 30,
         opacity: 0,
-        duration: 0.6,
-        delay: 0.1,
+        duration: 0.8,
+        stagger: 0.1,
+        delay: 0.4,
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 85%",
+          start: "top 80%",
         }
       });
 
@@ -72,22 +74,38 @@ const About: React.FC = () => {
     <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-16 md:py-24 px-6 w-full overflow-hidden">
       <div className="max-w-screen-3xl mx-auto">
         
-        {/* Top Section: Text Content */}
-        <div className="about-text-container flex flex-col items-start md:items-end text-left md:text-right mb-12 md:mb-16">
-          <div className="max-w-4xl 3xl:max-w-5xl overflow-hidden">
-            <h2 className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl 3xl:text-7xl leading-[0.9] uppercase text-primary dark:text-white mb-6 tracking-tighter">
-              <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte1}</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block font-serif italic text-accent-sepia dark:text-gray-500 font-light">{sobre.tituloDestaque}</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block">{sobre.tituloParte2}</span></div>
+        {/* Top Section: Text Content - Realigned to match design */}
+        <div className="about-text-container flex flex-col items-start text-left mb-16 md:mb-24">
+          <div className="max-w-4xl 3xl:max-w-5xl">
+            
+            {/* New Title Format */}
+            <h2 className="font-sans font-black text-5xl md:text-6xl lg:text-7xl 3xl:text-8xl leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase">
+              <div className="overflow-hidden"><span className="about-title-line block">EU SOU WILLIAM</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block">SIQUEIRA, E EU</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block text-[#C0C0C0] dark:text-[#4a4a4a]">MATERIALIZO</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block">HISTÓRIAS.</span></div>
             </h2>
             
-            <p className="about-desc font-sans text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed tracking-wide max-w-lg 3xl:max-w-xl ml-auto font-light border-l border-primary/10 pl-6 md:pl-0 md:border-l-0 md:border-r md:pr-6">
-              {sobre.descricao}
-            </p>
+            {/* New Description Format */}
+            <div className="about-body max-w-lg mt-8 mb-10">
+               <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300">
+                  Especialista em Neotradicional.<br/>
+                  Transformo narrativas pessoais em anatomia e arte perene.
+               </p>
+            </div>
+
+            {/* CTA Button */}
+            <div className="about-cta">
+                <a href="#concept" className="group inline-flex items-center gap-3 font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-sepia dark:text-gray-400 hover:text-ink-black dark:hover:text-white transition-colors">
+                    Entenda o Processo 
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+            </div>
+
           </div>
         </div>
 
-        {/* Bottom Section: Image Grid */}
+        {/* Bottom Section: Image Grid (Maintained) */}
         <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 3xl:gap-8">
           {sobre.imagens.map((item, index) => (
             <div key={index} className="about-image-card aspect-[3/4] overflow-hidden w-full relative group cursor-crosshair">
