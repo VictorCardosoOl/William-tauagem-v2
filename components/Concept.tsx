@@ -40,23 +40,23 @@ const Concept: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 md:py-32 px-6 md:px-12 bg-paper-warm dark:bg-[#181818] overflow-hidden transition-colors duration-1000">
+    <section ref={containerRef} className="relative w-full py-16 md:py-24 px-6 md:px-12 bg-paper-warm dark:bg-[#181818] overflow-hidden transition-colors duration-1000">
       
-      <div className="max-w-screen-3xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
+      <div className="max-w-screen-3xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20">
         
         <div className="lg:w-1/3 relative">
-          <div className="lg:sticky lg:top-32">
-            <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.8] mb-8">
+          <div className="lg:sticky lg:top-24">
+            <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.8] mb-6">
               {concept.titulo}
             </h2>
-            <div className="h-px w-32 bg-ink-black mb-6"></div>
+            <div className="h-px w-24 bg-ink-black mb-4"></div>
             <p className="font-sans text-xs tracking-[0.3em] uppercase font-bold text-ink-medium">
               {concept.subtitulo}
             </p>
           </div>
         </div>
 
-        <div className="lg:w-2/3 flex flex-col gap-20 md:gap-28">
+        <div className="lg:w-2/3 flex flex-col gap-12 md:gap-20">
           
           <div className="max-w-2xl 3xl:max-w-3xl">
             <p className="font-serif text-3xl md:text-4xl 3xl:text-5xl leading-tight text-ink-black dark:text-gray-200 italic font-thin">
@@ -64,9 +64,9 @@ const Concept: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
              
-             <div className="concept-img-1-wrapper relative md:-mt-12 group">
+             <div className="concept-img-1-wrapper relative md:-mt-8 group">
                 <div className="overflow-hidden aspect-[4/5] shadow-none border border-ink-light relative">
                   <img 
                     src={concept.imagens[0].url} 
@@ -81,12 +81,12 @@ const Concept: React.FC = () => {
                     />
                   </div>
                 </div>
-                <span className="absolute -bottom-10 -left-6 font-mono text-[9px] tracking-widest text-ink-black/50 dark:text-white/50 rotate-90 origin-left">
+                <span className="absolute -bottom-8 -left-6 font-mono text-[9px] tracking-widest text-ink-black/50 dark:text-white/50 rotate-90 origin-left">
                   FIG. 01 — STUDY
                 </span>
              </div>
 
-             <div className="flex flex-col gap-12">
+             <div className="flex flex-col gap-8 md:gap-10">
                 <p className="font-sans text-sm md:text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light border-l border-ink-black/20 pl-6">
                   {concept.textoSecundario}
                 </p>
