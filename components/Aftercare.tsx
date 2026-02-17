@@ -3,7 +3,7 @@ import { TEXTOS_GERAIS, ITENS_CUIDADOS } from '../data';
 import { Plus, Minus, ShieldCheck, Droplet, Sun } from 'lucide-react';
 
 const Aftercare: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLElement>(null);
 
   const toggleAccordion = (index: number) => {
