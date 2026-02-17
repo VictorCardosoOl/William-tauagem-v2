@@ -12,32 +12,21 @@ const Hero: React.FC = () => {
     const ctx = window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Title Reveal
+      // 1. Title Reveal (Entrance Only)
       tl.fromTo(titleRef.current,
         { y: "100%", rotate: 2 },
         { y: "0%", rotate: 0, duration: 1.1, ease: "power3.out" }
       );
 
-      // 2. Text & Line Reveal
+      // 2. Text & Line Reveal (Entrance Only)
       tl.fromTo(textRef.current, 
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
         "-=0.8"
       );
 
-      // 3. Fade Out on Scroll (Clean, no overlap)
-      if (window.ScrollTrigger) {
-        window.gsap.to([titleRef.current, textRef.current], {
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom center", // Fades out faster
-            scrub: true
-          }
-        });
-      }
+      // ScrollTrigger removed explicitly as requested.
+      // Text will simply scroll up with the document flow.
 
     }, containerRef);
 
