@@ -1,340 +1,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { TEXTOS_GERAIS, REDES_SOCIAIS } from '../data';
 
-// Injecting CSS directly to ensure it works without external CSS loaders setup
-const STYLES = `
-.staggered-menu-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 90;
-  pointer-events: none;
-}
-
-.staggered-menu-wrapper.fixed-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 90;
-  overflow: hidden;
-}
-
-.staggered-menu-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  background: transparent;
-  pointer-events: none;
-  z-index: 20;
-  /* Smart Navbar Transition handled by Tailwind classes in the component */
-}
-
-@media (max-width: 768px) {
-  .staggered-menu-header {
-    padding: 1.5rem;
-  }
-}
-
-.staggered-menu-header > * {
-  pointer-events: auto;
-}
-
-.sm-logo {
-  display: flex;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
-  color: #1A1A1A; /* Ink Black Default */
-  z-index: 100;
-  transition: color 0.3s ease;
-}
-
-.dark .sm-logo {
-  color: #F6F5F0; /* Paper Light on Dark */
-}
-
-.sm-toggle {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #1A1A1A; /* Ink Black Default - High Contrast */
-  font-weight: 500;
-  line-height: 1;
-  overflow: visible;
-  z-index: 100;
-  transition: color 0.3s ease;
-}
-
-.dark .sm-toggle {
-  color: #F6F5F0; /* Paper Light on Dark */
-}
-
-.sm-toggle:focus-visible {
-  outline: none;
-}
-
-.sm-toggle-textWrap {
-  position: relative;
-  display: inline-block;
-  height: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-weight: 700;
-  min-width: 70px;
-  text-align: right;
-}
-
-.sm-toggle-textInner {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.sm-toggle-line {
-  display: block;
-  height: 1em;
-  line-height: 1;
-}
-
-.sm-icon {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
-}
-
-.sm-icon-line {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-}
-
-.staggered-menu-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: clamp(300px, 45vw, 600px);
-  height: 100%;
-  background: #F6F5F0; /* Paper Light */
-  display: flex;
-  flex-direction: column;
-  padding: 8em 3em 3em 3em;
-  overflow-y: auto;
-  z-index: 10;
-  pointer-events: auto;
-  border-left: 1px solid rgba(0,0,0,0.05);
-}
-
-.dark .staggered-menu-panel {
-    background: #0F0F0F; /* Paper Dark */
-    border-left: 1px solid rgba(255,255,255,0.05);
-}
-
-[data-position='left'] .staggered-menu-panel {
-  right: auto;
-  left: 0;
-  border-left: none;
-  border-right: 1px solid rgba(0,0,0,0.05);
-}
-
-.sm-prelayers {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: clamp(300px, 45vw, 600px);
-  pointer-events: none;
-  z-index: 5;
-}
-
-[data-position='left'] .sm-prelayers {
-  right: auto;
-  left: 0;
-}
-
-.sm-prelayer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  transform: translateX(0);
-}
-
-.sm-panel-inner {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.sm-socials {
-  margin-top: auto;
-  padding-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  border-top: 1px solid rgba(0,0,0,0.1);
-}
-.dark .sm-socials {
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.sm-socials-title {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--sm-accent, #1A1A1A);
-  opacity: 0.5;
-}
-
-.dark .sm-socials-title {
-    color: #F6F5F0;
-}
-
-.sm-socials-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.sm-socials-link {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #1A1A1A;
-  text-decoration: none;
-  position: relative;
-  transition: opacity 0.3s ease;
-}
-
-.dark .sm-socials-link {
-    color: #F6F5F0;
-}
-
-.sm-socials-link:hover {
-  color: var(--sm-accent, #1A1A1A);
-  opacity: 0.6;
-}
-
-.sm-panel-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.sm-panel-itemWrap {
-  position: relative;
-  overflow: hidden;
-  line-height: 1;
-}
-
-.sm-panel-item {
-  position: relative;
-  color: #1A1A1A;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-style: italic;
-  font-size: 3.5rem;
-  cursor: pointer;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  transition: color 0.25s;
-  display: inline-block;
-  text-decoration: none;
-  padding-right: 1.4em;
-}
-
-.dark .sm-panel-item {
-    color: #F6F5F0;
-}
-
-@media (min-width: 1536px) {
-    .sm-panel-item {
-        font-size: 4.5rem;
-    }
-}
-
-.sm-panel-itemLabel {
-  display: inline-block;
-  will-change: transform;
-  transform-origin: 50% 100%;
-}
-
-.sm-panel-item:hover {
-  color: var(--sm-accent, #1A1A1A);
-}
-
-.sm-panel-list[data-numbering] {
-  counter-reset: smItem;
-}
-
-.sm-panel-list[data-numbering] .sm-panel-item::after {
-  counter-increment: smItem;
-  content: counter(smItem, decimal-leading-zero);
-  position: absolute;
-  top: 0.3em;
-  right: 1em;
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--sm-accent, #1A1A1A);
-  letter-spacing: 0.1em;
-  pointer-events: none;
-  user-select: none;
-  opacity: var(--sm-num-opacity, 0);
-}
-.dark .sm-panel-list[data-numbering] .sm-panel-item::after {
-    color: #F6F5F0;
-}
-
-@media (max-width: 640px) {
-  .staggered-menu-panel {
-    width: 100%;
-  }
-  .sm-panel-item {
-    font-size: 3rem;
-  }
-}
-`;
+// Styles have been moved to index.html to prevent JS bloating and CSP issues.
 
 interface MenuItem {
   label: string;
@@ -400,7 +67,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const closeTweenRef = useRef<any | null>(null);
   const spinTweenRef = useRef<any | null>(null);
   const textCycleAnimRef = useRef<any | null>(null);
-  const colorTweenRef = useRef<any | null>(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef<any | null>(null);
 
@@ -449,7 +115,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [open]); // Re-bind if open state changes (though ref handles value check)
+  }, [open]);
 
 
   useLayoutEffect(() => {
@@ -869,24 +535,21 @@ const Navbar: React.FC = () => {
     }));
 
     return (
-        <>
-            <style>{STYLES}</style>
-            <StaggeredMenu
-                position="right"
-                items={menuItems}
-                socialItems={socialItems}
-                displaySocials={true}
-                displayItemNumbering={true}
-                // Explicit colors handled by CSS now for reliability
-                menuButtonColor="#1A1A1A"
-                openMenuButtonColor="#1A1A1A"
-                changeMenuColorOnOpen={false} 
-                colors={['#1a1a1a', '#333333']} // Pre-layers (dark reveal)
-                accentColor="#1A1A1A"
-                isFixed={true}
-                closeOnClickAway={true}
-            />
-        </>
+        <StaggeredMenu
+            position="right"
+            items={menuItems}
+            socialItems={socialItems}
+            displaySocials={true}
+            displayItemNumbering={true}
+            // Explicit colors handled by CSS now for reliability
+            menuButtonColor="#1A1A1A"
+            openMenuButtonColor="#1A1A1A"
+            changeMenuColorOnOpen={false} 
+            colors={['#1a1a1a', '#333333']} // Pre-layers (dark reveal)
+            accentColor="#1A1A1A"
+            isFixed={true}
+            closeOnClickAway={true}
+        />
     );
 };
 

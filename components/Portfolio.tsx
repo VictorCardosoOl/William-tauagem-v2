@@ -169,6 +169,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
                   <img 
                     src={item.image} 
                     alt={`${item.title} main view`} 
+                    loading="lazy"
                     className="modal-img-hero w-full h-full object-cover origin-center" 
                   />
               </div>
@@ -176,13 +177,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               {/* Detail Box */}
               <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
                   <div className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl">
-                    <img src={item.image} alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
+                    <img src={item.image} loading="lazy" alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
                   </div>
               </div>
 
               {/* Texture/Artistic View - Full Height */}
               <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
-                  <img src={item.image} alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
+                  <img src={item.image} loading="lazy" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
                   <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
                     <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
                   </div>

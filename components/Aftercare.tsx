@@ -3,6 +3,7 @@ import { TEXTOS_GERAIS, ITENS_CUIDADOS } from '../data';
 import { Plus, Minus, ShieldCheck, Droplet, Sun } from 'lucide-react';
 
 const Aftercare: React.FC = () => {
+  // openIndex null garante que as fases iniciem "diminutas" (fechadas)
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -87,8 +88,8 @@ const Aftercare: React.FC = () => {
                         {/* DIVIDER LINE */}
                         <div className="protocol-line w-full h-px bg-ink-black/10 dark:bg-white/10 group-hover:bg-ink-black dark:group-hover:bg-white transition-colors duration-500"></div>
                         
-                        {/* HEADER ROW */}
-                        <div className="py-8 md:py-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        {/* HEADER ROW - Padding reduzido para visual "diminuto" quando fechado */}
+                        <div className="py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div className="flex items-baseline gap-6 md:gap-12">
                                 <span className={`font-sans text-xs font-bold tracking-[0.2em] transition-colors duration-300 ${isOpen ? 'text-accent-sepia' : 'text-ink-medium'}`}>
                                     {item.fase}
