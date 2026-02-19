@@ -12,28 +12,23 @@ const Hero: React.FC = () => {
     const ctx = window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Glamorous Entrance (Explosive Scale + Fade)
-      // Começa maior e "cai" na posição com elegância
-      tl.fromTo(titleRef.current,
-        { yPercent: 100, scale: 1.2, rotate: 3, opacity: 0 },
-        { yPercent: 0, scale: 1, rotate: 0, opacity: 1, duration: 1.4, ease: "expo.out" }
-      );
+      // 1. Title Entrance REMOVED explicitly.
+      // O título "WILLIAM" agora é estático no carregamento (renderiza nativamente via CSS).
 
-      // 2. Text Snaps in (Rápido e preciso)
+      // 2. Text Snaps in (Texto lateral entra suavemente)
       tl.fromTo(".hero-anim-text", 
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power4.out" },
-        "-=1.0"
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power4.out", delay: 0.2 }
       );
 
-      // 3. Line Expands
+      // 3. Line Expands (Linha decorativa)
       tl.fromTo(".anim-line",
         { scaleX: 0, transformOrigin: "right center" },
         { scaleX: 1, duration: 1, ease: "expo.out" },
-        "-=0.8"
+        "-=0.6"
       );
 
-      // 4. Physical Parallax on Scroll (Sensação de peso)
+      // 4. Physical Parallax on Scroll (Sensação de peso apenas ao rolar a página)
       window.gsap.to(titleRef.current, {
         yPercent: 30, // Move mais lento que o scroll
         opacity: 0.5,
@@ -42,7 +37,7 @@ const Hero: React.FC = () => {
             trigger: containerRef.current,
             start: "top top",
             end: "bottom top",
-            scrub: 1 // Inércia física (1s de delay para alcançar)
+            scrub: 1 // Inércia física
         }
       });
 
@@ -74,7 +69,7 @@ const Hero: React.FC = () => {
          <div className="mt-6 h-px w-1/2 bg-primary dark:bg-white ml-auto anim-line"></div>
       </div>
 
-      {/* MAIN TITLE: Mask Container - Adjusted Scaling */}
+      {/* MAIN TITLE: Mask Container */}
       <div className="relative w-full overflow-hidden select-none z-0 leading-none pb-2">
         <h1 
           ref={titleRef}
