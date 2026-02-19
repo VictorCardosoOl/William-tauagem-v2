@@ -17,26 +17,26 @@ const FAQ: React.FC = () => {
         const tl = window.gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 70%"
+                start: "top 75%" // Inicia um pouco mais tarde para garantir visibilidade
             }
         });
 
-        // 1. Sticky Header Reveal
+        // 1. Sticky Header Reveal - Mais lento e pesado (Luxo)
         tl.from(".faq-sticky-content", {
-            y: 50,
+            y: 80,
             opacity: 0,
-            duration: 1,
-            ease: "power3.out"
+            duration: 1.4,
+            ease: "power4.out"
         });
 
-        // 2. List Items Stagger
+        // 2. List Items Stagger - Entrada suave em cascata
         tl.from(".faq-item", {
-            y: 30,
+            y: 40,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power2.out"
-        }, "-=0.5");
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out"
+        }, "-=1.0");
         
     }, containerRef);
 
@@ -44,12 +44,12 @@ const FAQ: React.FC = () => {
   }, []);
 
   return (
-    <section id="faq" ref={containerRef} className="py-24 md:py-32 px-6 bg-[#EBE9E4] dark:bg-[#0a0a0a] transition-colors duration-500">
+    <section id="faq" ref={containerRef} className="py-24 md:py-32 px-6 bg-[#EBE9E4] dark:bg-[#0a0a0a] transition-colors duration-1000 ease-in-out">
       <div className="max-w-screen-3xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
         
         {/* LEFT COLUMN - STICKY HEADER */}
         <div className="lg:col-span-4 relative">
-            <div className="lg:sticky lg:top-32 faq-sticky-content">
+            <div className="lg:sticky lg:top-32 faq-sticky-content will-change-transform">
                 <div className="flex items-center gap-4 mb-6">
                     <span className="w-12 h-px bg-ink-black dark:bg-white/30"></span>
                     <span className="font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-ink-medium">
@@ -67,8 +67,8 @@ const FAQ: React.FC = () => {
                 </p>
 
                 <div className="hidden lg:block">
-                     <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-opacity hover:border-ink-black dark:hover:border-white group">
-                        Falar no WhatsApp <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                     <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-all duration-500 hover:border-ink-black dark:hover:border-white group">
+                        Falar no WhatsApp <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500 ease-out" />
                      </a>
                 </div>
             </div>
@@ -82,15 +82,15 @@ const FAQ: React.FC = () => {
                 return (
                     <div 
                         key={item.id} 
-                        className="faq-item border-b border-ink-black/10 dark:border-white/10 last:border-0"
+                        className="faq-item border-b border-ink-black/10 dark:border-white/10 last:border-0 overflow-hidden"
                     >
                         <button 
                             onClick={() => toggleAccordion(index)}
-                            className="w-full py-10 flex items-start justify-between gap-6 group text-left outline-none"
+                            className="w-full py-10 flex items-start justify-between gap-6 group text-left outline-none cursor-pointer"
                             aria-expanded={isOpen}
                         >
                             {/* Question Title */}
-                            <h3 className={`font-serif text-3xl md:text-4xl transition-all duration-500 transform ${
+                            <h3 className={`font-serif text-3xl md:text-4xl transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] transform ${
                                 isOpen 
                                 ? 'text-ink-black dark:text-white translate-x-4' 
                                 : 'text-ink-dark/70 dark:text-gray-500 group-hover:text-ink-black dark:group-hover:text-white group-hover:translate-x-2'
@@ -98,27 +98,40 @@ const FAQ: React.FC = () => {
                                 {item.pergunta}
                             </h3>
                             
-                            {/* Icon Rotation */}
-                            <span className={`mt-1 shrink-0 transition-transform duration-500 text-ink-black dark:text-white ${isOpen ? 'rotate-45' : 'rotate-0 group-hover:rotate-90'}`}>
+                            {/* Icon Animation - Scale + Rotate */}
+                            <span className={`mt-1 shrink-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] text-ink-black dark:text-white ${
+                                isOpen ? 'rotate-45 scale-110' : 'rotate-0 scale-100 group-hover:rotate-90'
+                            }`}>
                                 <Plus size={28} strokeWidth={0.8} />
                             </span>
                         </button>
 
-                        {/* Expandable Content */}
+                        {/* Expandable Content with Physics-based Easing */}
                         <div 
-                            className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                                isOpen ? 'grid-rows-[1fr] opacity-100 mb-12' : 'grid-rows-[0fr] opacity-0 mb-0'
+                            className={`grid transition-[grid-template-rows] duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${
+                                isOpen ? 'grid-rows-[1fr] mb-12' : 'grid-rows-[0fr] mb-0'
                             }`}
                         >
                             <div className="overflow-hidden">
-                                <div className="font-sans text-base leading-loose text-ink-medium dark:text-gray-400 max-w-2xl pl-4 md:pl-8 border-l border-ink-black/5 dark:border-white/5 font-light">
+                                <div className={`font-sans text-base leading-loose text-ink-medium dark:text-gray-400 max-w-2xl pl-4 md:pl-8 border-l border-ink-black/5 dark:border-white/5 font-light transition-all duration-700 delay-100 ${
+                                    isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                                }`}>
+                                    
                                     <p className="mb-8">{item.resposta}</p>
                                     
                                     {item.detalhes && item.detalhes.length > 0 && (
                                         <div className="pl-6 border-l-2 border-ink-black dark:border-white py-2">
                                             <ul className="space-y-3">
                                                 {item.detalhes.map((detalhe, i) => (
-                                                    <li key={i} className="flex items-center gap-3 text-[10px] md:text-xs font-bold uppercase tracking-widest text-ink-black dark:text-white">
+                                                    <li 
+                                                        key={i} 
+                                                        className={`flex items-center gap-3 text-[10px] md:text-xs font-bold uppercase tracking-widest text-ink-black dark:text-white transition-all duration-500 ease-out`}
+                                                        style={{ 
+                                                            transitionDelay: isOpen ? `${200 + (i * 100)}ms` : '0ms',
+                                                            opacity: isOpen ? 1 : 0,
+                                                            transform: isOpen ? 'translateX(0)' : 'translateX(-10px)'
+                                                        }}
+                                                    >
                                                         <span className="w-1 h-1 bg-ink-black dark:bg-white rounded-full"></span>
                                                         {detalhe}
                                                     </li>
