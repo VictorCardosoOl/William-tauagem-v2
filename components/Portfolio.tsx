@@ -11,38 +11,31 @@ interface ProjectDetailProps {
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Entrance Animation
+  // Entrance Animation - FASTER & GLAMOROUS
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Cinematic Curtain Reveal
+      // 1. Cinematic Curtain Reveal - Snappier
       tl.fromTo(containerRef.current, 
         { clipPath: "inset(100% 0% 0% 0%)" },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power4.inOut" }
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "expo.inOut" }
       );
 
-      // 2. Image "Landing" Effect
+      // 2. Image "Landing" Effect - Aggressive easing
       tl.fromTo(".modal-img-hero",
-        { scale: 1.15, filter: "blur(10px)" },
+        { scale: 1.2, filter: "blur(15px)" },
         { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
-        "-=0.6"
+        "-=0.4"
       );
 
-      // 3. Left Panel Content Stagger
+      // 3. Stagger Content
       tl.fromTo(".modal-text-anim", 
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: "power3.out" },
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: "power3.out" },
         "-=0.8"
-      );
-
-      // 4. Secondary Images Reveal
-      tl.fromTo(".modal-img-secondary",
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
-        "-=0.6"
       );
 
     }, containerRef) : null;
@@ -62,16 +55,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
         tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary"], {
             opacity: 0,
-            y: -20,
-            duration: 0.4,
+            y: -30,
+            duration: 0.3,
             ease: "power2.in"
         });
 
         tl.to(containerRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
-            duration: 0.6,
-            ease: "power4.inOut"
-        }, "-=0.2");
+            duration: 0.5,
+            ease: "expo.inOut"
+        }, "-=0.1");
 
     } else {
         onClose();
@@ -202,12 +195,10 @@ interface PortfolioItemProps {
     onClick: (item: PortfolioItem) => void;
 }
 
-// PERFORMANCE UPDATE: Replaced heavy SVG displacement map with high-performance CSS transitions
 const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
-  
   return (
     <div 
-        className="group relative cursor-pointer mb-16 md:mb-20 w-full block"
+        className="portfolio-item-anim group relative cursor-pointer mb-16 md:mb-20 w-full block"
         onClick={() => onClick(item)}
         role="button"
         tabIndex={0}
@@ -224,7 +215,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-110 grayscale group-hover:grayscale-0 will-change-transform"
             />
             
-            {/* Simple Overlay on Hover instead of complex SVG */}
+            {/* Simple Overlay on Hover */}
             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10">
@@ -248,12 +239,41 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
 
 const Portfolio: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+        // ENTRANCE: Staggered "Waterfall" effect
+        // Quando os elementos entram na tela, eles aparecem rapidamente um após o outro
+        window.ScrollTrigger.batch(".portfolio-item-anim", {
+            onEnter: (batch: any) => {
+                window.gsap.fromTo(batch, 
+                    { opacity: 0, y: 100, scale: 0.95 }, 
+                    { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "expo.out", overwrite: true }
+                );
+            },
+            onLeaveBack: (batch: any) => {
+                 // Opcional: Fade out ao subir para reanimar ao descer (sensação de "vivo")
+                 window.gsap.to(batch, { opacity: 0, y: 50, duration: 0.4, ease: "power2.in" });
+            },
+            onEnterBack: (batch: any) => {
+                 window.gsap.to(batch, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: "power2.out" });
+            },
+            start: "top 90%"
+        });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const col1 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 === 0);
   const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section id="work" className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative">
+    <section id="work" ref={containerRef} className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative">
       <div className="max-w-screen-3xl mx-auto mb-20 border-b border-ink-light dark:border-white/10 pb-6 flex flex-col md:flex-row justify-between items-end">
           <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 

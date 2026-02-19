@@ -4,29 +4,47 @@ import { TEXTOS_GERAIS } from '../data';
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const textWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!window.gsap) return;
+    if (!window.gsap || !window.ScrollTrigger) return;
 
     const ctx = window.gsap.context(() => {
       const tl = window.gsap.timeline();
 
-      // 1. Title Reveal (Entrance Only)
+      // 1. Glamorous Entrance (Explosive Scale + Fade)
+      // Começa maior e "cai" na posição com elegância
       tl.fromTo(titleRef.current,
-        { y: "100%", rotate: 2 },
-        { y: "0%", rotate: 0, duration: 1.1, ease: "power3.out" }
+        { yPercent: 100, scale: 1.2, rotate: 3, opacity: 0 },
+        { yPercent: 0, scale: 1, rotate: 0, opacity: 1, duration: 1.4, ease: "expo.out" }
       );
 
-      // 2. Text & Line Reveal (Entrance Only)
-      tl.fromTo(textRef.current, 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+      // 2. Text Snaps in (Rápido e preciso)
+      tl.fromTo(".hero-anim-text", 
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power4.out" },
+        "-=1.0"
+      );
+
+      // 3. Line Expands
+      tl.fromTo(".anim-line",
+        { scaleX: 0, transformOrigin: "right center" },
+        { scaleX: 1, duration: 1, ease: "expo.out" },
         "-=0.8"
       );
 
-      // ScrollTrigger removed explicitly as requested.
-      // Text will simply scroll up with the document flow.
+      // 4. Physical Parallax on Scroll (Sensação de peso)
+      window.gsap.to(titleRef.current, {
+        yPercent: 30, // Move mais lento que o scroll
+        opacity: 0.5,
+        ease: "none",
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1 // Inércia física (1s de delay para alcançar)
+        }
+      });
 
     }, containerRef);
 
@@ -45,20 +63,22 @@ const Hero: React.FC = () => {
 
       {/* RIGHT SIDE: Narrative Text - Adjusted Position */}
       <div 
-        ref={textRef}
-        className="absolute top-[18%] right-[5%] md:top-[25%] md:right-[6%] z-10 w-full max-w-xs md:max-w-md text-right px-6 md:px-0 opacity-0"
+        ref={textWrapperRef}
+        className="absolute top-[18%] right-[5%] md:top-[25%] md:right-[6%] z-10 w-full max-w-xs md:max-w-md text-right px-6 md:px-0"
       >
-         <p className="font-sans text-sm md:text-base leading-relaxed tracking-wide font-light text-gray-800 dark:text-gray-300">
-           {TEXTOS_GERAIS.heroTextoDescritivo}
-         </p>
+         <div className="overflow-hidden">
+            <p className="hero-anim-text font-sans text-sm md:text-base leading-relaxed tracking-wide font-light text-gray-800 dark:text-gray-300">
+            {TEXTOS_GERAIS.heroTextoDescritivo}
+            </p>
+         </div>
          <div className="mt-6 h-px w-1/2 bg-primary dark:bg-white ml-auto anim-line"></div>
       </div>
 
       {/* MAIN TITLE: Mask Container - Adjusted Scaling */}
-      <div className="relative w-full overflow-hidden select-none z-0 leading-none">
+      <div className="relative w-full overflow-hidden select-none z-0 leading-none pb-2">
         <h1 
           ref={titleRef}
-          className="font-sans font-black text-[22vw] md:text-[23vw] tracking-tighter text-primary dark:text-white leading-[0.8] text-center md:text-left transform origin-bottom scale-y-110 will-change-transform"
+          className="font-sans font-black text-[22vw] md:text-[23vw] tracking-tighter text-primary dark:text-white leading-[0.8] text-center md:text-left will-change-transform origin-bottom"
         >
           {TEXTOS_GERAIS.heroTituloPrincipal}
         </h1>

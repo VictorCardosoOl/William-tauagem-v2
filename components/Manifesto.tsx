@@ -10,41 +10,42 @@ const Manifesto: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // 1. Draw Lines Animation - Faster
+      // 1. Draw Lines Animation - FAST & SHARP
       window.gsap.from(".manifesto-line", {
-        scaleY: 0, 
+        scale: 0, 
         opacity: 0,
-        duration: 0.8, // Reduced from 1.5
-        ease: "power2.inOut",
+        duration: 0.6, // Muito rápido
+        ease: "power3.inOut",
         scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%" // Starts earlier
+            start: "top 70%"
         }
       });
 
-      // 2. Central Text Reveal - Snappier
-      window.gsap.from(".manifesto-text span", {
-        y: 40,
+      // 2. Central Text Reveal - EXPLOSIVE
+      window.gsap.from(".manifesto-text-part", {
+        y: 60,
         opacity: 0,
-        duration: 0.8, // Reduced from 1.2
-        stagger: 0.1,
-        ease: "power3.out",
+        filter: "blur(10px)",
+        duration: 0.9, 
+        stagger: 0.15,
+        ease: "expo.out",
         scrollTrigger: {
             trigger: ".manifesto-center",
-            start: "top 80%"
+            start: "top 75%"
         }
       });
 
       // 3. Cards Slide In
       window.gsap.from(".manifesto-card", {
-        x: 30,
+        x: 50,
         opacity: 0,
         duration: 0.8,
         stagger: 0.1,
-        ease: "power2.out",
+        ease: "expo.out",
         scrollTrigger: {
             trigger: ".manifesto-center",
-            start: "top 70%"
+            start: "top 60%"
         }
       });
 
@@ -76,11 +77,11 @@ const Manifesto: React.FC = () => {
                     {/* Content constrained for center focus but wrapper is huge */}
                     <div className="manifesto-text max-w-2xl 3xl:max-w-4xl text-center">
                         <h2 className="font-serif font-extralight text-5xl md:text-7xl lg:text-8xl 3xl:text-9xl leading-[0.9] tracking-tight text-ink-black dark:text-paper-light">
-                            <span className="block opacity-100">{manifesto.fraseParte1}</span>
-                            <span className="block italic font-thin text-ink-medium my-4">
+                            <span className="manifesto-text-part block opacity-100">{manifesto.fraseParte1}</span>
+                            <span className="manifesto-text-part block italic font-thin text-ink-medium my-4 scale-110 origin-center">
                                 {manifesto.fraseDestaque}
                             </span>
-                            <span className="block opacity-100">{manifesto.fraseParte2}</span>
+                            <span className="manifesto-text-part block opacity-100">{manifesto.fraseParte2}</span>
                         </h2>
                     </div>
                 </div>

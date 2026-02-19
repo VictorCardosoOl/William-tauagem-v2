@@ -11,26 +11,29 @@ const About: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // Animate Title text (Lines)
+      // 1. Title Lines - Fast Mask Reveal
+      // Uso de clip-path ou y-transform dentro de overflow hidden
       window.gsap.from(".about-title-line", {
-        y: 60,
+        yPercent: 100, // Move o texto para fora do container
+        rotate: 3,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
+        stagger: 0.08, // Cascata rápida
+        ease: "expo.out",
         scrollTrigger: {
           trigger: ".about-text-container",
-          start: "top 80%",
+          start: "top 85%",
+          toggleActions: "play none none reverse" // Reverte ao subir
         }
       });
 
-      // Animate Body Text & Button
+      // 2. Body Text - Fade Up Snap
       window.gsap.from([".about-body", ".about-cta"], {
-        y: 30,
+        y: 40,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.6,
         stagger: 0.1,
-        delay: 0.4,
+        delay: 0.2,
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".about-text-container",
@@ -38,29 +41,30 @@ const About: React.FC = () => {
         }
       });
 
-      // Animate Images Stagger
+      // 3. Image Grid Stagger
       window.gsap.from(".about-image-card", {
-        y: 60,
+        y: 100,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
+        scale: 0.9,
+        duration: 1,
+        stagger: 0.15,
+        ease: "expo.out",
         scrollTrigger: {
           trigger: ".about-grid",
-          start: "top 85%",
+          start: "top 90%",
         }
       });
 
-      // Parallax for Images
+      // 4. Parallax with Physical Weight
       window.gsap.utils.toArray(".about-image-card").forEach((card: any, i) => {
         window.gsap.to(card.querySelector('img'), {
-          yPercent: 15,
+          yPercent: 20, // Movimento significativo
           ease: "none",
           scrollTrigger: {
             trigger: card,
             start: "top bottom",
             end: "bottom top",
-            scrub: true
+            scrub: 0.5 // Leve delay (inércia)
           }
         });
       });
@@ -80,10 +84,10 @@ const About: React.FC = () => {
             
             {/* New Title Format */}
             <h2 className="font-sans font-black text-5xl md:text-6xl lg:text-7xl 3xl:text-8xl leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase">
-              <div className="overflow-hidden"><span className="about-title-line block">EU SOU WILLIAM</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block">SIQUEIRA, E EU</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block text-[#C0C0C0] dark:text-[#4a4a4a]">MATERIALIZO</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block">HISTÓRIAS.</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">EU SOU WILLIAM</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">SIQUEIRA, E EU</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block text-[#C0C0C0] dark:text-[#4a4a4a] origin-top-left">MATERIALIZO</span></div>
+              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">HISTÓRIAS.</span></div>
             </h2>
             
             {/* New Description Format - Aligned Right */}
@@ -122,19 +126,19 @@ const About: React.FC = () => {
               </div>
 
               {/* Layer 2: Color Reveal Overlay */}
-              <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10 overflow-hidden">
+              <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-500 ease-out [clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10 overflow-hidden">
                  <div className="w-full h-[120%] -mt-[10%] relative">
                     <img 
                       src={item.url} 
                       alt=""
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 will-change-transform"
+                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
                     />
                  </div>
               </div>
               
-              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                 <span className="font-sans text-[9px] tracking-[0.3em] bg-primary text-white px-3 py-1 uppercase font-bold">Fig. 0{index + 1}</span>
               </div>
 

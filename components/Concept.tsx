@@ -10,27 +10,40 @@ const Concept: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
         
-        // Parallax for left image
+        // Parallax for left image - WITH PHYSICAL INERTIA (Scrub 1)
         window.gsap.to(".concept-img-1", {
-            yPercent: -20,
+            yPercent: -30,
             ease: "none",
             scrollTrigger: {
                 trigger: ".concept-img-1-wrapper",
                 start: "top bottom",
                 end: "bottom top",
-                scrub: true
+                scrub: 1 // Physical feel
             }
         });
 
         // Parallax for right image
         window.gsap.to(".concept-img-2", {
-            yPercent: 10,
+            yPercent: 20,
             ease: "none",
             scrollTrigger: {
                 trigger: ".concept-img-2-wrapper",
                 start: "top bottom",
                 end: "bottom top",
-                scrub: true
+                scrub: 1.2 // Different weight
+            }
+        });
+
+        // Text Entrance
+        window.gsap.from(".concept-title", {
+            y: 100,
+            opacity: 0,
+            rotate: 2,
+            duration: 1,
+            ease: "expo.out",
+            scrollTrigger: {
+                trigger: ".concept-title-wrapper",
+                start: "top 80%"
             }
         });
 
@@ -45,8 +58,8 @@ const Concept: React.FC = () => {
       <div className="max-w-screen-3xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20">
         
         <div className="lg:w-1/3 relative">
-          <div className="lg:sticky lg:top-24">
-            <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.8] mb-6">
+          <div className="concept-title-wrapper lg:sticky lg:top-24">
+            <h2 className="concept-title font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.8] mb-6 origin-bottom-left">
               {concept.titulo}
             </h2>
             <div className="h-px w-24 bg-ink-black mb-4"></div>
@@ -71,7 +84,7 @@ const Concept: React.FC = () => {
                   <img 
                     src={concept.imagens[0].url} 
                     alt={concept.imagens[0].alt} 
-                    className="concept-img-1 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-1 absolute inset-0 w-full h-[140%] -top-[20%] object-cover grayscale contrast-125 opacity-100" 
                   />
                   <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
                      <img 
@@ -94,7 +107,7 @@ const Concept: React.FC = () => {
                    <img 
                     src={concept.imagens[1].url} 
                     alt={concept.imagens[1].alt} 
-                    className="concept-img-2 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-2 absolute inset-0 w-full h-[140%] -top-[20%] object-cover grayscale contrast-125 opacity-100" 
                   />
                   <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
                      <img 
