@@ -108,14 +108,16 @@ const About: React.FC = () => {
         {/* Bottom Section: Image Grid (Maintained) */}
         <div className="about-grid grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 3xl:gap-8">
           {sobre.imagens.map((item, index) => (
-            <div key={index} className="about-image-card aspect-[3/4] overflow-hidden w-full relative group cursor-crosshair">
+            <div key={index} className="about-image-card aspect-[3/4] overflow-hidden w-full relative group cursor-crosshair will-change-transform">
               
               {/* Layer 1: Grayscale Base with Parallax Wrapper */}
               <div className="w-full h-[120%] -mt-[10%] relative">
                  <img 
                     src={item.url} 
-                    alt={item.alt} 
-                    className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-90"
+                    alt={item.alt}
+                    loading="lazy" 
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-90 will-change-transform"
                  />
               </div>
 
@@ -125,7 +127,9 @@ const About: React.FC = () => {
                     <img 
                       src={item.url} 
                       alt=""
-                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 will-change-transform"
                     />
                  </div>
               </div>

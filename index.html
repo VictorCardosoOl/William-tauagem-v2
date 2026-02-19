@@ -114,6 +114,7 @@
         }
 
         /* NOISE / GRAIN TEXTURE - Essential for the Paper look */
+        /* OPTIMIZATION: translate3d(0,0,0) forces GPU layer to prevent repaint on scroll */
         .noise-bg {
             position: fixed;
             top: 0;
@@ -124,12 +125,20 @@
             z-index: 90; 
             opacity: 0.05; 
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-            mix-blend-mode: multiply; /* Better for paper effect */
+            mix-blend-mode: multiply; 
+            transform: translate3d(0,0,0);
+            backface-visibility: hidden;
         }
         
         .dark .noise-bg {
              mix-blend-mode: screen;
              opacity: 0.04;
+        }
+        
+        /* Performance Helpers */
+        .will-change-transform {
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         /* ---------------------------------------------------------
@@ -480,16 +489,6 @@
 </head>
 <body class="bg-paper-light dark:bg-paper-dark text-ink-black dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-ink-black selection:text-paper-light dark:selection:bg-paper-light dark:selection:text-ink-black overflow-x-hidden">
     
-    <!-- Global SVG Filters -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
-        <defs>
-            <filter id="liquid-distortion">
-                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" result="warp" />
-                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="0" in="SourceGraphic" in2="warp" />
-            </filter>
-        </defs>
-    </svg>
-
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

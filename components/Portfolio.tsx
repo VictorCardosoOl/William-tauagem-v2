@@ -93,7 +93,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden scrollbar-hide"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden scrollbar-hide will-change-transform"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
@@ -170,6 +170,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
                     src={item.image} 
                     alt={`${item.title} main view`} 
                     loading="lazy"
+                    decoding="async"
                     className="modal-img-hero w-full h-full object-cover origin-center" 
                   />
               </div>
@@ -177,13 +178,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               {/* Detail Box */}
               <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
                   <div className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl">
-                    <img src={item.image} loading="lazy" alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
+                    <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
                   </div>
               </div>
 
               {/* Texture/Artistic View - Full Height */}
               <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
-                  <img src={item.image} loading="lazy" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
+                  <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
                   <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
                     <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
                   </div>
@@ -201,74 +202,32 @@ interface PortfolioItemProps {
     onClick: (item: PortfolioItem) => void;
 }
 
+// PERFORMANCE UPDATE: Replaced heavy SVG displacement map with high-performance CSS transitions
 const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
-  const imageRef = useRef<HTMLImageElement>(null);
-  const filterRef = useRef<SVGFEDisplacementMapElement>(null);
-  const filterId = `liquid-${item.id}`;
-
-  const handleMouseEnter = () => {
-     if (window.gsap && filterRef.current) {
-         window.gsap.to(filterRef.current, { 
-             attr: { scale: 25 }, 
-             duration: 1.2, 
-             ease: "expo.out" 
-         });
-         if (imageRef.current) {
-             window.gsap.to(imageRef.current, { 
-                 scale: 1.05, 
-                 duration: 1.2, 
-                 ease: "expo.out" 
-             });
-         }
-     }
-  };
-
-  const handleMouseLeave = () => {
-    if (window.gsap && filterRef.current) {
-         window.gsap.to(filterRef.current, { 
-             attr: { scale: 0 }, 
-             duration: 1, 
-             ease: "power2.out" 
-         });
-         if (imageRef.current) {
-             window.gsap.to(imageRef.current, { 
-                 scale: 1, 
-                 duration: 1, 
-                 ease: "power2.out" 
-             });
-         }
-     }
-  };
-
+  
   return (
     <div 
         className="group relative cursor-pointer mb-16 md:mb-20 w-full block"
         onClick={() => onClick(item)}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => { if(e.key === 'Enter' || e.key === ' ') onClick(item); }}
     >
-        <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
-            <defs>
-                <filter id={filterId}>
-                    <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" result="warp" />
-                    <feDisplacementMap ref={filterRef} xChannelSelector="R" yChannelSelector="G" scale="0" in="SourceGraphic" in2="warp" />
-                </filter>
-            </defs>
-        </svg>
-
+        {/* Container for the image */}
         <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-gray-200 dark:bg-gray-800">
+            {/* Base Image - Grayscale */}
             <img 
-                ref={imageRef}
                 src={item.image} 
                 alt={`${item.title} tattoo on ${item.placement}`}
                 loading="lazy"
-                style={{ filter: `url(#${filterId})` }} 
-                className="absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale hover:grayscale-0 opacity-100 will-change-transform"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-110 grayscale group-hover:grayscale-0 will-change-transform"
             />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            
+            {/* Simple Overlay on Hover instead of complex SVG */}
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 rounded-full transform scale-90 group-hover:scale-100 transition-transform duration-500">
                     <span className="text-white text-xs uppercase tracking-widest font-bold">View Project</span>
                 </div>
@@ -279,7 +238,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
             <span className="font-sans text-xs uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
                 {item.placement}
             </span>
-            <h3 className="font-serif font-light italic text-3xl md:text-4xl text-ink-black dark:text-paper-light">
+            <h3 className="font-serif font-light italic text-3xl md:text-4xl text-ink-black dark:text-paper-light group-hover:translate-x-2 transition-transform duration-300 ease-out">
                 {item.title}
             </h3>
         </div>
