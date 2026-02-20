@@ -67,17 +67,17 @@ const Manifesto: React.FC = () => {
                      </span>
                 </div>
 
-                <div className="manifesto-center md:col-span-7 border-r border-ink-black/5 dark:border-white/5 flex flex-col justify-center items-center py-32 md:py-0 px-8 relative">
-                    {/* Hairlines using ink-light - Animated */}
-                    <div className="manifesto-line origin-left absolute top-12 left-12 w-8 h-[1px] bg-ink-black/10 dark:bg-white/20"></div>
-                    <div className="manifesto-line origin-top absolute top-12 left-12 w-[1px] h-8 bg-ink-black/10 dark:bg-white/20"></div>
+                <div className="manifesto-center md:col-span-7 border-r border-ink-black/5 dark:border-white/5 flex flex-col justify-center items-center py-24 md:py-0 px-6 relative">
+                    {/* Hairlines using ink-light - Animated - Hidden on Mobile */}
+                    <div className="hidden md:block manifesto-line origin-left absolute top-12 left-12 w-8 h-[1px] bg-ink-black/10 dark:bg-white/20"></div>
+                    <div className="hidden md:block manifesto-line origin-top absolute top-12 left-12 w-[1px] h-8 bg-ink-black/10 dark:bg-white/20"></div>
                     
-                    <div className="manifesto-line origin-right absolute bottom-12 right-12 w-8 h-[1px] bg-ink-black/10 dark:bg-white/20"></div>
-                    <div className="manifesto-line origin-bottom absolute bottom-12 right-12 w-[1px] h-8 bg-ink-black/10 dark:bg-white/20"></div>
+                    <div className="hidden md:block manifesto-line origin-right absolute bottom-12 right-12 w-8 h-[1px] bg-ink-black/10 dark:bg-white/20"></div>
+                    <div className="hidden md:block manifesto-line origin-bottom absolute bottom-12 right-12 w-[1px] h-8 bg-ink-black/10 dark:bg-white/20"></div>
 
                     {/* Content constrained for center focus but wrapper is huge */}
                     <div className="manifesto-text max-w-2xl 3xl:max-w-4xl text-center">
-                        <h2 className="font-serif font-extralight text-5xl md:text-7xl lg:text-8xl 3xl:text-9xl leading-[0.9] tracking-tight text-ink-black dark:text-paper-light">
+                        <h2 className="font-serif font-extralight text-fluid-h1 leading-[0.95] tracking-tight text-ink-black dark:text-paper-light">
                             <span className="manifesto-text-part block opacity-100">{manifesto.fraseParte1}</span>
                             <span className="manifesto-text-part block italic font-thin text-ink-medium my-4 scale-110 origin-center">
                                 {manifesto.fraseDestaque}

@@ -268,7 +268,7 @@ const Portfolio: React.FC = () => {
   return (
     <section id="work" ref={containerRef} className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative">
       <div className="max-w-screen-3xl mx-auto mb-20 border-b border-ink-light dark:border-white/10 pb-6 flex flex-col md:flex-row justify-between items-end">
-          <h2 className="font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-paper-light uppercase leading-[0.85]">
+          <h2 className="font-serif font-light text-fluid-h2 text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 
             <span className="italic font-extralight text-ink-medium">Works</span>
           </h2>

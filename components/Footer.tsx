@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
 
       {/* 2. BACKGROUND TYPOGRAPHY - Raised and Darkened */}
       <div className="absolute bottom-16 md:bottom-12 left-0 w-full overflow-hidden leading-none select-none pointer-events-none z-0 flex justify-center">
-         <h1 className="font-serif font-bold text-[18vw] text-[#1A1A1A] opacity-[0.08] dark:opacity-[0.1] text-center whitespace-nowrap tracking-tighter leading-[0.8]">
+         <h1 className="font-serif font-bold text-fluid-hero text-[#1A1A1A] opacity-[0.08] dark:opacity-[0.1] text-center whitespace-nowrap tracking-tighter leading-[0.8]">
             SIQUEIRA
          </h1>
       </div>
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
           {/* COL 1: IDENTITY */}
           <div className="p-10 md:p-14 lg:p-16 border-b md:border-b-0 border-r-0 md:border-r border-[#1A1A1A]/10 dark:border-white/10 flex flex-col justify-between min-h-[320px] group hover:bg-[#E8E6E1]/50 dark:hover:bg-[#1c1917]/30 transition-colors duration-500">
             <div>
-              <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] dark:text-[#fafaf9] tracking-tight mb-2">
+              <h2 className="font-serif text-fluid-h3 text-[#1A1A1A] dark:text-[#fafaf9] tracking-tight mb-2">
                 Studio <br /> W. Siqueira
               </h2>
               <span className="font-serif italic text-xl text-[#685A4F] dark:text-[#a8a29e]">

@@ -59,7 +59,7 @@ const Concept: React.FC = () => {
         
         <div className="lg:w-1/3 relative">
           <div className="concept-title-wrapper lg:sticky lg:top-24">
-            <h2 className="concept-title font-serif font-light text-6xl md:text-8xl 3xl:text-9xl text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.8] mb-6 origin-bottom-left">
+            <h2 className="concept-title font-serif font-light text-fluid-h2 text-ink-black dark:text-gray-100 uppercase tracking-tighter leading-[0.85] mb-6 origin-bottom-left">
               {concept.titulo}
             </h2>
             <div className="h-px w-24 bg-ink-black mb-4"></div>
@@ -72,19 +72,19 @@ const Concept: React.FC = () => {
         <div className="lg:w-2/3 flex flex-col gap-12 md:gap-20">
           
           <div className="max-w-2xl 3xl:max-w-3xl">
-            <p className="font-serif text-3xl md:text-4xl 3xl:text-5xl leading-tight text-ink-black dark:text-gray-200 italic font-thin">
+            <p className="font-serif text-2xl md:text-3xl lg:text-4xl leading-tight text-ink-black dark:text-gray-200 italic font-thin">
               "{concept.textoPrincipal}"
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
              
-             <div className="concept-img-1-wrapper relative md:-mt-8 group">
-                <div className="overflow-hidden aspect-[4/5] shadow-none border border-ink-light relative">
+             <div className="concept-img-1-wrapper relative md:-mt-8 group w-full">
+                <div className="overflow-hidden aspect-[4/5] shadow-none border border-ink-light relative w-full">
                   <img 
                     src={concept.imagens[0].url} 
                     alt={concept.imagens[0].alt} 
-                    className="concept-img-1 absolute inset-0 w-full h-[140%] -top-[20%] object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-1 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
                   />
                   <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
                      <img 

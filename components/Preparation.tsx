@@ -40,12 +40,12 @@ const Preparation: React.FC = () => {
             <div key={item.id} className="prep-item group relative">
               
               <div className="mb-4 transform group-hover:-translate-y-2 transition-transform duration-500">
-                <span className="font-serif italic font-thin text-8xl md:text-9xl 3xl:text-[8rem] text-ink-light opacity-60 group-hover:text-ink-medium group-hover:opacity-100 transition-all duration-500">
+                <span className="font-serif italic font-thin text-fluid-hero text-ink-light opacity-60 group-hover:text-ink-medium group-hover:opacity-100 transition-all duration-500">
                   0{item.id}
                 </span>
               </div>
 
-              <h3 className="font-serif text-3xl 3xl:text-4xl font-light italic text-ink-black dark:text-white mb-6 relative inline-block">
+              <h3 className="font-serif text-fluid-h3 font-light italic text-ink-black dark:text-white mb-6 relative inline-block">
                 {item.titulo}
               </h3>
 

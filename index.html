@@ -32,6 +32,7 @@
             theme: {
                 // Breakpoints estendidos para Monitores Ultra-Wide
                 screens: {
+                    'xs': '480px', // Mobile Landscape / Larger Phones
                     'sm': '640px',
                     'md': '768px',
                     'lg': '1024px',
@@ -46,6 +47,18 @@
                         '9xl': '96rem',
                         'screen-3xl': '1920px',
                         'screen-4xl': '2400px', // Controlled ultra-wide
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '22': '5.5rem',
+                        '30': '7.5rem',
+                    },
+                    fontSize: {
+                        'fluid-hero': 'clamp(3rem, 15vw, 12rem)',
+                        'fluid-h1': 'clamp(2.5rem, 8vw, 6rem)',
+                        'fluid-h2': 'clamp(2rem, 6vw, 4.5rem)',
+                        'fluid-h3': 'clamp(1.5rem, 4vw, 3rem)',
+                        'fluid-body': 'clamp(1rem, 1.5vw, 1.25rem)',
                     },
                     colors: {
                         // PALETA "PAPEL & NANQUIM" (WARM MONOCHROME)

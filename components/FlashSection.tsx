@@ -62,7 +62,7 @@ const FlashSection: React.FC = () => {
               <p className="font-sans text-xs tracking-[0.3em] uppercase text-ink-medium font-bold mb-4">
                 Eventos & Agenda
               </p>
-              <h2 className="font-serif font-light text-5xl md:text-7xl 3xl:text-8xl text-ink-black dark:text-white uppercase leading-[0.8]">
+              <h2 className="font-serif font-light text-fluid-h2 text-ink-black dark:text-white uppercase leading-[0.8]">
                 {TEXTOS_GERAIS.tituloFlash}
               </h2>
             </div>
@@ -89,7 +89,7 @@ const FlashSection: React.FC = () => {
                 Flash Day
               </div>
 
-              <h2 className="font-serif font-light text-4xl md:text-5xl leading-[0.9] text-ink-black dark:text-white mb-4">
+              <h2 className="font-serif font-light text-fluid-h3 leading-[0.9] text-ink-black dark:text-white mb-4">
                 Sessões Rápidas <br />
                 <span className="italic font-thin text-ink-medium">Catálogo Pronto</span>
               </h2>

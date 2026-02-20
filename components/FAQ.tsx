@@ -57,7 +57,7 @@ const FAQ: React.FC = () => {
                     </span>
                 </div>
                 
-                <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl text-ink-black dark:text-white leading-[0.85] mb-8">
+                <h2 className="font-serif text-fluid-h2 text-ink-black dark:text-white leading-[0.85] mb-8">
                     Dúvidas <br/>
                     <span className="text-ink-medium/50 italic font-light">Frequentes</span>
                 </h2>

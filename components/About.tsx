@@ -83,7 +83,7 @@ const About: React.FC = () => {
           <div className="max-w-4xl 3xl:max-w-5xl">
             
             {/* New Title Format */}
-            <h2 className="font-sans font-black text-5xl md:text-6xl lg:text-7xl 3xl:text-8xl leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase">
+            <h2 className="font-sans font-black text-fluid-h1 leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase">
               <div className="overflow-hidden"><span className="about-title-line block origin-top-left">EU SOU WILLIAM</span></div>
               <div className="overflow-hidden"><span className="about-title-line block origin-top-left">SIQUEIRA, E EU</span></div>
               <div className="overflow-hidden"><span className="about-title-line block text-[#C0C0C0] dark:text-[#4a4a4a] origin-top-left">MATERIALIZO</span></div>

@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
     <header 
       id="home" 
       ref={containerRef}
-      className="relative h-screen w-full flex flex-col justify-end overflow-hidden bg-background-light dark:bg-background-dark text-primary dark:text-gray-100 transition-colors duration-500 pb-12 md:pb-0"
+      className="relative min-h-[100dvh] w-full flex flex-col justify-end overflow-hidden bg-background-light dark:bg-background-dark text-primary dark:text-gray-100 transition-colors duration-500 pb-safe-bottom"
     >
       
       {/* Decorative Gradient Overlay */}
@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
       {/* RIGHT SIDE: Narrative Text - Adjusted Position */}
       <div 
         ref={textWrapperRef}
-        className="absolute top-[18%] right-[5%] md:top-[25%] md:right-[6%] z-10 w-full max-w-xs md:max-w-md text-right px-6 md:px-0"
+        className="absolute top-[15%] right-[5%] md:top-[25%] md:right-[6%] z-10 w-full max-w-[280px] md:max-w-md text-right px-6 md:px-0"
       >
          <div className="overflow-hidden">
             <p className="hero-anim-text font-sans text-sm md:text-base leading-relaxed tracking-wide font-light text-gray-800 dark:text-gray-300">
@@ -72,10 +72,10 @@ const Hero: React.FC = () => {
       </div>
 
       {/* MAIN TITLE: Mask Container */}
-      <div className="relative w-full overflow-hidden select-none z-0 leading-none pb-2">
+      <div className="relative w-full overflow-hidden select-none z-0 leading-none pb-4 md:pb-0">
         <h1 
           ref={titleRef}
-          className="font-sans font-black text-[22vw] md:text-[23vw] tracking-tighter text-primary dark:text-white leading-[0.8] text-center md:text-left will-change-transform origin-bottom"
+          className="font-sans font-black text-[23vw] md:text-[24vw] tracking-tighter text-primary dark:text-white leading-[0.8] text-center w-full will-change-transform origin-bottom"
         >
           {TEXTOS_GERAIS.heroTituloPrincipal}
         </h1>

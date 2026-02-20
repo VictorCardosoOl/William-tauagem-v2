@@ -46,7 +46,7 @@ const CreativeProcess: React.FC = () => {
                                 
                                 <div className="flex justify-between items-baseline">
                                     <div className="pr-4">
-                                        <h4 className={`text-4xl md:text-5xl transition-all duration-500 ${
+                                        <h4 className={`text-fluid-h3 transition-all duration-500 ${
                                             isActive 
                                             ? 'font-serif italic font-light text-ink-black dark:text-white translate-x-3' 
                                             : 'font-serif font-thin text-ink-medium/40 dark:text-gray-500 group-hover:text-ink-black'
