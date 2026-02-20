@@ -94,12 +94,12 @@ const App: React.FC = () => {
           <Hero />
           <Portfolio />
           <Manifesto />
-          <About />
           <Concept />
           <CreativeProcess />
           <Preparation />
           <FlashSection />
           <Aftercare />
+          <About />
           <FAQ />
         </main>
         <Footer />
