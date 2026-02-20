@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
@@ -39,6 +40,43 @@ const App: React.FC = () => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    // Integrate Lenis with GSAP ScrollTrigger
+    if (window.ScrollTrigger) {
+      lenis.on('scroll', window.ScrollTrigger.update);
+
+      window.gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      window.gsap.ticker.lagSmoothing(0);
+    }
+
+    // RAF loop for Lenis if GSAP is not present (fallback)
+    if (!window.gsap) {
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    return () => {
+      lenis.destroy();
+      if (window.gsap) {
+        window.gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      }
+    };
   }, []);
 
   return (

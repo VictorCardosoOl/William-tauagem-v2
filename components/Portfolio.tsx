@@ -254,13 +254,6 @@ const Portfolio: React.FC = () => {
                     { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "expo.out", overwrite: true }
                 );
             },
-            onLeaveBack: (batch: any) => {
-                 // Opcional: Fade out ao subir para reanimar ao descer (sensação de "vivo")
-                 window.gsap.to(batch, { opacity: 0, y: 50, duration: 0.4, ease: "power2.in" });
-            },
-            onEnterBack: (batch: any) => {
-                 window.gsap.to(batch, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: "power2.out" });
-            },
             start: "top 90%"
         });
 

@@ -10,15 +10,16 @@ const Manifesto: React.FC = () => {
 
     const ctx = window.gsap.context(() => {
       
-      // 1. Draw Lines Animation - FAST & SHARP
+      // 1. Draw Lines Animation - CONNECTED TO SCROLL
       window.gsap.from(".manifesto-line", {
         scale: 0, 
         opacity: 0,
-        duration: 0.6, // Muito rápido
-        ease: "power3.inOut",
+        ease: "none",
         scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 70%"
+            start: "top 80%",
+            end: "center center",
+            scrub: 1
         }
       });
 

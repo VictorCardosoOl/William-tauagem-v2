@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ITENS_PREPARO } from '../data';
 
 const Preparation: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    const ctx = window.gsap.context(() => {
+      window.gsap.from(".prep-item", {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%"
+        }
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="min-h-screen flex flex-col bg-white dark:bg-[#1a1a1a] py-20 md:py-32 px-6 md:px-12 w-full transition-colors duration-500 border-t border-ink-light dark:border-white/5 relative">
+    <section ref={containerRef} className="min-h-screen flex flex-col bg-white dark:bg-[#1a1a1a] py-20 md:py-32 px-6 md:px-12 w-full transition-colors duration-500 border-t border-ink-light dark:border-white/5 relative">
       <div className="max-w-screen-3xl mx-auto w-full my-auto">
         
         <div className="mb-16 md:mb-24">
@@ -15,7 +37,7 @@ const Preparation: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 3xl:gap-24">
           {ITENS_PREPARO.map((item) => (
-            <div key={item.id} className="group relative">
+            <div key={item.id} className="prep-item group relative">
               
               <div className="mb-4 transform group-hover:-translate-y-2 transition-transform duration-500">
                 <span className="font-serif italic font-thin text-8xl md:text-9xl 3xl:text-[8rem] text-ink-light opacity-60 group-hover:text-ink-medium group-hover:opacity-100 transition-all duration-500">

@@ -30,13 +30,15 @@ const Hero: React.FC = () => {
 
       // 4. Physical Parallax on Scroll (Sensação de peso apenas ao rolar a página)
       window.gsap.to(titleRef.current, {
-        yPercent: 30, // Move mais lento que o scroll
-        opacity: 0.5,
+        yPercent: 50, // Move mais lento que o scroll
+        opacity: 0,
+        scale: 0.9,
+        filter: "blur(8px)",
         ease: "none",
         scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "bottom top",
+            end: "bottom 20%",
             scrub: 1 // Inércia física
         }
       });
