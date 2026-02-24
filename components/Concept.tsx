@@ -95,7 +95,7 @@ const Concept: React.FC = () => {
                   </div>
                 </div>
                 <span className="absolute -bottom-8 -left-6 font-mono text-[9px] tracking-widest text-ink-black/50 dark:text-white/50 rotate-90 origin-left">
-                  FIG. 01 — STUDY
+                  FIG. 01, STUDY
                 </span>
              </div>
 

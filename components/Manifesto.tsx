@@ -63,7 +63,7 @@ const Manifesto: React.FC = () => {
                 
                 <div className="hidden md:flex md:col-span-1 border-r border-ink-black/5 dark:border-white/5 justify-center py-12">
                      <span className="writing-mode-vertical text-xs uppercase tracking-[0.4em] text-ink-medium dark:text-white/40 font-bold rotate-180">
-                        {manifesto.titulo} — Est. 2018
+                        {manifesto.titulo}, Est. 2018
                      </span>
                 </div>
 

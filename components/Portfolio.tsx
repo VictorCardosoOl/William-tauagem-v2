@@ -179,7 +179,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
                   <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
                   <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
-                    <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. — Texture Analysis</p>
+                    <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. , Texture Analysis</p>
                   </div>
               </div>
 

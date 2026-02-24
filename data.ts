@@ -39,7 +39,7 @@ export const TEXTOS_GERAIS = {
   },
   sobre: {
     titulo: "Do conceito à pele",
-    paragrafo1: "Cada projeto nasce de uma história — a sua.\nMais do que um desenho, sua tatuagem carrega significado, memória e identidade.",
+    paragrafo1: "Cada projeto nasce de uma história, a sua.\nMais do que um desenho, sua tatuagem carrega significado, memória e identidade.",
     paragrafo2: "Especialização em Neo Tradicional e Pontilhismo, com projetos autorais desenvolvidos a partir da sua narrativa, respeitando a anatomia do corpo e a essência de cada cliente.\nAqui, suas ideias ganham forma e passam a fazer parte de você.",
     imagens: [
       {
@@ -59,7 +59,7 @@ export const TEXTOS_GERAIS = {
   concept: {
     titulo: "CONCEPT",
     subtitulo: "O Manifesto do Processo",
-    textoPrincipal: "Não imponho formas. Descubro formas. Cada corpo tem sua geografia — curvas, texturas, cicatrizes, histórias. Minha tatuagem é um mapa que respeita o território.",
+    textoPrincipal: "Não imponho formas. Descubro formas. Cada corpo tem sua geografia, curvas, texturas, cicatrizes, histórias. Minha tatuagem é um mapa que respeita o território.",
     textoSecundario: "A pele me conta uma história. Eu apenas a traduzo em linhas. Escuto o silêncio entre as palavras do cliente para encontrar a imagem que já existe, latente, esperando para emergir.",
     imagens: [
       {
@@ -133,7 +133,7 @@ export const PROCESSO_CRIATIVO: ProcessoCriativoItem[] = [
   {
     id: 2,
     titulo: "Estudo Anatômico",
-    subtitulo: "Cada corpo é único — e o nosso desenho precisa respeitar isso.",
+    subtitulo: "Cada corpo é único, e o nosso desenho precisa respeitar isso.",
     descricao: "Em alguns casos, solicitamos fotos da região a ser tatuada para desenvolver o projeto com melhor encaixe anatômico e, quando necessário, apresentar uma simulação no corpo, ajudando você a visualizar o resultado final."
   },
   {

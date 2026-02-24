@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
                <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#8C8C8C] dark:text-[#78716c] font-bold mb-2">
                  Estabelecido
                </p>
-               <p className="font-sans text-sm md:text-base text-[#3D3D3D] dark:text-[#d6d3d1]">São Paulo, BR — {currentYear}</p>
+               <p className="font-sans text-sm md:text-base text-[#3D3D3D] dark:text-[#d6d3d1]">São Paulo, BR, {currentYear}</p>
             </div>
           </div>
 
