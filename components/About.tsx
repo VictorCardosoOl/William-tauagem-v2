@@ -83,18 +83,17 @@ const About: React.FC = () => {
           <div className="max-w-4xl 3xl:max-w-5xl">
             
             {/* New Title Format */}
-            <h2 className="font-sans font-black text-fluid-h1 leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase">
-              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">EU SOU WILLIAM</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">SIQUEIRA, E EU</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block text-[#C0C0C0] dark:text-[#4a4a4a] origin-top-left">MATERIALIZO</span></div>
-              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">HISTÓRIAS.</span></div>
+            <h2 className="font-sans font-black text-fluid-h1 leading-[0.9] text-ink-black dark:text-white mb-8 tracking-tighter uppercase text-right">
+              <div className="overflow-hidden"><span className="about-title-line block origin-top-left">{sobre.titulo}</span></div>
             </h2>
             
             {/* New Description Format - Aligned Right */}
-            <div className="about-body max-w-lg mt-8 mb-10 ml-auto">
-               <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300">
-                  Especialista em Neotradicional.<br/>
-                  Transformo narrativas pessoais em anatomia e arte perene.
+            <div className="about-body max-w-lg mt-8 mb-10 ml-auto space-y-8">
+               <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300 whitespace-pre-line">
+                  {sobre.paragrafo1}
+               </p>
+               <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300 whitespace-pre-line">
+                  {sobre.paragrafo2}
                </p>
             </div>
 

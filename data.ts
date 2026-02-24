@@ -9,7 +9,7 @@ export const TEXTOS_GERAIS = {
   slogan: "A PELE FALA. EU ESCUTO.", 
   heroTituloPrincipal: "WILLIAM",
   heroTituloSecundario: "Etching Silence",
-  heroTextoDescritivo: "Especialista em tatuagens neotradicionais e blackwork em São Paulo. Projetos exclusivos desenhados para sua anatomia com máxima biossegurança. Agende sua consultoria e transforme sua ideia em arte.",
+  heroTextoDescritivo: "Traduzindo ideias para o papel, do papel para a pele",
   anoEstabelecimento: "EST. 2018",
   tituloMetodologia: {
     linha1: "INTENSIDADE",
@@ -38,10 +38,9 @@ export const TEXTOS_GERAIS = {
     card2Texto: "Trate o artefato como uma ferida. Mantenha limpo, hidrate com moderação. Deixe a pele respirar e se reformar em torno de sua nova história."
   },
   sobre: {
-    tituloParte1: "EU SOU WILLIAM",
-    tituloDestaque: "MATERIALIZO",
-    tituloParte2: "HISTÓRIAS.",
-    descricao: "Especialista em Neotradicional. Transformo narrativas pessoais em anatomia e arte perene.",
+    titulo: "Do conceito à pele",
+    paragrafo1: "Cada projeto nasce de uma história — a sua.\nMais do que um desenho, sua tatuagem carrega significado, memória e identidade.",
+    paragrafo2: "Especialização em Neo Tradicional e Pontilhismo, com projetos autorais desenvolvidos a partir da sua narrativa, respeitando a anatomia do corpo e a essência de cada cliente.\nAqui, suas ideias ganham forma e passam a fazer parte de você.",
     imagens: [
       {
         url: "https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop",
@@ -127,27 +126,27 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
 export const PROCESSO_CRIATIVO: ProcessoCriativoItem[] = [
   {
     id: 1,
-    titulo: "Briefing & Conexão",
-    subtitulo: "Entendemos sua história.",
-    descricao: "Uma conversa profunda para captar a essência do que você deseja expressar. Analisamos referências, memórias e significados para construir uma base sólida para a arte."
+    titulo: "Briefing",
+    subtitulo: "Você traz a ideia. A gente transforma em desenho.",
+    descricao: "Você conta sua ideia, referências, sentimentos e intenções. A partir disso, transformamos sua história em um conceito visual único, criado exclusivamente para você."
   },
   {
     id: 2,
     titulo: "Estudo Anatômico",
-    subtitulo: "Projeção digital no corpo.",
-    descricao: "Utilizamos fotografia e edição digital (Photoshop) para projetar o desenho diretamente sobre a foto do seu corpo. Isso garante que a arte respeite sua musculatura, curvaturas e fluxo natural, criando uma peça orgânica e fluida."
+    subtitulo: "Cada corpo é único — e o nosso desenho precisa respeitar isso.",
+    descricao: "Em alguns casos, solicitamos fotos da região a ser tatuada para desenvolver o projeto com melhor encaixe anatômico e, quando necessário, apresentar uma simulação no corpo, ajudando você a visualizar o resultado final."
   },
   {
     id: 3,
     titulo: "Sketching",
-    subtitulo: "O desenho ganha vida.",
-    descricao: "O momento onde a ideia toma forma. Traços iniciais, definição de fluxos, luz e sombra são refinados para criar uma composição visual única antes de passar para a pele."
+    subtitulo: "Hora de rabiscar.",
+    descricao: "Criamos de 1 a 4 sketches, refinando o desenho conforme necessário, até que o projeto esteja alinhado com sua expectativa e nossa proposta artística."
   },
   {
     id: 4,
-    titulo: "A Sessão",
-    subtitulo: "Execução técnica.",
-    descricao: "O ritual final. Com precisão cirúrgica e materiais de alta qualidade, a arte é eternizada na pele em um ambiente seguro, estéril e acolhedor."
+    titulo: "Sessão",
+    subtitulo: "Ambiente seguro, materiais regulamentados e foco total no trabalho.",
+    descricao: "Sem distrações. Sem improviso."
   }
 ];
 
