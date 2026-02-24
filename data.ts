@@ -157,12 +157,12 @@ export const ITENS_PREPARO: PreparoItem[] = [
   {
     id: 1,
     titulo: "Hidratação",
-    descricao: "Comece a hidratar a região da tatuagem 7 dias antes. Uma pele hidratada recebe melhor a tinta, reduz o trauma da agulha e facilita drasticamente a cicatrização posterior."
+    descricao: "Sua pele é nossa base.\n Beba bastante água ao longo da semana anterior à sessão e hidrate a região a ser tatuada de 2 a 3 vezes ao dia."
   },
   {
     id: 2,
     titulo: "Descanso",
-    descricao: "Durma bem na noite anterior (8h+). O corpo precisa de energia para lidar com a sessão. Faça uma refeição reforçada antes de vir ao estúdio para evitar quedas de pressão."
+    descricao: "Durma bem na noite anterior e esteja bem alimentado.\n Uma refeição reforçada ajuda a evitar quedas de pressão."
   },
   {
     id: 3,
@@ -183,11 +183,12 @@ export const ITENS_CUIDADOS: ProtocoloItem[] = [
   {
     fase: 'FASE I',
     titulo: 'A Cicatrização',
-    descricao: 'Mantenha o curativo original por pelo menos 3 a 4 horas. Este é o período crítico onde a pele inicia o processo de vedação.',
+    descricao: 'Mantenha o curativo original por pelo menos 6 a 12 horas. Este é o período crítico onde a pele inicia o processo de vedação.',
     lista: [
-      'Lave com sabão neutro e água fria',
-      'Seque com papel toalha (sem esfregar)',
-      'Evite roupas apertadas na região'
+      'Lave com cuidado e hidrate 2 a 3x ao dia',
+      'Não coce, não puxe casquinhas',
+      'Evite sol e roupas apertadas',
+      'Protetor solar sempre que exposta'
     ]
   },
   {
@@ -219,11 +220,10 @@ export const ITENS_FAQ: FAQItem[] = [
   {
     id: 1,
     pergunta: "Qual o valor da sessão?",
-    resposta: "O valor é calculado pela complexidade, não apenas por hora.",
+    resposta: "O valor depende do projeto, não do relógio.",
     detalhes: [
-      "Orçamento base via WhatsApp",
-      "Valor final definido no briefing presencial",
-      "Sinal de 30% para reserva da data"
+      "Complexidade, região e materiais.",
+      "Sinal de 30% para confirmação da data."
     ]
   },
   {
@@ -255,6 +255,24 @@ export const ITENS_FAQ: FAQItem[] = [
       "Não permitimos crianças ou animais",
       "Ambiente privado e seguro"
     ]
+  },
+  {
+    id: 5,
+    pergunta: "Uso tinta vegana?",
+    resposta: "Não, pois, nao sao autorizadas pela anvisa ate o momento atual",
+    detalhes: []
+  },
+  {
+    id: 6,
+    pergunta: "Para sua tattoo ficar sempre impecável",
+    resposta: "Mantenha-se hidratado: beba água e use hidratante regularmente",
+    detalhes: []
+  },
+  {
+    id: 7,
+    pergunta: "Quer realçar a tattoo?",
+    resposta: "Antes de sair, aplique hidratante, protetor solar (durante o dia) e finalize com um toque de vaselina, o resultado é brilho e definição instantânea",
+    detalhes: []
   }
 ];
 
