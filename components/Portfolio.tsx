@@ -86,7 +86,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden scrollbar-hide will-change-transform"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-[100dvh] overflow-y-auto overflow-x-hidden scrollbar-hide"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"

@@ -79,20 +79,13 @@ const Concept: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
              
-             <div className="concept-img-1-wrapper relative md:-mt-8 group w-full">
+             <div className="concept-img-1-wrapper relative md:-mt-8 w-full">
                 <div className="overflow-hidden aspect-[4/5] shadow-none border border-ink-light relative w-full">
                   <img 
                     src={concept.imagens[0].url} 
                     alt={concept.imagens[0].alt} 
-                    className="concept-img-1 absolute inset-0 w-full h-[120%] -top-[10%] object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-1 absolute inset-0 w-full h-[120%] -top-[10%] object-cover" 
                   />
-                  <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(100%_0_0_0)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
-                     <img 
-                      src={concept.imagens[0].url} 
-                      alt=""
-                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
-                    />
-                  </div>
                 </div>
                 <span className="absolute -bottom-8 -left-6 font-mono text-[9px] tracking-widest text-ink-black/50 dark:text-white/50 rotate-90 origin-left">
                   FIG. 01, STUDY
@@ -103,19 +96,12 @@ const Concept: React.FC = () => {
                 <p className="font-sans text-sm md:text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light border-l border-ink-black/20 pl-6">
                   {concept.textoSecundario}
                 </p>
-                <div className="concept-img-2-wrapper overflow-hidden aspect-square shadow-none border border-ink-light w-4/5 self-end group relative">
+                <div className="concept-img-2-wrapper overflow-hidden aspect-square shadow-none border border-ink-light w-4/5 self-end relative">
                    <img 
                     src={concept.imagens[1].url} 
                     alt={concept.imagens[1].alt} 
-                    className="concept-img-2 absolute inset-0 w-full h-[140%] -top-[20%] object-cover grayscale contrast-125 opacity-100" 
+                    className="concept-img-2 absolute inset-0 w-full h-[140%] -top-[20%] object-cover" 
                   />
-                  <div className="absolute inset-0 w-full h-full transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0_0_0_0)] z-10">
-                     <img 
-                      src={concept.imagens[1].url} 
-                      alt=""
-                      className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
-                    />
-                  </div>
                 </div>
              </div>
           </div>
