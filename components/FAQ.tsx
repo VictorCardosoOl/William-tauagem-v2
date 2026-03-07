@@ -49,29 +49,27 @@ const FAQ: React.FC = () => {
         
         {/* LEFT COLUMN - STICKY HEADER */}
         <div className="lg:col-span-4 relative">
-            <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2">
-                <div className="faq-sticky-content will-change-transform">
-                    <div className="flex items-center gap-4 mb-6">
-                        <span className="w-12 h-px bg-ink-black dark:bg-white/30"></span>
-                        <span className="font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-ink-medium">
-                            SUPORTE
-                        </span>
-                    </div>
-                    
-                    <h2 className="font-serif text-fluid-h2 text-ink-black dark:text-white leading-[0.85] mb-8">
-                        Dúvidas <br/>
-                        <span className="text-ink-medium/50 italic font-light">Frequentes</span>
-                    </h2>
+            <div className="lg:sticky lg:top-32 faq-sticky-content will-change-transform">
+                <div className="flex items-center gap-4 mb-6">
+                    <span className="w-12 h-px bg-ink-black dark:bg-white/30"></span>
+                    <span className="font-sans text-[10px] tracking-[0.25em] uppercase font-bold text-ink-medium">
+                        SUPORTE
+                    </span>
+                </div>
+                
+                <h2 className="font-serif text-fluid-h2 text-ink-black dark:text-white leading-[0.85] mb-8">
+                    Dúvidas <br/>
+                    <span className="text-ink-medium/50 italic font-light">Frequentes</span>
+                </h2>
 
-                    <p className="font-sans text-sm leading-relaxed text-ink-dark dark:text-gray-400 max-w-sm mb-12 font-light tracking-wide border-l border-ink-black/10 dark:border-white/10 pl-4">
-                        A transparência é fundamental para um processo criativo fluido. Aqui estão as respostas para as questões mais comuns.
-                    </p>
+                <p className="font-sans text-sm leading-relaxed text-ink-dark dark:text-gray-400 max-w-sm mb-12 font-light tracking-wide border-l border-ink-black/10 dark:border-white/10 pl-4">
+                    A transparência é fundamental para um processo criativo fluido. Aqui estão as respostas para as questões mais comuns.
+                </p>
 
-                    <div className="hidden lg:block">
-                         <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-all duration-500 hover:border-ink-black dark:hover:border-white group">
-                            Falar no WhatsApp <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500 ease-out" />
-                         </a>
-                    </div>
+                <div className="hidden lg:block">
+                     <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-all duration-500 hover:border-ink-black dark:hover:border-white group">
+                        Falar no WhatsApp <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500 ease-out" />
+                     </a>
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ const Aftercare: React.FC = () => {
       <div className="max-w-screen-2xl mx-auto">
         
         {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 gap-8 border-b border-ink-black/10 dark:border-white/10 pb-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 gap-8 border-b border-ink-black/10 dark:border-white/10 pb-8">
             <div className="max-w-2xl">
                 <div className="flex items-center gap-3 mb-6">
                     <span className="w-2 h-2 bg-accent-sepia rounded-full animate-pulse"></span>
