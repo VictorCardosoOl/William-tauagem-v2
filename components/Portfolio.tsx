@@ -14,6 +14,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   // Entrance Animation - FASTER & GLAMOROUS
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    window.dispatchEvent(new CustomEvent('lenis-stop'));
 
     const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
       const tl = window.gsap.timeline();
@@ -50,6 +51,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
     return () => {
       document.body.style.overflow = '';
+      window.dispatchEvent(new CustomEvent('lenis-start'));
       if (ctx) ctx.revert();
     };
   }, []);
@@ -94,10 +96,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden overscroll-contain"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
+      data-lenis-prevent
+      onWheel={(e) => e.stopPropagation()}
     >
       <div className="flex flex-col lg:flex-row w-full h-full relative">
             
@@ -160,7 +164,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             </div>
 
             {/* RIGHT PANEL: VISUALS (Scrolling) */}
-            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
+            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0" data-lenis-prevent>
               
               {/* Main Hero Image */}
               <div className="w-full h-screen relative overflow-hidden">

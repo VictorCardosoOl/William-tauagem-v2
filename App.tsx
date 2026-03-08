@@ -62,6 +62,13 @@ const App: React.FC = () => {
       window.gsap.ticker.lagSmoothing(0);
     }
 
+    // Listen for custom events to control Lenis
+    const stopLenis = () => lenis.stop();
+    const startLenis = () => lenis.start();
+    
+    window.addEventListener('lenis-stop', stopLenis);
+    window.addEventListener('lenis-start', startLenis);
+
     // RAF loop for Lenis if GSAP is not present (fallback)
     if (!window.gsap) {
       function raf(time: number) {
@@ -73,6 +80,8 @@ const App: React.FC = () => {
 
     return () => {
       lenis.destroy();
+      window.removeEventListener('lenis-stop', stopLenis);
+      window.removeEventListener('lenis-start', startLenis);
       if (window.gsap) {
         window.gsap.ticker.remove((time) => lenis.raf(time * 1000));
       }
