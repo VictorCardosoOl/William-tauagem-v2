@@ -77,13 +77,22 @@ const FlashSection: React.FC = () => {
         <div className="flash-grid grid grid-cols-1 lg:grid-cols-2 gap-px bg-ink-light dark:bg-white/10 border border-ink-light dark:border-white/10">
           
           {/* CARD 1: FLASH DAY */}
-          <div className="flash-card bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-8 md:p-12 flex flex-col justify-between min-h-[450px] md:min-h-[550px] relative overflow-hidden">
+          <div className="flash-card relative bg-paper-light dark:bg-[#121212] text-ink-black dark:text-white p-8 md:p-12 flex flex-col justify-between min-h-[450px] md:min-h-[550px] overflow-hidden group">
             
-            <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
+            <div className="absolute inset-0 z-0">
+               <div className="absolute inset-0 bg-white/80 dark:bg-black/80 z-10 transition-colors duration-500"></div>
+               <img 
+                 src="https://images.unsplash.com/photo-1568515387631-8b650a3d91ce?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Colorful Abstract Texture" 
+                 className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2s]"
+               />
+            </div>
+
+            <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none z-20">
                 <Zap size={250} strokeWidth={0.2} />
             </div>
 
-            <div>
+            <div className="relative z-20">
               <div className="inline-flex items-center gap-3 border border-ink-black/20 dark:border-white/20 px-3 py-1.5 text-[10px] tracking-[0.25em] uppercase font-bold mb-8">
                 <Zap size={10} fill="currentColor" />
                 Flash Day
@@ -109,7 +118,7 @@ const FlashSection: React.FC = () => {
               </ul>
             </div>
 
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-ink-light dark:border-white/10 pt-6">
+            <div className="relative z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-t border-ink-light dark:border-white/10 pt-6">
               <div>
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-medium mb-1">
                   <Calendar size={12} />

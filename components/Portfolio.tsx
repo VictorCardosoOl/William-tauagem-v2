@@ -86,18 +86,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden scrollbar-hide will-change-transform"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden scrollbar-hide will-change-transform"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
     >
-      <div className="flex flex-col w-full relative min-h-screen">
-        
-        {/* WRAPPER FOR SPLIT CONTENT */}
-        <div className="flex flex-col lg:flex-row w-full relative z-10 flex-grow">
+      <div className="flex flex-col lg:flex-row w-full h-full relative">
             
-            {/* LEFT PANEL: TEXT & INFO (Sticky) */}
-            <div className="lg:w-[35%] w-full lg:h-screen lg:sticky lg:top-0 bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20">
+            {/* LEFT PANEL: TEXT & INFO (Fixed on desktop) */}
+            <div className="lg:w-[35%] w-full lg:h-full bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20 shrink-0">
               
               <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
                 <div>
@@ -155,7 +152,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             </div>
 
             {/* RIGHT PANEL: VISUALS (Scrolling) */}
-            <div className="lg:w-[65%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col pb-24 lg:pb-0">
+            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col pb-24 lg:pb-0 scrollbar-hide">
               
               {/* Main Hero Image */}
               <div className="w-full h-screen relative overflow-hidden">
@@ -185,7 +182,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
             </div>
         </div>
-      </div>
     </div>
   );
 };

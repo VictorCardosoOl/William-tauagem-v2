@@ -30,7 +30,7 @@ const CreativeProcess: React.FC = () => {
                 </h3>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
                 {/* LISTA ESQUERDA - Mais compacta verticalmente */}
                 <div className="flex-1 w-full flex flex-col">
                     {PROCESSO_CRIATIVO.map((item, index) => {
@@ -71,7 +71,7 @@ const CreativeProcess: React.FC = () => {
                 </div>
 
                 {/* CONTEÚDO DIREITA - Fonte maior e margens ajustadas */}
-                <div className="flex-1 w-full lg:sticky lg:top-32 h-full min-h-[300px] flex items-center justify-center lg:justify-start lg:pl-8 mt-6 lg:mt-0">
+                <div className="flex-1 w-full lg:sticky lg:top-1/2 lg:-translate-y-1/2 h-auto flex items-center justify-center lg:justify-start lg:pl-8 mt-6 lg:mt-0">
                     <div className="relative w-full max-w-lg" ref={contentRef}>
                         <div className="absolute -top-12 -left-6 text-[10rem] md:text-[12rem] leading-none font-serif text-ink-black opacity-[0.04] dark:text-white dark:opacity-[0.04] select-none pointer-events-none transition-all duration-700 font-thin italic">
                             0{activeProcess + 1}
