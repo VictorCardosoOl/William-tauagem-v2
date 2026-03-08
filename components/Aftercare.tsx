@@ -85,11 +85,8 @@ const Aftercare: React.FC = () => {
 
                 return (
                     <article key={index} className="group cursor-pointer" onClick={() => toggleAccordion(index)}>
-                        {/* DIVIDER LINE */}
-                        <div className="protocol-line w-full h-px bg-ink-black/10 dark:bg-white/10 group-hover:bg-ink-black dark:group-hover:bg-white transition-colors duration-500"></div>
-                        
                         {/* HEADER ROW - Padding reduzido para visual "diminuto" quando fechado */}
-                        <div className="py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div className="py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ink-black/10 dark:border-white/10 group-hover:border-ink-black dark:group-hover:border-white transition-colors duration-500">
                             <div className="flex items-baseline gap-6 md:gap-12">
                                 <span className={`font-sans text-xs font-bold tracking-[0.2em] transition-colors duration-300 ${isOpen ? 'text-accent-sepia' : 'text-ink-medium'}`}>
                                     {item.fase}
@@ -148,9 +145,6 @@ const Aftercare: React.FC = () => {
                     </article>
                 );
             })}
-            
-            {/* FINAL LINE */}
-            <div className="w-full h-px bg-ink-black/10 dark:bg-white/10"></div>
         </div>
 
       </div>
