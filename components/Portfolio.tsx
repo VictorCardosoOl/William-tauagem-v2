@@ -152,7 +152,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             </div>
 
             {/* RIGHT PANEL: VISUALS (Scrolling) */}
-            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] flex flex-col pb-24 lg:pb-0 scrollbar-hide">
+            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0 scrollbar-hide">
               
               {/* Main Hero Image */}
               <div className="w-full h-screen relative overflow-hidden">
