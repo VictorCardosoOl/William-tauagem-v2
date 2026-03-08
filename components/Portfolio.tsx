@@ -21,7 +21,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
       // 1. Cinematic Curtain Reveal - Snappier
       tl.fromTo(containerRef.current, 
         { clipPath: "inset(100% 0% 0% 0%)" },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "expo.inOut" }
+        { 
+            clipPath: "inset(0% 0% 0% 0%)", 
+            duration: 0.8, 
+            ease: "expo.inOut",
+            onComplete: () => {
+                // Remove clipPath to prevent scroll blocking issues
+                if (containerRef.current) containerRef.current.style.clipPath = '';
+            }
+        }
       );
 
       // 2. Image "Landing" Effect - Aggressive easing
@@ -86,7 +94,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden scrollbar-hide will-change-transform"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
@@ -152,7 +160,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             </div>
 
             {/* RIGHT PANEL: VISUALS (Scrolling) */}
-            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0 scrollbar-hide">
+            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
               
               {/* Main Hero Image */}
               <div className="w-full h-screen relative overflow-hidden">
