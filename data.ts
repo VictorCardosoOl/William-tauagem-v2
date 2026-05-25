@@ -259,7 +259,7 @@ export const ITENS_FAQ: FAQItem[] = [
   {
     id: 5,
     pergunta: "Uso tinta vegana?",
-    resposta: "Não, pois, nao sao autorizadas pela anvisa ate o momento atual",
+    resposta: "Não trabalhamos com tintas veganas, pois até o momento não há opções autorizadas pela ANVISA.",
     detalhes: []
   },
   {

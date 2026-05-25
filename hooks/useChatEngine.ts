@@ -30,8 +30,12 @@ export const useChatEngine = () => {
     };
   }, []);
 
-  const processInput = useCallback((text: string) => {
-    const userMsg: Message = { id: Date.now().toString(), text, sender: 'user' };
+  const processInput = useCallback((rawText: string) => {
+    // Sanitização e validação contra XSS / Injection e limitação de comprimento
+    const sanitized = rawText.replace(/<[^>]*>/g, '').trim().slice(0, 300);
+    if (!sanitized) return;
+
+    const userMsg: Message = { id: Date.now().toString(), text: sanitized, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
     setIsTyping(true);
 
@@ -41,16 +45,14 @@ export const useChatEngine = () => {
       let nextBotMsg = '';
       let nextStep = step + 1;
 
-      // Safe state updates based on current step via functional updates or refs usually preferred,
-      // but 'step' dependency in useCallback ensures freshness here.
       if (step === 0) {
-        setUserData(prev => ({ ...prev, name: text }));
-        nextBotMsg = `Prazer, ${text}. Em qual parte do corpo você imagina sua tatuagem?`;
+        setUserData(prev => ({ ...prev, name: sanitized }));
+        nextBotMsg = `Prazer, ${sanitized}. Em qual parte do corpo você imagina sua tatuagem?`;
       } else if (step === 1) {
-        setUserData(prev => ({ ...prev, placement: text }));
+        setUserData(prev => ({ ...prev, placement: sanitized }));
         nextBotMsg = 'Perfeito. E qual é a ideia principal ou conceito?';
       } else if (step === 2) {
-        setUserData(prev => ({ ...prev, idea: text }));
+        setUserData(prev => ({ ...prev, idea: sanitized }));
         nextBotMsg = 'Excelente. Tenho o que preciso. Vou gerar um link direto para o WhatsApp oficial com esse resumo.';
       }
 

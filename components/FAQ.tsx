@@ -85,9 +85,11 @@ const FAQ: React.FC = () => {
                         className="faq-item border-b border-ink-black/10 dark:border-white/10 last:border-0 overflow-hidden"
                     >
                         <button 
+                            id={`faq-btn-${item.id}`}
                             onClick={() => toggleAccordion(index)}
                             className="w-full py-10 flex items-start justify-between gap-6 group text-left outline-none cursor-pointer"
                             aria-expanded={isOpen}
+                            aria-controls={`faq-panel-${item.id}`}
                         >
                             {/* Question Title */}
                             <h3 className={`font-serif text-3xl md:text-4xl transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] transform ${
@@ -108,6 +110,9 @@ const FAQ: React.FC = () => {
 
                         {/* Expandable Content with Physics-based Easing */}
                         <div 
+                            id={`faq-panel-${item.id}`}
+                            role="region"
+                            aria-labelledby={`faq-btn-${item.id}`}
                             className={`grid transition-[grid-template-rows] duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${
                                 isOpen ? 'grid-rows-[1fr] mb-12' : 'grid-rows-[0fr] mb-0'
                             }`}

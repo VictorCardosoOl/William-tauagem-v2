@@ -14,6 +14,21 @@ const ChatWidget: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping, isOpen]);
 
+  // Escape key handler for closing the chat dialog
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
@@ -33,13 +48,18 @@ const ChatWidget: React.FC = () => {
       <button
         onClick={handleOpen}
         className={`fixed bottom-6 right-6 z-[60] bg-ink-black dark:bg-paper-light text-paper-light dark:text-ink-black p-4 rounded-full shadow-2xl hover:scale-105 transition-transform duration-300 group ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-        aria-label="Abrir Chat"
+        aria-label="Abrir Chat de Atendimento"
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
       >
         <MessageSquare className="w-6 h-6" strokeWidth={1.5} />
       </button>
 
       {/* CHAT WINDOW */}
       <div 
+        role="dialog"
+        aria-label="Assistente de Atendimento Virtual"
+        aria-modal="true"
         className={`fixed bottom-6 right-6 z-[70] w-[90vw] md:w-[400px] bg-paper-light dark:bg-paper-dark border border-ink-light dark:border-white/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col origin-bottom-right
         ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 translate-y-12 pointer-events-none'}`}
         style={{ height: 'min(600px, 80vh)' }}
