@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { PORTFOLIO_ITEMS } from '../data';
 import { PortfolioItem } from '../types';
 import { X, ArrowRight, ArrowDown } from 'lucide-react';
+import Lenis from 'lenis';
 
 interface ProjectDetailProps {
   item: PortfolioItem;
@@ -10,6 +11,7 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
 
   // Entrance Animation - FASTER & GLAMOROUS
   useEffect(() => {
@@ -56,6 +58,33 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     };
   }, []);
 
+  // Dedicated Lenis instance for the modal container
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const modalLenis = new Lenis({
+      wrapper: containerRef.current,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    let rafId: number;
+    function raf(time: number) {
+      modalLenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      modalLenis.destroy();
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   // Close Logic
   const handleClose = useCallback(() => {
     if (window.gsap && containerRef.current) {
@@ -81,32 +110,48 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     }
   }, [onClose]);
 
-  // Handle ESC Key
+  // Handle Keyboard Navigation (ESC, Left, Right)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleClose();
+      if (activeImage !== null) {
+        if (e.key === 'Escape') {
+          setActiveImage(null);
+        } else if (e.key === 'ArrowRight') {
+          const currentIndex = PORTFOLIO_ITEMS.findIndex(p => p.image === activeImage);
+          if (currentIndex !== -1) {
+            const nextIndex = (currentIndex + 1) % PORTFOLIO_ITEMS.length;
+            setActiveImage(PORTFOLIO_ITEMS[nextIndex].image);
+          }
+        } else if (e.key === 'ArrowLeft') {
+          const currentIndex = PORTFOLIO_ITEMS.findIndex(p => p.image === activeImage);
+          if (currentIndex !== -1) {
+            const prevIndex = (currentIndex - 1 + PORTFOLIO_ITEMS.length) % PORTFOLIO_ITEMS.length;
+            setActiveImage(PORTFOLIO_ITEMS[prevIndex].image);
+          }
+        }
+      } else {
+        if (e.key === 'Escape') {
+          handleClose();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleClose]);
+  }, [handleClose, activeImage]);
 
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full lg:overflow-hidden overflow-y-auto overflow-x-hidden overscroll-contain"
+      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden overscroll-contain"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
-      data-lenis-prevent
-      onWheel={(e) => e.stopPropagation()}
     >
       <div className="flex flex-col lg:flex-row w-full h-full relative">
             
             {/* LEFT PANEL: TEXT & INFO (Fixed on desktop) */}
-            <div className="lg:w-[35%] w-full lg:h-full bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20 shrink-0">
+            <div className="lg:w-[35%] w-full lg:fixed lg:left-0 lg:top-0 lg:h-full bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20 shrink-0">
               
               <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
                 <div>
@@ -163,37 +208,81 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               </div>
             </div>
 
-            {/* RIGHT PANEL: VISUALS (Scrolling) */}
-            <div className="lg:w-[65%] w-full lg:h-full lg:overflow-y-auto bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0" data-lenis-prevent>
+            {/* RIGHT PANEL: VISUALS (Scrolling with margin-left on desktop to clear fixed left panel) */}
+            <div className="lg:w-[65%] lg:ml-[35%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
               
               {/* Main Hero Image */}
-              <div className="w-full h-screen relative overflow-hidden">
+              <div 
+                className="w-full h-screen relative overflow-hidden cursor-zoom-in group" 
+                onClick={() => setActiveImage(item.image)}
+              >
                   <img 
                     src={item.image} 
                     alt={`${item.title} main view`} 
                     loading="lazy"
                     decoding="async"
-                    className="modal-img-hero w-full h-full object-cover origin-center" 
+                    className="modal-img-hero w-full h-full object-cover origin-center transition-transform duration-700 group-hover:scale-105" 
                   />
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                    <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
+                  </div>
               </div>
 
               {/* Detail Box */}
               <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
-                  <div className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl">
+                  <div 
+                    className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl cursor-zoom-in group"
+                    onClick={() => setActiveImage(item.image)}
+                  >
                     <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                      <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
+                    </div>
                   </div>
               </div>
 
               {/* Texture/Artistic View - Full Height */}
-              <div className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale">
+              <div 
+                className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale cursor-zoom-in group"
+                onClick={() => setActiveImage(item.image)}
+              >
                   <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
-                  <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20">
+                  <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20 z-10">
                     <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. , Texture Analysis</p>
+                  </div>
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                    <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
                   </div>
               </div>
 
             </div>
         </div>
+
+      {/* Lightbox / Fullscreen Image Viewer */}
+      {activeImage && (
+        <div 
+          className="fixed inset-0 z-[110] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-12 transition-opacity duration-300 ease-out"
+          onClick={() => setActiveImage(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button 
+            onClick={(e) => { e.stopPropagation(); setActiveImage(null); }}
+            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors p-3 z-50 bg-white/10 hover:bg-white/20 rounded-full border border-white/10 flex items-center justify-center"
+            aria-label="Close image viewer"
+          >
+            <X size={24} strokeWidth={1.5} />
+          </button>
+          
+          <div className="relative max-w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={activeImage} 
+              alt="Expanded project view" 
+              className="max-w-full max-h-[85vh] object-contain shadow-2xl select-none transition-transform duration-300 ease-out" 
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
