@@ -1,82 +1,8 @@
 1:"$Sreact.fragment"
-9:I[68027,["/_next/static/chunks/158myu8e_yme3.js"],"default",1]
+8:I[68027,["/_next/static/chunks/158myu8e_yme3.js"],"default",1]
+:HL["/_next/static/chunks/3wuoee0xbiyzh.css","style"]
 :HL["https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;700;900&display=swap","style"]
-:HL["https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop","image"]
-:HL["https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800&auto=format&fit=crop","image"]
-2:T962,
-            window.tailwind = window.tailwind || {};
-            window.tailwind.config = {
-              darkMode: "class",
-              theme: {
-                screens: {
-                  'xs': '480px',
-                  'sm': '640px',
-                  'md': '768px',
-                  'lg': '1024px',
-                  'xl': '1280px',
-                  '2xl': '1536px',
-                  '3xl': '1920px',
-                  '4xl': '2560px',
-                },
-                extend: {
-                  maxWidth: {
-                    '8xl': '88rem',
-                    '9xl': '96rem',
-                    'screen-3xl': '1920px',
-                    'screen-4xl': '2400px',
-                  },
-                  spacing: {
-                    '18': '4.5rem',
-                    '22': '5.5rem',
-                    '30': '7.5rem',
-                  },
-                  fontSize: {
-                    'fluid-hero': 'clamp(3rem, 15vw, 12rem)',
-                    'fluid-h1': 'clamp(2.5rem, 8vw, 6rem)',
-                    'fluid-h2': 'clamp(2rem, 6vw, 4.5rem)',
-                    'fluid-h3': 'clamp(1.5rem, 4vw, 3rem)',
-                    'fluid-body': 'clamp(1rem, 1.5vw, 1.25rem)',
-                  },
-                  colors: {
-                    "paper-light": "#F6F5F0",
-                    "paper-dark": "#0F0F0F",
-                    "paper-warm": "#E8E6E1",
-                    primary: "#1A1A1A",
-                    "ink-black": "#1A1A1A",
-                    "ink-dark": "#3D3D3D",
-                    "ink-medium": "#8C8C8C",
-                    "ink-light": "#D4D3D0",
-                    "accent-clay": "#C95D46",
-                    "accent-sepia": "#685A4F",
-                  },
-                  fontFamily: {
-                    serif: ["'Cormorant Garamond'", "serif"],
-                    sans: ["'Inter'", "sans-serif"],
-                  },
-                  letterSpacing: {
-                    tighter: '-0.05em',
-                    tight: '-0.025em',
-                    normal: '0em',
-                    wide: '0.025em',
-                    wider: '0.05em',
-                    widest: '0.1em',
-                    'ultra': '0.25em',
-                    'mega': '0.35em',
-                  },
-                  borderRadius: {
-                    'arch': '20rem 20rem 0 0',
-                  }
-                },
-              },
-            };
-          0:{"P":null,"c":["","_not-found"],"q":"","i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","script","script-0",{"src":"/_next/static/chunks/158myu8e_yme3.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"pt-BR","children":[["$","head",null,{"children":[["$","meta",null,{"charSet":"utf-8"}],["$","meta",null,{"name":"viewport","content":"width=device-width, initial-scale=1.0"}],["$","title",null,{"children":"W. Siqueira - Tattoo Artist | Fine Line & Blackwork SP"}],["$","meta",null,{"name":"description","content":"Especialista em tatuagens neotradicionais, blackwork e fine line em São Paulo. Projetos exclusivos desenhados para sua anatomia. Agende sua consultoria."}],["$","link",null,{"href":"https://fonts.googleapis.com","rel":"preconnect"}],["$","link",null,{"crossOrigin":"","href":"https://fonts.gstatic.com","rel":"preconnect"}],["$","link",null,{"href":"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;700;900&display=swap","rel":"stylesheet"}],["$","link",null,{"href":"https://images.unsplash.com","rel":"preconnect"}],["$","link",null,{"rel":"preload","as":"image","href":"https://images.unsplash.com/photo-1550625624-2c49c71607a9?q=80&w=800&auto=format&fit=crop"}],["$","link",null,{"rel":"preload","as":"image","href":"https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800&auto=format&fit=crop"}],["$","script",null,{"src":"https://cdn.tailwindcss.com?plugins=forms,typography","async":true}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}],"$L3"]}],"$L4"]}]]}],{"children":["$L5",{"children":["$L6",{},null,false,null]},null,false,"$@7"]},null,false,null],"$L8",false]],"m":"$undefined","G":["$9",[]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"pWfiF0aNKpXFJ4dRj0Wk9"}
-b:I[39756,["/_next/static/chunks/158myu8e_yme3.js"],"default"]
-c:I[37457,["/_next/static/chunks/158myu8e_yme3.js"],"default"]
-d:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"OutletBoundary"]
-e:"$Sreact.suspense"
-11:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"ViewportBoundary"]
-13:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"MetadataBoundary"]
-a:T2bb7,
+2:T2bb7,
             .text-vertical {
                 writing-mode: vertical-lr;
                 text-orientation: mixed;
@@ -424,13 +350,20 @@ a:T2bb7,
               outline: 2px solid #F6F5F0 !important;
               outline-offset: 4px !important;
             }
-          3:["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$a"}}]
-4:["$","body",null,{"className":"bg-paper-light dark:bg-paper-dark text-ink-black dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-ink-black selection:text-paper-light dark:selection:bg-paper-light dark:selection:text-ink-black overflow-x-hidden","children":["$","$Lb",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lc",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]
-5:["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lc",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-6:["$","$1","c",{"children":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$4:props:children:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$4:props:children:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$4:props:children:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$4:props:children:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],null,["$","$Ld",null,{"children":["$","$e",null,{"name":"Next.MetadataOutlet","children":"$@f"}]}]]}]
-10:[]
-7:"$W10"
-8:["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L11",null,{"children":"$L12"}],["$","div",null,{"hidden":true,"children":["$","$L13",null,{"children":["$","$e",null,{"name":"Next.Metadata","children":"$L14"}]}]}],null]}]
-12:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-f:null
-14:[]
+          0:{"P":null,"c":["","_not-found"],"q":"","i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3wuoee0xbiyzh.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/158myu8e_yme3.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"pt-BR","children":[["$","head",null,{"children":[["$","meta",null,{"charSet":"utf-8"}],["$","meta",null,{"name":"viewport","content":"width=device-width, initial-scale=1.0"}],["$","title",null,{"children":"W. Siqueira - Tattoo Artist | Fine Line & Blackwork SP"}],["$","meta",null,{"name":"description","content":"Especialista em tatuagens neotradicionais, blackwork e fine line em São Paulo. Projetos exclusivos desenhados para sua anatomia. Agende sua consultoria."}],["$","link",null,{"href":"https://fonts.googleapis.com","rel":"preconnect"}],["$","link",null,{"crossOrigin":"","href":"https://fonts.gstatic.com","rel":"preconnect"}],["$","link",null,{"href":"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;700;900&display=swap","rel":"stylesheet"}],["$","link",null,{"href":"https://images.unsplash.com","rel":"preconnect"}],["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],"$L3"]}]]}],{"children":["$L4",{"children":["$L5",{},null,false,null]},null,false,"$@6"]},null,false,null],"$L7",false]],"m":"$undefined","G":["$8",["$L9"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"Z96PbUkWVxiHq3UxyPFXT"}
+a:I[39756,["/_next/static/chunks/158myu8e_yme3.js"],"default"]
+b:I[37457,["/_next/static/chunks/158myu8e_yme3.js"],"default"]
+c:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"OutletBoundary"]
+d:"$Sreact.suspense"
+10:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"ViewportBoundary"]
+12:I[97367,["/_next/static/chunks/158myu8e_yme3.js"],"MetadataBoundary"]
+3:["$","body",null,{"className":"bg-paper-light dark:bg-paper-dark text-ink-black dark:text-gray-200 transition-colors duration-500 antialiased selection:bg-ink-black selection:text-paper-light dark:selection:bg-paper-light dark:selection:text-ink-black overflow-x-hidden","children":["$","$La",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]
+4:["$","$1","c",{"children":[null,["$","$La",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+5:["$","$1","c",{"children":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$3:props:children:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$3:props:children:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$3:props:children:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$3:props:children:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],null,["$","$Lc",null,{"children":["$","$d",null,{"name":"Next.MetadataOutlet","children":"$@e"}]}]]}]
+f:[]
+6:"$Wf"
+7:["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L10",null,{"children":"$L11"}],["$","div",null,{"hidden":true,"children":["$","$L12",null,{"children":["$","$d",null,{"name":"Next.Metadata","children":"$L13"}]}]}],null]}]
+9:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3wuoee0xbiyzh.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+11:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+e:null
+13:[]

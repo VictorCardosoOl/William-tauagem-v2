@@ -4280,7 +4280,7 @@ const Aftercare = ()=>{
                             onClick: ()=>toggleAccordion(index),
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ink-black/10 dark:border-white/10 group-hover:border-ink-black dark:group-hover:border-white transition-colors duration-500",
+                                    className: "py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors duration-500",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex items-baseline gap-6 md:gap-12",
@@ -4458,6 +4458,13 @@ const Aftercare = ()=>{
                                 }, void 0, false, {
                                     fileName: "[project]/components/Aftercare.tsx",
                                     lineNumber: 106,
+                                    columnNumber: 25
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "protocol-line h-[1px] w-full bg-ink-black/10 dark:bg-white/10 group-hover:bg-ink-black dark:group-hover:bg-white transition-colors duration-500"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/Aftercare.tsx",
+                                    lineNumber: 145,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
