@@ -1,78 +1,77 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { TEXTOS_GERAIS } from '../data';
 import { ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About: React.FC = () => {
   const { sobre } = TEXTOS_GERAIS;
   const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
+  useGSAP(() => {
+    // 1. Title Lines - Fast Mask Reveal
+    gsap.from(".about-title-line", {
+      yPercent: 100,
+      rotate: 3,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: ".about-text-container",
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
+    });
 
-    const ctx = window.gsap.context(() => {
-      
-      // 1. Title Lines - Fast Mask Reveal
-      // Uso de clip-path ou y-transform dentro de overflow hidden
-      window.gsap.from(".about-title-line", {
-        yPercent: 100, // Move o texto para fora do container
-        rotate: 3,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08, // Cascata rápida
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: ".about-text-container",
-          start: "top 85%",
-          toggleActions: "play none none reverse" // Reverte ao subir
-        }
-      });
+    // 2. Body Text - Fade Up Snap
+    gsap.from([".about-body", ".about-cta"], {
+      y: 40,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      delay: 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".about-text-container",
+        start: "top 80%",
+      }
+    });
 
-      // 2. Body Text - Fade Up Snap
-      window.gsap.from([".about-body", ".about-cta"], {
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".about-text-container",
-          start: "top 80%",
-        }
-      });
+    // 3. Image Grid Stagger
+    gsap.from(".about-image-card", {
+      y: 100,
+      opacity: 0,
+      scale: 0.9,
+      duration: 1,
+      stagger: 0.15,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: ".about-grid",
+        start: "top 90%",
+      }
+    });
 
-      // 3. Image Grid Stagger
-      window.gsap.from(".about-image-card", {
-        y: 100,
-        opacity: 0,
-        scale: 0.9,
-        duration: 1,
-        stagger: 0.15,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: ".about-grid",
-          start: "top 90%",
-        }
-      });
-
-      // 4. Parallax with Physical Weight
-      window.gsap.utils.toArray(".about-image-card").forEach((card: any, i) => {
-        window.gsap.to(card.querySelector('img'), {
-          yPercent: 20, // Movimento significativo
+    // 4. Parallax with Physical Weight
+    gsap.utils.toArray(".about-image-card").forEach((card: any) => {
+      const img = card.querySelector('img');
+      if (img) {
+        gsap.to(img, {
+          yPercent: 20,
           ease: "none",
           scrollTrigger: {
             trigger: card,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.5 // Leve delay (inércia)
+            scrub: 0.5
           }
         });
-      });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+      }
+    });
+  }, { scope: containerRef });
 
   return (
     <section id="about" ref={containerRef} className="bg-white dark:bg-background-dark py-16 md:py-24 px-6 w-full overflow-hidden">

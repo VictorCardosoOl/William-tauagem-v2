@@ -3,6 +3,13 @@ import { PORTFOLIO_ITEMS } from '../data';
 import { PortfolioItem } from '../types';
 import { X, ArrowRight, ArrowDown } from 'lucide-react';
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { useScroll } from '../context/ScrollContext';
+import { useFocusTrap } from '../hooks/useFocusTrap';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProjectDetailProps {
   item: PortfolioItem;
@@ -12,51 +19,47 @@ interface ProjectDetailProps {
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const { stopScroll, startScroll } = useScroll();
 
-  // Entrance Animation - FASTER & GLAMOROUS
-  useEffect(() => {
+  // Traps keyboard focus in modal dialog
+  useFocusTrap(containerRef, true);
+
+  // Entrance Animation
+  useGSAP(() => {
     document.body.style.overflow = 'hidden';
-    window.dispatchEvent(new CustomEvent('lenis-stop'));
+    stopScroll();
 
-    const ctx = window.gsap && containerRef.current ? window.gsap.context(() => {
-      const tl = window.gsap.timeline();
+    const tl = gsap.timeline();
 
-      // 1. Cinematic Curtain Reveal - Snappier
-      tl.fromTo(containerRef.current, 
-        { clipPath: "inset(100% 0% 0% 0%)" },
-        { 
-            clipPath: "inset(0% 0% 0% 0%)", 
-            duration: 0.8, 
-            ease: "expo.inOut",
-            onComplete: () => {
-                // Remove clipPath to prevent scroll blocking issues
-                if (containerRef.current) containerRef.current.style.clipPath = '';
-            }
-        }
-      );
+    tl.fromTo(containerRef.current, 
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { 
+          clipPath: "inset(0% 0% 0% 0%)", 
+          duration: 0.8, 
+          ease: "expo.inOut",
+          onComplete: () => {
+              if (containerRef.current) containerRef.current.style.clipPath = '';
+          }
+      }
+    );
 
-      // 2. Image "Landing" Effect - Aggressive easing
-      tl.fromTo(".modal-img-hero",
-        { scale: 1.2, filter: "blur(15px)" },
-        { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
-        "-=0.4"
-      );
+    tl.fromTo(".modal-img-hero",
+      { scale: 1.2, filter: "blur(15px)" },
+      { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
+      "-=0.4"
+    );
 
-      // 3. Stagger Content
-      tl.fromTo(".modal-text-anim", 
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: "power3.out" },
-        "-=0.8"
-      );
-
-    }, containerRef) : null;
+    tl.fromTo(".modal-text-anim", 
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: "power3.out" },
+      "-=0.8"
+    );
 
     return () => {
       document.body.style.overflow = '';
-      window.dispatchEvent(new CustomEvent('lenis-start'));
-      if (ctx) ctx.revert();
+      startScroll();
     };
-  }, []);
+  }, { scope: containerRef });
 
   // Dedicated Lenis instance for the modal container
   useEffect(() => {
@@ -87,8 +90,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
 
   // Close Logic
   const handleClose = useCallback(() => {
-    if (window.gsap && containerRef.current) {
-        const tl = window.gsap.timeline({
+    if (containerRef.current) {
+        const tl = gsap.timeline({
             onComplete: onClose
         });
 
@@ -147,10 +150,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-title"
+      tabIndex={-1}
     >
       <div className="flex flex-col lg:flex-row w-full h-full relative">
             
-            {/* LEFT PANEL: TEXT & INFO (Fixed on desktop) */}
+            {/* LEFT PANEL: TEXT & INFO */}
             <div className="lg:w-[35%] w-full lg:fixed lg:left-0 lg:top-0 lg:h-full bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20 shrink-0">
               
               <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
@@ -208,7 +212,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               </div>
             </div>
 
-            {/* RIGHT PANEL: VISUALS (Scrolling with margin-left on desktop to clear fixed left panel) */}
+            {/* RIGHT PANEL: VISUALS */}
             <div className="lg:w-[65%] lg:ml-[35%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
               
               {/* Main Hero Image */}
@@ -301,9 +305,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
         tabIndex={0}
         onKeyDown={(e) => { if(e.key === 'Enter' || e.key === ' ') onClick(item); }}
     >
-        {/* Container for the image */}
         <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-gray-200 dark:bg-gray-800">
-            {/* Base Image - Grayscale */}
             <img 
                 src={item.image} 
                 alt={`${item.title} tattoo on ${item.placement}`}
@@ -312,7 +314,6 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-110 grayscale group-hover:grayscale-0 will-change-transform"
             />
             
-            {/* Simple Overlay on Hover */}
             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10">
@@ -338,26 +339,17 @@ const Portfolio: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
-
-    const ctx = window.gsap.context(() => {
-        // ENTRANCE: Staggered "Waterfall" effect
-        // Quando os elementos entram na tela, eles aparecem rapidamente um após o outro
-        window.ScrollTrigger.batch(".portfolio-item-anim", {
-            onEnter: (batch: any) => {
-                window.gsap.fromTo(batch, 
-                    { opacity: 0, y: 100, scale: 0.95 }, 
-                    { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "expo.out", overwrite: true }
-                );
-            },
-            start: "top 90%"
-        });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    ScrollTrigger.batch(".portfolio-item-anim", {
+        onEnter: (batch) => {
+            gsap.fromTo(batch, 
+                { opacity: 0, y: 100, scale: 0.95 }, 
+                { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "expo.out", overwrite: true }
+            );
+        },
+        start: "top 90%"
+    });
+  }, { scope: containerRef });
 
   const col1 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 === 0);
   const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);

@@ -1,6 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ITENS_FAQ } from '../data';
+import React, { useState, useRef } from 'react';
+import { ITENS_FAQ, WHATSAPP_PHONE } from '../data';
 import { Plus, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -10,38 +15,31 @@ const FAQ: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
+  useGSAP(() => {
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%"
+        }
+    });
 
-    const ctx = window.gsap.context(() => {
-        const tl = window.gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 75%" // Inicia um pouco mais tarde para garantir visibilidade
-            }
-        });
+    tl.from(".faq-sticky-content", {
+        y: 80,
+        opacity: 0,
+        duration: 1.4,
+        ease: "power4.out"
+    });
 
-        // 1. Sticky Header Reveal - Mais lento e pesado (Luxo)
-        tl.from(".faq-sticky-content", {
-            y: 80,
-            opacity: 0,
-            duration: 1.4,
-            ease: "power4.out"
-        });
+    tl.from(".faq-item", {
+        y: 40,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+    }, "-=1.0");
+  }, { scope: containerRef });
 
-        // 2. List Items Stagger - Entrada suave em cascata
-        tl.from(".faq-item", {
-            y: 40,
-            opacity: 0,
-            duration: 1.2,
-            stagger: 0.15,
-            ease: "power3.out"
-        }, "-=1.0");
-        
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=Olá%2C%20gostaria%20de%20tirar%20uma%20dúvida.`;
 
   return (
     <section id="faq" ref={containerRef} className="py-24 md:py-32 px-6 bg-[#EBE9E4] dark:bg-[#0a0a0a] transition-colors duration-1000 ease-in-out">
@@ -67,7 +65,7 @@ const FAQ: React.FC = () => {
                 </p>
 
                 <div className="hidden lg:block">
-                     <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-all duration-500 hover:border-ink-black dark:hover:border-white group">
+                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2 hover:opacity-60 transition-all duration-500 hover:border-ink-black dark:hover:border-white group">
                         Falar no WhatsApp <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500 ease-out" />
                      </a>
                 </div>
@@ -91,7 +89,6 @@ const FAQ: React.FC = () => {
                             aria-expanded={isOpen}
                             aria-controls={`faq-panel-${item.id}`}
                         >
-                            {/* Question Title */}
                             <h3 className={`font-serif text-3xl md:text-4xl transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] transform ${
                                 isOpen 
                                 ? 'text-ink-black dark:text-white translate-x-4' 
@@ -100,7 +97,6 @@ const FAQ: React.FC = () => {
                                 {item.pergunta}
                             </h3>
                             
-                            {/* Icon Animation - Scale + Rotate */}
                             <span className={`mt-1 shrink-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] text-ink-black dark:text-white ${
                                 isOpen ? 'rotate-45 scale-110' : 'rotate-0 scale-100 group-hover:rotate-90'
                             }`}>
@@ -108,7 +104,6 @@ const FAQ: React.FC = () => {
                             </span>
                         </button>
 
-                        {/* Expandable Content with Physics-based Easing */}
                         <div 
                             id={`faq-panel-${item.id}`}
                             role="region"
@@ -122,7 +117,7 @@ const FAQ: React.FC = () => {
                                     isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
                                 }`}>
                                     
-                                    <p className="mb-8">{item.resposta}</p>
+                                    <p className="mb-8 whitespace-pre-line">{item.resposta}</p>
                                     
                                     {item.detalhes && item.detalhes.length > 0 && (
                                         <div className="pl-6 border-l-2 border-ink-black dark:border-white py-2">
@@ -137,7 +132,7 @@ const FAQ: React.FC = () => {
                                                             transform: isOpen ? 'translateX(0)' : 'translateX(-10px)'
                                                         }}
                                                     >
-                                                        <span className="w-1 h-1 bg-ink-black dark:bg-white rounded-full"></span>
+                                                        <span className="w-1.5 h-1.5 bg-ink-black dark:bg-white rounded-full"></span>
                                                         {detalhe}
                                                     </li>
                                                 ))}
@@ -153,7 +148,7 @@ const FAQ: React.FC = () => {
             
             {/* Mobile Footer CTA */}
             <div className="mt-16 lg:hidden">
-                 <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2">
+                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink-black dark:text-white border-b border-ink-black/30 dark:border-white/30 pb-2">
                     Falar no WhatsApp <ArrowRight size={14} />
                  </a>
             </div>

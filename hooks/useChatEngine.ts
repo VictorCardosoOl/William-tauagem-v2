@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
+import { WHATSAPP_PHONE } from '../data';
 
 export interface Message {
   id: string;
@@ -67,8 +68,7 @@ export const useChatEngine = () => {
 
   const generateWhatsAppLink = useCallback(() => {
     const text = `*Nova Solicitação via Site*%0A%0A*Nome:* ${userData.name}%0A*Local:* ${userData.placement}%0A*Ideia:* ${userData.idea}%0A%0AGostaria de orçar esse projeto.`;
-    const phone = '5511999999999'; 
-    return `https://wa.me/${phone}?text=${text}`;
+    return `https://wa.me/${WHATSAPP_PHONE}?text=${text}`;
   }, [userData]);
 
   return {

@@ -1,56 +1,53 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { TEXTOS_GERAIS } from '../data';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Concept: React.FC = () => {
   const { concept } = TEXTOS_GERAIS;
   const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
+  useGSAP(() => {
+    // Parallax for left image - WITH PHYSICAL INERTIA (Scrub 1)
+    gsap.to(".concept-img-1", {
+        yPercent: -30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".concept-img-1-wrapper",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+        }
+    });
 
-    const ctx = window.gsap.context(() => {
-        
-        // Parallax for left image - WITH PHYSICAL INERTIA (Scrub 1)
-        window.gsap.to(".concept-img-1", {
-            yPercent: -30,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".concept-img-1-wrapper",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1 // Physical feel
-            }
-        });
+    // Parallax for right image
+    gsap.to(".concept-img-2", {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".concept-img-2-wrapper",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2
+        }
+    });
 
-        // Parallax for right image
-        window.gsap.to(".concept-img-2", {
-            yPercent: 20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".concept-img-2-wrapper",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1.2 // Different weight
-            }
-        });
-
-        // Text Entrance
-        window.gsap.from(".concept-title", {
-            y: 100,
-            opacity: 0,
-            rotate: 2,
-            duration: 1,
-            ease: "expo.out",
-            scrollTrigger: {
-                trigger: ".concept-title-wrapper",
-                start: "top 80%"
-            }
-        });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    // Text Entrance
+    gsap.from(".concept-title", {
+        y: 100,
+        opacity: 0,
+        rotate: 2,
+        duration: 1,
+        ease: "expo.out",
+        scrollTrigger: {
+            trigger: ".concept-title-wrapper",
+            start: "top 80%"
+        }
+    });
+  }, { scope: containerRef });
 
   return (
     <section ref={containerRef} className="relative w-full py-16 md:py-24 px-6 md:px-12 bg-paper-warm dark:bg-[#181818] transition-colors duration-1000">
@@ -72,7 +69,7 @@ const Concept: React.FC = () => {
         <div className="lg:w-2/3 flex flex-col gap-12 md:gap-20">
           
           <div className="max-w-2xl 3xl:max-w-3xl">
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl leading-tight text-ink-black dark:text-gray-200 italic font-thin">
+            <p className="font-serif text-2xl md:text-3xl lg:text-4xl leading-tight text-ink-black dark:text-gray-200 italic font-thin whitespace-pre-line">
               "{concept.textoPrincipal}"
             </p>
           </div>
@@ -93,7 +90,7 @@ const Concept: React.FC = () => {
              </div>
 
              <div className="flex flex-col gap-8 md:gap-10">
-                <p className="font-sans text-sm md:text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light border-l border-ink-black/20 pl-6">
+                <p className="font-sans text-sm md:text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light border-l border-ink-black/20 pl-6 whitespace-pre-line">
                   {concept.textoSecundario}
                 </p>
                 <div className="concept-img-2-wrapper overflow-hidden aspect-square shadow-none border border-ink-light w-4/5 self-end relative">

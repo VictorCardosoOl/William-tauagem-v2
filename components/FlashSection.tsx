@@ -1,6 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Zap, Crown, CheckCircle2, Calendar, ArrowRight } from 'lucide-react';
 import { TEXTOS_GERAIS } from '../data';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FlashSection: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -17,41 +22,33 @@ const FlashSection: React.FC = () => {
     "Privacidade total"
   ];
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
+  useGSAP(() => {
+    // Animate Header
+    gsap.from(".flash-header", {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%"
+        }
+    });
 
-    const ctx = window.gsap.context(() => {
-        // Animate Header - Fast
-        window.gsap.from(".flash-header", {
-            y: 30,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 85%"
-            }
-        });
-
-        // Animate Cards with tight stagger
-        window.gsap.from(".flash-card", {
-            y: 50,
-            opacity: 0,
-            scale: 0.98,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: ".flash-grid",
-                start: "top 85%"
-            }
-        });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
+    // Animate Cards with tight stagger
+    gsap.from(".flash-card", {
+        y: 50,
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power4.out",
+        scrollTrigger: {
+            trigger: ".flash-grid",
+            start: "top 85%"
+        }
+    });
+  }, { scope: containerRef });
 
   return (
     <section id="flash" ref={containerRef} className="bg-paper-light dark:bg-black py-16 md:py-24 px-6 border-y border-ink-light dark:border-white/10 transition-colors duration-500">
@@ -62,7 +59,7 @@ const FlashSection: React.FC = () => {
               <p className="font-sans text-xs tracking-[0.3em] uppercase text-ink-medium font-bold mb-4">
                 Eventos & Agenda
               </p>
-              <h2 className="font-serif font-light text-fluid-h2 text-ink-black dark:text-white uppercase leading-[0.8]">
+              <h2 className="font-serif font-light text-fluid-h2 text-ink-black dark:text-white uppercase leading-[0.8] whitespace-pre-line">
                 {TEXTOS_GERAIS.tituloFlash}
               </h2>
             </div>

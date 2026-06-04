@@ -277,11 +277,13 @@ export const ITENS_FAQ: FAQItem[] = [
 ];
 
 
+export const WHATSAPP_PHONE = "5511999999999";
+
 // ==========================================
 // REDES SOCIAIS
 // ==========================================
 export const REDES_SOCIAIS: LinkSocial[] = [
-  { nome: 'WhatsApp', url: 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento.' },
+  { nome: 'WhatsApp', url: `https://wa.me/${WHATSAPP_PHONE}?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento.` },
   { nome: 'Instagram', url: 'https://instagram.com/' },
   { nome: 'E-mail', url: 'mailto:contato@wsiqueira.com' },
 ];

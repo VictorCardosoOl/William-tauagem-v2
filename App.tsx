@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
@@ -14,88 +13,36 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import ChatWidget from './components/ChatWidget';
+import { ScrollProvider } from './context/ScrollContext';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleLoadingComplete = () => {
-    // Force scroll to top prevents browser from remembering scroll position or jumping to inputs
     window.scrollTo(0, 0);
     setIsLoading(false);
     
-    // Refresh GSAP ScrollTrigger after layout settles
     setTimeout(() => {
-        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+      ScrollTrigger.refresh();
     }, 100);
   };
 
   useEffect(() => {
-    // Register GSAP Plugins only
-    if (window.gsap) {
-      if (window.Flip) window.gsap.registerPlugin(window.Flip);
-      if (window.ScrollTrigger) window.gsap.registerPlugin(window.ScrollTrigger);
-    }
-    
-    // Manual scroll restoration to ensure we start at top
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
-
-    // Integrate Lenis with GSAP ScrollTrigger
-    if (window.ScrollTrigger) {
-      lenis.on('scroll', window.ScrollTrigger.update);
-
-      window.gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-
-      window.gsap.ticker.lagSmoothing(0);
-    }
-
-    // Listen for custom events to control Lenis
-    const stopLenis = () => lenis.stop();
-    const startLenis = () => lenis.start();
-    
-    window.addEventListener('lenis-stop', stopLenis);
-    window.addEventListener('lenis-start', startLenis);
-
-    // RAF loop for Lenis if GSAP is not present (fallback)
-    if (!window.gsap) {
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    }
-
-    return () => {
-      lenis.destroy();
-      window.removeEventListener('lenis-stop', stopLenis);
-      window.removeEventListener('lenis-start', startLenis);
-      if (window.gsap) {
-        window.gsap.ticker.remove((time) => lenis.raf(time * 1000));
-      }
-    };
   }, []);
 
   return (
-    <>
+    <ScrollProvider>
       {isLoading && <Preloader onComplete={handleLoadingComplete} />}
       
-      {/* Global Texture Layer - Film Grain/Noise */}
       <div className="noise-bg" aria-hidden="true"></div>
       
-      {/* Standard Container */}
       <div className="w-full min-h-screen opacity-100">
         <Navbar />
         <ChatWidget />
@@ -113,7 +60,7 @@ const App: React.FC = () => {
         </main>
         <Footer />
       </div>
-    </>
+    </ScrollProvider>
   );
 };
 

@@ -1,28 +1,27 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { ITENS_PREPARO } from '../data';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Preparation: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
-
-    const ctx = window.gsap.context(() => {
-      window.gsap.from(".prep-item", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%"
-        }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    gsap.from(".prep-item", {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 75%"
+      }
+    });
+  }, { scope: containerRef });
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col bg-white dark:bg-[#1a1a1a] py-20 md:py-32 px-6 md:px-12 w-full transition-colors duration-500 border-t border-ink-light dark:border-white/5 relative">
@@ -49,7 +48,7 @@ const Preparation: React.FC = () => {
                 {item.titulo}
               </h3>
 
-              <p className="font-sans text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light">
+              <p className="font-sans text-base leading-loose tracking-wide text-ink-dark dark:text-gray-400 font-light whitespace-pre-line">
                 {item.descricao}
               </p>
 

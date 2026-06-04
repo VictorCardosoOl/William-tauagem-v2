@@ -1,9 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { TEXTOS_GERAIS, ITENS_CUIDADOS } from '../data';
 import { Plus, Minus, ShieldCheck, Droplet, Sun } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Aftercare: React.FC = () => {
-  // openIndex null garante que as fases iniciem "diminutas" (fechadas)
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -20,38 +24,32 @@ const Aftercare: React.FC = () => {
      }
   };
 
-  useEffect(() => {
-    if (!window.gsap || !window.ScrollTrigger) return;
+  useGSAP(() => {
+    // Animação do Título
+    gsap.from(".aftercare-title", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%"
+        }
+    });
 
-    const ctx = window.gsap.context(() => {
-        // Animação do Título
-        window.gsap.from(".aftercare-title", {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 75%"
-            }
-        });
-
-        // Animação das Linhas divisórias
-        window.gsap.from(".protocol-line", {
-            scaleX: 0,
-            transformOrigin: "left center",
-            duration: 1.2,
-            stagger: 0.2,
-            ease: "expo.out",
-            scrollTrigger: {
-                trigger: ".protocol-list",
-                start: "top 80%"
-            }
-        });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    // Animação das Linhas divisórias
+    gsap.from(".protocol-line", {
+        scaleX: 0,
+        transformOrigin: "left center",
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "expo.out",
+        scrollTrigger: {
+            trigger: ".protocol-list",
+            start: "top 80%"
+        }
+    });
+  }, { scope: containerRef });
 
   return (
     <section id="cuidados" ref={containerRef} className="py-24 md:py-32 px-6 bg-paper-light dark:bg-paper-dark transition-colors duration-500 overflow-hidden">
@@ -85,7 +83,7 @@ const Aftercare: React.FC = () => {
 
                 return (
                     <article key={index} className="group cursor-pointer" onClick={() => toggleAccordion(index)}>
-                        {/* HEADER ROW - Padding reduzido para visual "diminuto" quando fechado */}
+                        {/* HEADER ROW */}
                         <div className="py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ink-black/10 dark:border-white/10 group-hover:border-ink-black dark:group-hover:border-white transition-colors duration-500">
                             <div className="flex items-baseline gap-6 md:gap-12">
                                 <span className={`font-sans text-xs font-bold tracking-[0.2em] transition-colors duration-300 ${isOpen ? 'text-accent-sepia' : 'text-ink-medium'}`}>
@@ -113,7 +111,7 @@ const Aftercare: React.FC = () => {
                                     
                                     {/* Description Column */}
                                     <div className="md:col-span-5">
-                                        <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300 italic mb-6">
+                                        <p className="font-serif text-xl md:text-2xl leading-relaxed text-ink-dark dark:text-gray-300 italic mb-6 whitespace-pre-line">
                                             "{item.descricao}"
                                         </p>
                                         <div className="flex items-center gap-2 text-ink-medium dark:text-gray-500">

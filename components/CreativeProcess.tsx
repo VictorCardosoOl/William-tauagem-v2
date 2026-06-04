@@ -1,24 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { PROCESSO_CRIATIVO } from '../data';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const CreativeProcess: React.FC = () => {
   const [activeProcess, setActiveProcess] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!window.gsap || !contentRef.current) return;
-
-    const ctx = window.gsap.context(() => {
-      window.gsap.killTweensOf('.anim-text');
-      window.gsap.fromTo(
-        '.anim-text',
-        { y: 20, opacity: 0, filter: 'blur(4px)' },
-        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, stagger: 0.1, ease: 'power3.out', overwrite: 'auto' }
-      );
-    }, contentRef);
-
-    return () => ctx.revert();
-  }, [activeProcess]);
+  useGSAP(() => {
+    gsap.killTweensOf('.anim-text');
+    gsap.fromTo(
+      '.anim-text',
+      { y: 20, opacity: 0, filter: 'blur(4px)' },
+      { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.6, stagger: 0.1, ease: 'power3.out', overwrite: 'auto' }
+    );
+  }, { scope: contentRef, dependencies: [activeProcess] });
 
   return (
     <section className="bg-paper-warm dark:bg-[#121212] py-12 md:py-20 px-6 md:px-12 transition-colors duration-500">
@@ -31,7 +27,7 @@ const CreativeProcess: React.FC = () => {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-                {/* LISTA ESQUERDA - Mais compacta verticalmente */}
+                {/* LISTA ESQUERDA */}
                 <div className="flex-1 w-full flex flex-col">
                     {PROCESSO_CRIATIVO.map((item, index) => {
                         const isActive = activeProcess === index;
@@ -70,7 +66,7 @@ const CreativeProcess: React.FC = () => {
                     })}
                 </div>
 
-                {/* CONTEÚDO DIREITA - Fonte maior e margens ajustadas */}
+                {/* CONTEÚDO DIREITA */}
                 <div className="flex-1 w-full lg:sticky lg:top-1/3 h-auto min-h-[300px] flex items-center justify-center lg:justify-start lg:pl-8 mt-6 lg:mt-0">
                     <div className="relative w-full max-w-lg" ref={contentRef}>
                         <div className="absolute -top-12 -left-6 text-[10rem] md:text-[12rem] leading-none font-serif text-ink-black opacity-[0.04] dark:text-white dark:opacity-[0.04] select-none pointer-events-none transition-all duration-700 font-thin italic">
@@ -80,7 +76,7 @@ const CreativeProcess: React.FC = () => {
                             <h3 className="anim-text font-serif italic text-3xl md:text-4xl mb-4 text-ink-black dark:text-white border-b border-ink-black/10 dark:border-white/20 pb-3 inline-block font-light">
                                 Detalhes da Etapa
                             </h3>
-                            <p className="anim-text font-sans text-base md:text-lg leading-loose tracking-wide text-ink-dark dark:text-gray-300 font-light">
+                            <p className="anim-text font-sans text-base md:text-lg leading-loose tracking-wide text-ink-dark dark:text-gray-300 font-light whitespace-pre-line">
                                 {PROCESSO_CRIATIVO[activeProcess].descricao}
                             </p>
                         </div>

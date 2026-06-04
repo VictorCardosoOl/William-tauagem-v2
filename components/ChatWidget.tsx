@@ -1,18 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, ArrowRight } from 'lucide-react';
 import { useChatEngine } from '../hooks/useChatEngine';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const widgetRef = useRef<HTMLDivElement>(null);
   
   const { messages, isTyping, processInput, generateWhatsAppLink, isComplete } = useChatEngine();
+
+  // Trap focus inside the chat widget when it's open
+  useFocusTrap(widgetRef, isOpen);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping, isOpen]);
+
+  // Focus the input reactively without timeout when opened
+  useEffect(() => {
+    if (isOpen && !isComplete) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen, isComplete]);
 
   // Escape key handler for closing the chat dialog
   useEffect(() => {
@@ -38,8 +50,6 @@ const ChatWidget: React.FC = () => {
 
   const handleOpen = () => {
       setIsOpen(true);
-      // Slight delay to focus input
-      setTimeout(() => inputRef.current?.focus(), 100);
   };
 
   return (
@@ -57,12 +67,14 @@ const ChatWidget: React.FC = () => {
 
       {/* CHAT WINDOW */}
       <div 
+        ref={widgetRef}
         role="dialog"
         aria-label="Assistente de Atendimento Virtual"
         aria-modal="true"
         className={`fixed bottom-6 right-6 z-[70] w-[90vw] md:w-[400px] bg-paper-light dark:bg-paper-dark border border-ink-light dark:border-white/10 shadow-2xl rounded-sm overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col origin-bottom-right
         ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 translate-y-12 pointer-events-none'}`}
         style={{ height: 'min(600px, 80vh)' }}
+        tabIndex={-1}
       >
         
         {/* HEADER - Editorial Style */}
@@ -74,7 +86,7 @@ const ChatWidget: React.FC = () => {
                     <p className="font-sans text-[9px] uppercase tracking-widest opacity-60">Concierge</p>
                 </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:text-ink-medium transition-colors">
+            <button onClick={() => setIsOpen(false)} className="hover:text-ink-medium transition-colors" aria-label="Fechar Chat">
                 <X size={20} strokeWidth={1} />
             </button>
         </div>
@@ -130,6 +142,7 @@ const ChatWidget: React.FC = () => {
                         type="submit"
                         disabled={!inputValue.trim()}
                         className="p-2 text-ink-black dark:text-white disabled:opacity-30 hover:text-ink-medium transition-colors"
+                        aria-label="Enviar mensagem"
                     >
                         <Send size={18} />
                     </button>
