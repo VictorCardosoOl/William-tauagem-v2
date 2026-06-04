@@ -21,10 +21,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const { stopScroll, startScroll } = useScroll();
 
-  // Traps keyboard focus in modal dialog
   useFocusTrap(containerRef, true);
 
-  // Entrance Animation
   useGSAP(() => {
     document.body.style.overflow = 'hidden';
     stopScroll();
@@ -61,7 +59,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     };
   }, { scope: containerRef });
 
-  // Dedicated Lenis instance for the modal container
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -88,7 +85,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     };
   }, []);
 
-  // Close Logic
   const handleClose = useCallback(() => {
     if (containerRef.current) {
         const tl = gsap.timeline({
@@ -113,7 +109,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
     }
   }, [onClose]);
 
-  // Handle Keyboard Navigation (ESC, Left, Right)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (activeImage !== null) {
@@ -205,7 +200,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
               </div>
 
               <div className="pt-12 lg:pt-0 modal-text-anim">
-                <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors">
+                <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors" type="button">
                     <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">Agendar Projeto Similar</span>
                     <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                 </button>
@@ -216,12 +211,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             <div className="lg:w-[65%] lg:ml-[35%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
               
               {/* Main Hero Image */}
-              <div 
-                className="w-full h-screen relative overflow-hidden cursor-zoom-in group" 
+              <button 
+                className="w-full h-screen relative overflow-hidden cursor-zoom-in group outline-none block text-left" 
                 onClick={() => setActiveImage(item.image)}
+                type="button"
+                aria-label="Expandir foto principal"
               >
                   <img 
-                    src={item.image} 
+                    src={`${item.image}&auto=format&fit=crop`} 
+                    srcSet={`${item.image}&w=600&auto=format&fit=crop 600w, ${item.image}&w=1200&auto=format&fit=crop 1200w, ${item.image}&w=2000&auto=format&fit=crop 2000w`}
+                    sizes="(max-width: 1024px) 100vw, 65vw"
                     alt={`${item.title} main view`} 
                     loading="lazy"
                     decoding="async"
@@ -230,34 +229,54 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
                   <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
                   </div>
-              </div>
+              </button>
 
               {/* Detail Box */}
               <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
-                  <div 
-                    className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl cursor-zoom-in group"
+                  <button 
+                    className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl cursor-zoom-in group outline-none text-left"
                     onClick={() => setActiveImage(item.image)}
+                    type="button"
+                    aria-label="Expandir foto de detalhe"
                   >
-                    <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} detail view`} className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" />
+                    <img 
+                      src={`${item.image}&auto=format&fit=crop`} 
+                      srcSet={`${item.image}&w=400&auto=format&fit=crop 400w, ${item.image}&w=800&auto=format&fit=crop 800w, ${item.image}&w=1200&auto=format&fit=crop 1200w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy" 
+                      decoding="async" 
+                      alt={`${item.title} detail view`} 
+                      className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" 
+                    />
                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                       <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
                     </div>
-                  </div>
+                  </button>
               </div>
 
               {/* Texture/Artistic View - Full Height */}
-              <div 
-                className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale cursor-zoom-in group"
+              <button 
+                className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale cursor-zoom-in group outline-none block text-left"
                 onClick={() => setActiveImage(item.image)}
+                type="button"
+                aria-label="Expandir foto artística"
               >
-                  <img src={item.image} loading="lazy" decoding="async" alt={`${item.title} texture view`} className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" />
+                  <img 
+                    src={`${item.image}&auto=format&fit=crop`} 
+                    srcSet={`${item.image}&w=600&auto=format&fit=crop 600w, ${item.image}&w=1200&auto=format&fit=crop 1200w, ${item.image}&w=2000&auto=format&fit=crop 2000w`}
+                    sizes="(max-width: 1024px) 100vw, 65vw"
+                    loading="lazy" 
+                    decoding="async" 
+                    alt={`${item.title} texture view`} 
+                    className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" 
+                  />
                   <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20 z-10">
                     <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. , Texture Analysis</p>
                   </div>
                   <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
                   </div>
-              </div>
+              </button>
 
             </div>
         </div>
@@ -274,6 +293,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
             onClick={(e) => { e.stopPropagation(); setActiveImage(null); }}
             className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors p-3 z-50 bg-white/10 hover:bg-white/20 rounded-full border border-white/10 flex items-center justify-center"
             aria-label="Close image viewer"
+            type="button"
           >
             <X size={24} strokeWidth={1.5} />
           </button>
@@ -298,16 +318,17 @@ interface PortfolioItemProps {
 
 const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
   return (
-    <div 
-        className="portfolio-item-anim group relative cursor-pointer mb-16 md:mb-20 w-full block"
+    <button 
+        className="portfolio-item-anim group relative mb-16 md:mb-20 w-full block text-left outline-none"
         onClick={() => onClick(item)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => { if(e.key === 'Enter' || e.key === ' ') onClick(item); }}
+        type="button"
+        aria-label={`Ver detalhes do projeto ${item.title} no ${item.placement.toLowerCase()}`}
     >
-        <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-gray-200 dark:bg-gray-800">
+        <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-gray-200 dark:bg-gray-800 w-full">
             <img 
-                src={item.image} 
+                src={`${item.image}&auto=format&fit=crop`}
+                srcSet={`${item.image}&w=400&auto=format&fit=crop 400w, ${item.image}&w=800&auto=format&fit=crop 800w, ${item.image}&w=1200&auto=format&fit=crop 1200w`}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 alt={`${item.title} tattoo on ${item.placement}`}
                 loading="lazy"
                 decoding="async"
@@ -331,7 +352,7 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
                 {item.title}
             </h3>
         </div>
-    </div>
+    </button>
   );
 };
 

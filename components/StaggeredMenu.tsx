@@ -49,7 +49,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuClose
 }) => {
   const [open, setOpen] = useState(false);
-  const openRef = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const preLayersRef = useRef<HTMLDivElement>(null);
   const preLayerElsRef = useRef<Element[]>([]);
@@ -81,7 +80,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const updateNavbar = () => {
       const currentScrollY = window.scrollY;
       
-      if (openRef.current) {
+      if (open) {
         setIsVisible(true);
         ticking = false;
         return;
@@ -310,13 +309,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }
   }, []);
 
-  const animateColor = useCallback(
-    (opening: boolean) => {
-      // Color animation handled by CSS classes for better theme support
-    },
-    []
-  );
-
   const animateText = useCallback((opening: boolean) => {
     const inner = textInnerRef.current;
     if (!inner) return;
@@ -346,8 +338,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, []);
 
   const toggleMenu = useCallback(() => {
-    const target = !openRef.current;
-    openRef.current = target;
+    const target = !open;
     setOpen(target);
     if (target) {
       stopScroll();
@@ -360,28 +351,25 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       playClose();
     }
     animateIcon(target);
-    animateColor(target);
     animateText(target);
-  }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose, stopScroll, startScroll]);
+  }, [open, playOpen, playClose, animateIcon, animateText, onMenuOpen, onMenuClose, stopScroll, startScroll]);
 
   const closeMenu = useCallback((onCompleteCallback?: () => void) => {
-    if (openRef.current) {
-      openRef.current = false;
+    if (open) {
       setOpen(false);
       startScroll();
       onMenuClose?.();
       playClose(onCompleteCallback);
       animateIcon(false);
-      animateColor(false);
       animateText(false);
     } else {
       if (onCompleteCallback) {
         onCompleteCallback();
       }
     }
-  }, [playClose, animateIcon, animateColor, animateText, onMenuClose, startScroll]);
+  }, [open, playClose, animateIcon, animateText, onMenuClose, startScroll]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!closeOnClickAway || !open) return;
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -401,17 +389,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
-  const handleLinkClick = (e: React.MouseEvent, link: string) => {
-    e.preventDefault();
-    closeMenu(() => {
-      const targetId = link.replace('#', '');
-      const elem = document.getElementById(targetId);
-      if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        if (link.startsWith('http')) window.open(link, '_blank');
-      }
-    });
+  const handleLinkClick = () => {
+    closeMenu();
   };
 
   return (
@@ -477,7 +456,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     href={it.link} 
                     aria-label={it.ariaLabel} 
                     data-index={idx + 1}
-                    onClick={(e) => handleLinkClick(e, it.link)}
+                    onClick={handleLinkClick}
                   >
                     <span className="sm-panel-itemLabel">{it.label}</span>
                   </a>

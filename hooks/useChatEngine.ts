@@ -32,11 +32,10 @@ export const useChatEngine = () => {
   }, []);
 
   const processInput = useCallback((rawText: string) => {
-    // Sanitização e validação contra XSS / Injection e limitação de comprimento
-    const sanitized = rawText.replace(/<[^>]*>/g, '').trim().slice(0, 300);
+    const sanitized = rawText.trim().slice(0, 300);
     if (!sanitized) return;
 
-    const userMsg: Message = { id: Date.now().toString(), text: sanitized, sender: 'user' };
+    const userMsg: Message = { id: crypto.randomUUID(), text: sanitized, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
     setIsTyping(true);
 
@@ -58,7 +57,7 @@ export const useChatEngine = () => {
       }
 
       if (nextBotMsg) {
-        setMessages(prev => [...prev, { id: Date.now().toString(), text: nextBotMsg, sender: 'bot' }]);
+        setMessages(prev => [...prev, { id: crypto.randomUUID(), text: nextBotMsg, sender: 'bot' }]);
       }
       
       setIsTyping(false);
