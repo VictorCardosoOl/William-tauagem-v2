@@ -29,6 +29,9 @@ const App: React.FC = () => {
     setTimeout(() => {
       ScrollTrigger.refresh();
     }, 100);
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 300);
   };
 
   useEffect(() => {
