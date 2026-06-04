@@ -12,10 +12,6 @@ const nextConfig = {
   },
   // Static HTML Export
   output: 'export',
-  // Disable next/image checking inside static builds if remote images are used
-  images: {
-    unoptimized: true
-  },
   devIndicators: {
     appIsrStatus: false,
     buildActivity: false,

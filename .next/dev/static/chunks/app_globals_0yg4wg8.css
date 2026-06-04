@@ -656,10 +656,6 @@
     pointer-events: none;
   }
 
-  .visible {
-    visibility: visible;
-  }
-
   .absolute {
     position: absolute;
   }
@@ -670,10 +666,6 @@
 
   .relative {
     position: relative;
-  }
-
-  .static {
-    position: static;
   }
 
   .sticky {
@@ -978,10 +970,6 @@
 
   .hidden {
     display: none;
-  }
-
-  .inline {
-    display: inline;
   }
 
   .inline-block {
@@ -1413,10 +1401,6 @@
 
   .cursor-zoom-in {
     cursor: zoom-in;
-  }
-
-  .resize {
-    resize: both;
   }
 
   .scrollbar-thin {
