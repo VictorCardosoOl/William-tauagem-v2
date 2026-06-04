@@ -1,338 +1,35 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { PORTFOLIO_ITEMS } from '../data';
 import { PortfolioItem } from '../types';
-import { X, ArrowRight, ArrowDown } from 'lucide-react';
-import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useScroll } from '../context/ScrollContext';
-import { useFocusTrap } from '../hooks/useFocusTrap';
+import { ProjectDetail } from './ProjectDetail';
+import { ProgressiveImage } from './ProgressiveImage';
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface ProjectDetailProps {
-  item: PortfolioItem;
-  onClose: () => void;
-}
-
-const ProjectDetail: React.FC<ProjectDetailProps> = ({ item, onClose }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeImage, setActiveImage] = useState<string | null>(null);
-  const { stopScroll, startScroll } = useScroll();
-
-  useFocusTrap(containerRef, true);
-
-  useGSAP(() => {
-    document.body.style.overflow = 'hidden';
-    stopScroll();
-
-    const tl = gsap.timeline();
-
-    tl.fromTo(containerRef.current, 
-      { clipPath: "inset(100% 0% 0% 0%)" },
-      { 
-          clipPath: "inset(0% 0% 0% 0%)", 
-          duration: 0.8, 
-          ease: "expo.inOut",
-          onComplete: () => {
-              if (containerRef.current) containerRef.current.style.clipPath = '';
-          }
-      }
-    );
-
-    tl.fromTo(".modal-img-hero",
-      { scale: 1.2, filter: "blur(15px)" },
-      { scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
-      "-=0.4"
-    );
-
-    tl.fromTo(".modal-text-anim", 
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: "power3.out" },
-      "-=0.8"
-    );
-
-    return () => {
-      document.body.style.overflow = '';
-      startScroll();
-    };
-  }, { scope: containerRef });
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const modalLenis = new Lenis({
-      wrapper: containerRef.current,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
-
-    let rafId: number;
-    function raf(time: number) {
-      modalLenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    return () => {
-      modalLenis.destroy();
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
-
-  const handleClose = useCallback(() => {
-    if (containerRef.current) {
-        const tl = gsap.timeline({
-            onComplete: onClose
-        });
-
-        tl.to([".modal-text-anim", ".modal-img-hero", ".modal-img-secondary"], {
-            opacity: 0,
-            y: -30,
-            duration: 0.3,
-            ease: "power2.in"
-        });
-
-        tl.to(containerRef.current, {
-            clipPath: "inset(0% 0% 100% 0%)",
-            duration: 0.5,
-            ease: "expo.inOut"
-        }, "-=0.1");
-
-    } else {
-        onClose();
-    }
-  }, [onClose]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (activeImage !== null) {
-        if (e.key === 'Escape') {
-          setActiveImage(null);
-        } else if (e.key === 'ArrowRight') {
-          const currentIndex = PORTFOLIO_ITEMS.findIndex(p => p.image === activeImage);
-          if (currentIndex !== -1) {
-            const nextIndex = (currentIndex + 1) % PORTFOLIO_ITEMS.length;
-            setActiveImage(PORTFOLIO_ITEMS[nextIndex].image);
-          }
-        } else if (e.key === 'ArrowLeft') {
-          const currentIndex = PORTFOLIO_ITEMS.findIndex(p => p.image === activeImage);
-          if (currentIndex !== -1) {
-            const prevIndex = (currentIndex - 1 + PORTFOLIO_ITEMS.length) % PORTFOLIO_ITEMS.length;
-            setActiveImage(PORTFOLIO_ITEMS[prevIndex].image);
-          }
-        }
-      } else {
-        if (e.key === 'Escape') {
-          handleClose();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleClose, activeImage]);
-
-  return (
-    <div 
-      ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#F6F5F0] dark:bg-[#0F0F0F] w-full h-full overflow-y-auto overflow-x-hidden overscroll-contain"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="project-title"
-      tabIndex={-1}
-    >
-      <div className="flex flex-col lg:flex-row w-full h-full relative">
-            
-            {/* LEFT PANEL: TEXT & INFO */}
-            <div className="lg:w-[35%] w-full lg:fixed lg:left-0 lg:top-0 lg:h-full bg-[#F6F5F0] dark:bg-[#0F0F0F] text-ink-black dark:text-paper-light flex flex-col justify-between p-8 md:p-12 border-r border-ink-black/10 dark:border-white/10 z-20 shrink-0">
-              
-              <div className="modal-text-anim flex justify-between items-start mb-12 lg:mb-0">
-                <div>
-                  <p className="font-sans text-xs tracking-[0.3em] uppercase font-bold text-ink-medium mb-2">Project 0{item.id}</p>
-                  <h1 id="project-title" className="font-serif italic text-5xl md:text-6xl font-light leading-none">{item.title}</h1>
-                </div>
-                <button 
-                    onClick={handleClose} 
-                    className="group flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-ink-medium transition-colors p-2"
-                    aria-label="Close project details"
-                >
-                    Close <X size={20} className="group-hover:rotate-90 transition-transform duration-300" strokeWidth={1} />
-                </button>
-              </div>
-
-              <div className="lg:hidden modal-text-anim mb-8 text-ink-medium animate-bounce">
-                <ArrowDown size={24} />
-              </div>
-
-              <div className="hidden lg:block space-y-12">
-                <div className="space-y-6 modal-text-anim">
-                    <div className="w-12 h-px bg-ink-black dark:bg-white mb-6"></div>
-                    <p className="font-serif text-2xl italic leading-relaxed text-ink-dark dark:text-gray-300">
-                        "A anatomia dita o fluxo. A tinta sela o pacto."
-                    </p>
-                    <p className="font-sans text-base leading-loose text-ink-medium dark:text-gray-400 max-w-sm">
-                        Este projeto explora a tensão entre o orgânico e o geométrico. 
-                        Desenhado à mão livre (freehand) para se adaptar perfeitamente à curvatura do {item.placement.toLowerCase()}.
-                        A cicatrização respeita o tom de pele natural, garantindo contraste vitalício.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-8 border-t border-ink-black/10 dark:border-white/10 pt-8 modal-text-anim">
-                    <div>
-                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Technique</h4>
-                        <p className="font-serif text-xl">Fine Line / Dotwork</p>
-                    </div>
-                    <div>
-                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Session</h4>
-                        <p className="font-serif text-xl">6 Hours</p>
-                    </div>
-                    <div>
-                        <h4 className="font-sans text-xs uppercase tracking-widest text-ink-medium mb-2">Healed</h4>
-                        <p className="font-serif text-xl">4 Weeks</p>
-                    </div>
-                </div>
-              </div>
-
-              <div className="pt-12 lg:pt-0 modal-text-anim">
-                <button className="w-full bg-ink-black dark:bg-white text-paper-light dark:text-ink-black py-4 px-6 flex justify-between items-center group hover:bg-ink-dark transition-colors" type="button">
-                    <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">Agendar Projeto Similar</span>
-                    <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-                </button>
-              </div>
-            </div>
-
-            {/* RIGHT PANEL: VISUALS */}
-            <div className="lg:w-[65%] lg:ml-[35%] w-full bg-[#E5E5E5] dark:bg-[#1a1a1a] pb-24 lg:pb-0">
-              
-              {/* Main Hero Image */}
-              <button 
-                className="w-full h-screen relative overflow-hidden cursor-zoom-in group outline-none block text-left" 
-                onClick={() => setActiveImage(item.image)}
-                type="button"
-                aria-label="Expandir foto principal"
-              >
-                  <img 
-                    src={`${item.image}&auto=format&fit=crop`} 
-                    srcSet={`${item.image}&w=600&auto=format&fit=crop 600w, ${item.image}&w=1200&auto=format&fit=crop 1200w, ${item.image}&w=2000&auto=format&fit=crop 2000w`}
-                    sizes="(max-width: 1024px) 100vw, 65vw"
-                    alt={`${item.title} main view`} 
-                    loading="lazy"
-                    decoding="async"
-                    className="modal-img-hero w-full h-full object-cover origin-center transition-transform duration-700 group-hover:scale-105" 
-                  />
-                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                    <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
-                  </div>
-              </button>
-
-              {/* Detail Box */}
-              <div className="w-full min-h-[80vh] bg-white dark:bg-black p-12 md:p-24 flex items-center justify-center">
-                  <button 
-                    className="modal-img-secondary w-full aspect-[4/5] relative overflow-hidden shadow-2xl cursor-zoom-in group outline-none text-left"
-                    onClick={() => setActiveImage(item.image)}
-                    type="button"
-                    aria-label="Expandir foto de detalhe"
-                  >
-                    <img 
-                      src={`${item.image}&auto=format&fit=crop`} 
-                      srcSet={`${item.image}&w=400&auto=format&fit=crop 400w, ${item.image}&w=800&auto=format&fit=crop 800w, ${item.image}&w=1200&auto=format&fit=crop 1200w`}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      loading="lazy" 
-                      decoding="async" 
-                      alt={`${item.title} detail view`} 
-                      className="w-full h-full object-cover scale-150 origin-top-left grayscale hover:grayscale-0 transition-all duration-700" 
-                    />
-                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                      <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
-                    </div>
-                  </button>
-              </div>
-
-              {/* Texture/Artistic View - Full Height */}
-              <button 
-                className="modal-img-secondary w-full h-screen relative overflow-hidden grayscale cursor-zoom-in group outline-none block text-left"
-                onClick={() => setActiveImage(item.image)}
-                type="button"
-                aria-label="Expandir foto artística"
-              >
-                  <img 
-                    src={`${item.image}&auto=format&fit=crop`} 
-                    srcSet={`${item.image}&w=600&auto=format&fit=crop 600w, ${item.image}&w=1200&auto=format&fit=crop 1200w, ${item.image}&w=2000&auto=format&fit=crop 2000w`}
-                    sizes="(max-width: 1024px) 100vw, 65vw"
-                    loading="lazy" 
-                    decoding="async" 
-                    alt={`${item.title} texture view`} 
-                    className="w-full h-full object-cover scale-125 hover:scale-110 transition-transform duration-[3s]" 
-                  />
-                  <div className="absolute bottom-12 left-12 bg-white/10 backdrop-blur-md p-4 border border-white/20 z-10">
-                    <p className="font-mono text-xs text-white uppercase tracking-widest">Fig 03. , Texture Analysis</p>
-                  </div>
-                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                    <span className="text-white text-xs uppercase tracking-widest font-bold bg-black/40 backdrop-blur-md px-4 py-2 border border-white/20">Ampliar Foto</span>
-                  </div>
-              </button>
-
-            </div>
-        </div>
-
-      {/* Lightbox / Fullscreen Image Viewer */}
-      {activeImage && (
-        <div 
-          className="fixed inset-0 z-[110] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-12 transition-opacity duration-300 ease-out"
-          onClick={() => setActiveImage(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <button 
-            onClick={(e) => { e.stopPropagation(); setActiveImage(null); }}
-            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors p-3 z-50 bg-white/10 hover:bg-white/20 rounded-full border border-white/10 flex items-center justify-center"
-            aria-label="Close image viewer"
-            type="button"
-          >
-            <X size={24} strokeWidth={1.5} />
-          </button>
-          
-          <div className="relative max-w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img 
-              src={activeImage} 
-              alt="Expanded project view" 
-              className="max-w-full max-h-[85vh] object-contain shadow-2xl select-none transition-transform duration-300 ease-out" 
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 interface PortfolioItemProps {
     item: PortfolioItem;
     onClick: (item: PortfolioItem) => void;
+    isLarge?: boolean;
 }
 
-const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick }) => {
+const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick, isLarge }) => {
   return (
     <button 
-        className="portfolio-item-anim group relative mb-16 md:mb-20 w-full block text-left outline-none"
+        className="portfolio-item-anim group relative mb-8 w-full block text-left outline-none"
         onClick={() => onClick(item)}
         type="button"
         aria-label={`Ver detalhes do projeto ${item.title} no ${item.placement.toLowerCase()}`}
     >
-        <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-gray-200 dark:bg-gray-800 w-full">
-            <img 
+        <div className={`relative overflow-hidden w-full bg-gray-200 dark:bg-gray-800 transition-all duration-700 ${isLarge ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]'}`}>
+            <ProgressiveImage 
                 src={`${item.image}&auto=format&fit=crop`}
                 srcSet={`${item.image}&w=400&auto=format&fit=crop 400w, ${item.image}&w=800&auto=format&fit=crop 800w, ${item.image}&w=1200&auto=format&fit=crop 1200w`}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes={isLarge ? "(max-width: 1024px) 100vw, 80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
                 alt={`${item.title} tattoo on ${item.placement}`}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-110 grayscale group-hover:grayscale-0 will-change-transform"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-105 grayscale group-hover:grayscale-0 will-change-transform"
             />
             
             <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -344,8 +41,8 @@ const PortfolioItemComponent: React.FC<PortfolioItemProps> = ({ item, onClick })
             </div>
         </div>
 
-        <div className="mt-5 flex flex-col items-start gap-1 group-hover:opacity-100 transition-opacity duration-500">
-            <span className="font-sans text-xs uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
+        <div className="mt-5 flex flex-col items-start gap-1">
+            <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink-medium font-bold group-hover:text-ink-black dark:group-hover:text-white transition-colors duration-300">
                 {item.placement}
             </span>
             <h3 className="font-serif font-light italic text-3xl md:text-4xl text-ink-black dark:text-paper-light group-hover:translate-x-2 transition-transform duration-300 ease-out">
@@ -364,20 +61,19 @@ const Portfolio: React.FC = () => {
     ScrollTrigger.batch(".portfolio-item-anim", {
         onEnter: (batch) => {
             gsap.fromTo(batch, 
-                { opacity: 0, y: 100, scale: 0.95 }, 
-                { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "expo.out", overwrite: true }
+                { opacity: 0, y: 80, scale: 0.98 }, 
+                { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 1.2, ease: "power2.out", overwrite: true }
             );
         },
-        start: "top 90%"
+        start: "top 95%"
     });
   }, { scope: containerRef });
 
-  const col1 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 === 0);
-  const col2 = PORTFOLIO_ITEMS.filter((_, i) => i % 2 !== 0);
-
   return (
-    <section id="work" ref={containerRef} className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative">
-      <div className="max-w-screen-3xl mx-auto mb-20 border-b border-ink-light dark:border-white/10 pb-6 flex flex-col md:flex-row justify-between items-end">
+    <section id="work" ref={containerRef} className="w-full bg-paper-light dark:bg-paper-dark py-20 md:py-28 px-6 relative border-t border-ink-light dark:border-white/5">
+      
+      {/* Title / Section Header */}
+      <div className="max-w-screen-3xl mx-auto mb-20 border-b border-ink-light dark:border-white/5 pb-6 flex flex-col md:flex-row justify-between items-end">
           <h2 className="font-serif font-light text-fluid-h2 text-ink-black dark:text-paper-light uppercase leading-[0.85]">
             Selected <br/> 
             <span className="italic font-extralight text-ink-medium">Works</span>
@@ -387,17 +83,48 @@ const Portfolio: React.FC = () => {
           </p>
       </div>
 
-      <div className="max-w-screen-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 3xl:gap-24">
-          <div className="flex flex-col gap-10 md:gap-16">
-            {col1.map((item) => (
-              <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
-            ))}
+      {/* Asymmetric Editorial Grid */}
+      <div className="max-w-screen-3xl mx-auto flex flex-col gap-24 md:gap-36">
+        
+        {/* ROW 1: Wide Banner Reveal */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 lg:col-start-1">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[0]} onClick={setSelectedItem} isLarge={true} />
           </div>
-          <div className="flex flex-col gap-10 md:gap-16 md:mt-24">
-            {col2.map((item) => (
-              <PortfolioItemComponent key={item.id} item={item} onClick={setSelectedItem} />
-            ))}
+          <div className="lg:col-span-3 lg:col-start-10 hidden lg:block border-l border-ink-light dark:border-white/5 pl-8 py-12">
+            <p className="font-serif italic text-lg leading-relaxed text-ink-medium dark:text-gray-400">
+              "A beleza reside na precisão da sombra e na impermanência do traço."
+            </p>
           </div>
+        </div>
+
+        {/* ROW 2: Asymmetric Split */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          <div className="lg:col-span-5 lg:col-start-2 lg:mt-12">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[1]} onClick={setSelectedItem} />
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[2]} onClick={setSelectedItem} />
+          </div>
+        </div>
+
+        {/* ROW 3: Full Screen Centerpiece */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-10 lg:col-start-2">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[3]} onClick={setSelectedItem} isLarge={true} />
+          </div>
+        </div>
+
+        {/* ROW 4: Dynamic Alternate Offset */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+          <div className="lg:col-span-5 lg:col-start-1">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[4]} onClick={setSelectedItem} />
+          </div>
+          <div className="lg:col-span-5 lg:col-start-7 lg:mt-24">
+            <PortfolioItemComponent item={PORTFOLIO_ITEMS[5]} onClick={setSelectedItem} />
+          </div>
+        </div>
+
       </div>
 
       {selectedItem && (

@@ -53,7 +53,7 @@ const Manifesto: React.FC = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-paper-warm dark:bg-[#121212] transition-colors duration-500 overflow-hidden">
+    <section ref={containerRef} className="bg-paper-light dark:bg-[#121212] transition-colors duration-500 overflow-hidden">
         <div className="w-full border-t border-ink-black/5 dark:border-white/5">
             {/* WIDE CONTAINER */}
             <div className="max-w-screen-4xl mx-auto grid grid-cols-1 md:grid-cols-12 min-h-screen">

@@ -29,8 +29,7 @@ const Hero: React.FC = () => {
 
     // 4. Physical Parallax on Scroll (Sensação de peso apenas ao rolar a página)
     if (titleRef.current) {
-      gsap.fromTo(titleRef.current,
-        { opacity: 1, yPercent: 0, scale: 1, filter: "blur(0px)" },
+      gsap.to(titleRef.current,
         {
           yPercent: 50,
           opacity: 0,
